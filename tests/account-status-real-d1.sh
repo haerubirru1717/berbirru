@@ -37,8 +37,8 @@ d1x --command "INSERT INTO users (id,email,password_hash,pen_name,account_status
 d1x --command "INSERT INTO users (id,email,password_hash,pen_name,account_status) VALUES ('$(node -e "console.log(crypto.randomUUID())")',$(Q "haeru@berbirru.com"),$(Q "$PWHASH"),$(Q "ownerpen"),'active');"
 OWNER_ID="$(d1q "SELECT id FROM users WHERE lower(email)=lower('haeru@berbirru.com')" | jq1)"
 d1x --command "INSERT INTO sessions (id,user_id,token_hash,expires_at) VALUES ('h-so',$(Q "$OWNER_ID"),$(Q "$OHH"),datetime('now','+25 minutes')),('h-sv',$(Q "$VIC"),$(Q "$VHH"),datetime('now','+25 minutes'));"
-OCO="berbirru_session=$OTTOK"
-VCO="berbirru_session=$VSTOK"
+OCO="kitatulis_session=$OTTOK"
+VCO="kitatulis_session=$VSTOK"
 
 npx wrangler dev --config "$CFG" --local --persist-to "$STORE" --port "$PORT" >"$LOG" 2>&1 &
 DEV_PID=$!
@@ -63,7 +63,7 @@ pass "A: 10-way suspend → 1 pemenang, audit 1, semua sesi victic musnah"
 # ============ B. suspend sudah terjadi → login semua ditolak/tak berefek ============
 RES="$(node tests/account-status-real-d1.mjs "$BASE" login "$VIC" 6 none "{\"email\":\"harness@x.invalid\",\"password\":\"HarnessPass123!\",\"turnstile_token\":\"XXXX.DUMMY.TOKEN.XXXX\"}")"
 echo "B-res: $RES"
-COOKS="$(python3 -c "import json,sys; print(sum(1 for r in json.loads(sys.argv[1]) if r['status']==200 and 'berbirru_session=' in r['setCookie']))" "$RES")"
+COOKS="$(python3 -c "import json,sys; print(sum(1 for r in json.loads(sys.argv[1]) if r['status']==200 and 'kitatulis_session=' in r['setCookie']))" "$RES")"
 [[ "$COOKS" == "0" ]] || fail "B: ada sesi baru utk akun suspended"
 SES="$(d1q "SELECT COUNT(*) c FROM sessions WHERE user_id=$(Q "$VIC")" | jq1)"
 [[ "$SES" == "0" ]] || fail "B: baris sesi muncul utk suspended"

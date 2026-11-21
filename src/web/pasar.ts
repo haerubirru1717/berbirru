@@ -1,4 +1,4 @@
-// Pasar Buku — marketplace rekber BERBIRRU (Varian A: grid 2 kolom).
+// Pasar Buku — marketplace rekber KITATULIS (Varian A: grid 2 kolom).
 // Desain owner-approved 2026-10-18; plan: .hermes/plans/2026-10-18-pasar-buku.md
 // Fee rekber 5.000/order ditanggung PENJUAL (tak tampil di harga pembeli).
 
@@ -117,10 +117,10 @@ export function renderPasarPage(user: any, listings: any[], f: { q?: string; con
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pasar Buku — BERBIRRU.COM</title>
+  <title>Pasar Buku — KITATULIS.COM</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.ico">
-  <meta property="og:title" content="Pasar Buku — BERBIRRU.COM">
-  <meta property="og:description" content="Jual beli buku sastra aman lewat rekber BERBIRRU.">
+  <meta property="og:title" content="Pasar Buku — KITATULIS.COM">
+  <meta property="og:description" content="Jual beli buku sastra aman lewat rekber KITATULIS.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700;1,6..72,500&family=Roboto+Mono:wght@600;700&display=swap" rel="stylesheet">
@@ -184,7 +184,7 @@ export function renderPasarPage(user: any, listings: any[], f: { q?: string; con
 
     <div class="rekber-note">
       <svg viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C15.5 3.8 18 5 20 5a1 1 0 0 1 1 1Z"/></svg>
-      <span>Semua transaksi dilindungi rekber BERBIRRU: uang baru diteruskan ke penjual setelah barang tiba di tanganmu. Biaya keamanan Rp5.000 ditanggung penjual.</span>
+      <span>Semua transaksi dilindungi rekber KITATULIS: uang baru diteruskan ke penjual setelah barang tiba di tanganmu. Biaya keamanan Rp5.000 ditanggung penjual.</span>
     </div>
   </div>
   ${renderBottomNav('pasar', user)}
@@ -198,7 +198,7 @@ export function renderJualPage(user: any): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jual Buku — BERBIRRU.COM</title>
+  <title>Jual Buku — KITATULIS.COM</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -235,7 +235,7 @@ export function renderJualPage(user: any): string {
       <a href="/" class="brand-wrap">
         <div class="brand-badge">
           <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-          <h1>BERBIRRU</h1>
+          <h1>KITATULIS</h1>
         </div>
         <span class="brand-com-tag">.com</span>
       </a>
@@ -506,7 +506,7 @@ export function renderListingDetail(user: any, p: any, seller: any, adminView = 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${escapeHtml(p.title)} — Pasar Buku BERBIRRU.COM</title>
+  <title>${escapeHtml(p.title)} — Pasar Buku KITATULIS.COM</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -550,7 +550,7 @@ export function renderListingDetail(user: any, p: any, seller: any, adminView = 
       <a href="/" class="brand-wrap">
         <div class="brand-badge">
           <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-          <h1>BERBIRRU</h1>
+          <h1>KITATULIS</h1>
         </div>
         <span class="brand-com-tag">.com</span>
       </a>
@@ -573,7 +573,7 @@ export function renderListingDetail(user: any, p: any, seller: any, adminView = 
       <div class="d-ship">${Number(p.weight_g) > 0 ? 'Berat ±' + (Number(p.weight_g) >= 1000 ? (Number(p.weight_g) / 1000).toLocaleString('id-ID', { maximumFractionDigits: 1 }) + ' kg' : Number(p.weight_g) + ' g') + ' · ' : ''}Ongkir dihitung kurir, min 1 kg saat checkout</div>
       <div class="d-badges">
         <span class="badge">${escapeHtml(COND_LABEL[p.cond] || escapeHtml(p.cond))}</span>
-        <span class="badge">Rekber BERBIRRU</span>
+        <span class="badge">Rekber KITATULIS</span>
         <span class="badge">${Number(p.stock || 0) > 0 ? `Stok ${Number(p.stock)}` : 'Stok habis'}</span>
       </div>
       ${p.descr ? `<div class="d-descr">${escapeHtml(p.descr)}</div>` : ''}
@@ -664,7 +664,7 @@ export function renderEditListingPage(user: any, l: any): string {
   const cond = String(l.cond || 'bekas_bagus');
   return `<!DOCTYPE html>
 <html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Edit Buku | BERBIRRU</title>
+<title>Edit Buku | KITATULIS</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.ico">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700&display=swap" rel="stylesheet">
 ${PASAR_BASE_CSS}

@@ -89,15 +89,15 @@ export function renderTokoPublikPage(toko: any, listings: any[], opts: { isOwner
     if (arr[0]) fotoOg = `${opts.baseUrl}/media/${String(arr[0]).split('?')[0]}`;
   } catch { /* pakai default */ }
 
-  const desc = `${bukuAktif} buku${toko.city ? ' · ' + toko.city : ''} · Rekber BERBIRRU`;
-  const wa = `https://wa.me/?text=${encodeURIComponent(`${toko.shop_name} di BERBIRRU — ${url}`)}`;
+  const desc = `${bukuAktif} buku${toko.city ? ' · ' + toko.city : ''} · Rekber KITATULIS`;
+  const wa = `https://wa.me/?text=${encodeURIComponent(`${toko.shop_name} di KITATULIS — ${url}`)}`;
 
   return `<!DOCTYPE html>
 <html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${escapeHtml(toko.shop_name)} — Toko Buku | BERBIRRU</title>
+<title>${escapeHtml(toko.shop_name)} — Toko Buku | KITATULIS</title>
 <meta name="description" content="${escapeHtml(desc)}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="${escapeHtml(toko.shop_name)} — Toko Buku BERBIRRU">
+<meta property="og:title" content="${escapeHtml(toko.shop_name)} — Toko Buku KITATULIS">
 <meta property="og:description" content="${escapeHtml(desc)}">
 <meta property="og:image" content="${escapeHtml(fotoOg)}">
 <meta property="og:url" content="${escapeHtml(url)}">

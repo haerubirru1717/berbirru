@@ -1,6 +1,6 @@
 // Smoke E2E idempotent untuk sandbox uji. Dipakai di setiap siklus refactor.
 // node scripts/e2e-smoke.mjs        → semua checks; process.exit(1) kalau ada gagal.
-// Scope: sosial + guard dasar pasar. Memakai akun fixture snap1/snap2 (lihat references/berbirru-sandbox-e2e.md).
+// Scope: sosial + guard dasar pasar. Memakai akun fixture snap1/snap2 (lihat references/kitatulis-sandbox-e2e.md).
 import { chromium } from '/home/ubuntu/.npm/_npx/d537ee5ee2a13f03/node_modules/playwright/index.mjs';
 
 const B = process.env.SMOKE_BASE || 'https://berbirru-uji.haerubirru17.workers.dev';

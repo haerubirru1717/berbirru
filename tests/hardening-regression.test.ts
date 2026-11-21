@@ -41,7 +41,7 @@ mountPasar(app as any);
 const envMock = { DB: d1, KURIR_MOCK: '1', BINDERBYTE_KEY: '', OWNER_EMAIL: 'o@x', APP_DOMAIN: 't.test' } as any;
 let last = 0;
 for (let i = 1; i <= 22; i++) {
-  const res = await app.request('/pasar/order/o1/track', { method: 'POST', headers: { Cookie: 'berbirru_session=tok' } }, envMock);
+  const res = await app.request('/pasar/order/o1/track', { method: 'POST', headers: { Cookie: 'kitatulis_session=tok' } }, envMock);
   last = res.status;
   if (i <= 20) assert(res.status === 200, 'call ' + i + ' harus 200, dapat ' + res.status);
 }

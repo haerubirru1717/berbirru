@@ -1,4 +1,4 @@
-// Mockup preset "Kern" (krem koran) di atas Berbirru — token + font asli Kern.
+// Mockup preset "Kern" (krem koran) di atas Kitatulis — token + font asli Kern.
 const { chromium } = await import('/home/ubuntu/.npm/_npx/d537ee5ee2a13f03/node_modules/playwright/index.mjs');
 const B = 'https://berbirru-uji.haerubirru17.workers.dev';
 const OUT = 'golden/visual/mockup';
@@ -33,7 +33,7 @@ const KERN = `
 const PAGES = [['feed', '/feed'], ['pasar', '/pasar'], ['profile', '/u/snap1'], ['akun', '/akun']];
 const br = await chromium.launch();
 const ctx = await br.newContext({ viewport: { width: 412, height: 915 } });
-await ctx.addCookies([{ name: 'berbirru_session', value: 'snap-session-token-01', domain: 'berbirru-uji.haerubirru17.workers.dev', path: '/' }]);
+await ctx.addCookies([{ name: 'kitatulis_session', value: 'snap-session-token-01', domain: 'berbirru-uji.haerubirru17.workers.dev', path: '/' }]);
 for (const [name, path] of PAGES) {
   const p = await ctx.newPage();
   await p.goto(B + path, { waitUntil: 'domcontentloaded' });

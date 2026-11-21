@@ -34,7 +34,7 @@ const PAGES = [['feed', '/feed'], ['pasar', '/pasar'], ['profile', '/u/snap1'], 
 mkdirSync(OUT, { recursive: true });
 const br = await chromium.launch();
 const ctx = await br.newContext({ viewport: { width: 412, height: 915 } });
-await ctx.addCookies([{ name: 'berbirru_session', value: 'snap-session-token-01', domain: 'berbirru-uji.haerubirru17.workers.dev', path: '/' }]);
+await ctx.addCookies([{ name: 'kitatulis_session', value: 'snap-session-token-01', domain: 'berbirru-uji.haerubirru17.workers.dev', path: '/' }]);
 for (const [name, path] of PAGES) {
   const p = await ctx.newPage();
   await p.goto(B + path, { waitUntil: 'domcontentloaded' });

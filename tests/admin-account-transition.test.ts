@@ -46,7 +46,7 @@ function fresh(): any {
   const db = new DatabaseSync(':memory:');
   db.exec(schema);
   db.exec(`INSERT INTO users (id,email,password_hash,pen_name,account_status) VALUES
-    ('owner','owner@berbirru.com','x','owner','active'),
+    ('owner','owner@kitatulis.com','x','owner','active'),
     ('victim','victim@x.invalid','x','victim','active'),
     ('actor','actor@x.invalid','x','actor','active')`);
   db.exec(`INSERT INTO sessions (id,user_id,token_hash,expires_at) VALUES
@@ -65,7 +65,7 @@ const cnt = (db: any, sql: string, ...args: any[]): number => {
 {
   const db = fresh();
   const m = 'act-1';
-  assert.equal(run(db, JUDGE_SUS, ['spam uji jelas', 'now', 'actor', m, 'victim', 'owner@berbirru.com']), 1);
+  assert.equal(run(db, JUDGE_SUS, ['spam uji jelas', 'now', 'actor', m, 'victim', 'owner@kitatulis.com']), 1);
   assert.equal(run(db, DEL_SUS, ['victim', 'victim', m]), 3, 'delete=3 (login+rst+otpf), bukan invariant');
   assert.equal(run(db, AUD_SUS, ['a1', 'actor', 'actor@x.invalid', 'spam uji jelas', 'now', 'victim', m]), 1);
   assert.equal(cnt(db, "SELECT COUNT(*) c FROM users WHERE id='victim' AND account_status='suspended' AND suspended_by='actor' AND account_action_id=?", m), 1);
@@ -76,17 +76,17 @@ const cnt = (db: any, sql: string, ...args: any[]): number => {
 // B. Owner tidak bisa ditarget (exclusion di hakim).
 {
   const db = fresh();
-  assert.equal(run(db, JUDGE_SUS, ['alasan sah minimal', 'now', 'actor', 'act-o', 'owner', 'owner@berbirru.com']), 0, 'owner kebal');
+  assert.equal(run(db, JUDGE_SUS, ['alasan sah minimal', 'now', 'actor', 'act-o', 'owner', 'owner@kitatulis.com']), 0, 'owner kebal');
   assert.equal(cnt(db, "SELECT (account_status='active') c FROM users WHERE id='owner'"), 1, 'owner masih active');
   db.close();
 }
 // C. Wrong state: suspend yang sudah suspended → hakim 0; delete+audit ikut 0.
 {
   const db = fresh();
-  assert.equal(run(db, JUDGE_SUS, ['spam uji jelas', 'now', 'actor', 'act-1', 'victim', 'owner@berbirru.com']), 1);
+  assert.equal(run(db, JUDGE_SUS, ['spam uji jelas', 'now', 'actor', 'act-1', 'victim', 'owner@kitatulis.com']), 1);
   run(db, DEL_SUS, ['victim', 'victim', 'act-1']);
   run(db, AUD_SUS, ['a1', 'actor', 'actor@x.invalid', 'spam uji jelas', 'now', 'victim', 'act-1']);
-  assert.equal(run(db, JUDGE_SUS, ['spam kedua jelas', 'now', 'actor', 'act-2', 'victim', 'owner@berbirru.com']), 0, 'state salah 409');
+  assert.equal(run(db, JUDGE_SUS, ['spam kedua jelas', 'now', 'actor', 'act-2', 'victim', 'owner@kitatulis.com']), 0, 'state salah 409');
   assert.equal(run(db, DEL_SUS, ['victim', 'victim', 'act-2']), 0, 'loser delete 0 sesi (marker bukan miliknya)');
   assert.equal(run(db, AUD_SUS, ['a2', 'actor', 'actor@x.invalid', 'spam kedua jelas', 'now', 'victim', 'act-2']), 0, 'loser audit 0');
   assert.equal(cnt(db, "SELECT COUNT(*) c FROM social_account_actions"), 1, 'audit tepat sekali');
@@ -95,7 +95,7 @@ const cnt = (db: any, sql: string, ...args: any[]): number => {
 // D. Stale loser tidak bisa menghapus sesi pemenang (delete mensyaratkan marker pemenang).
 {
   const db = fresh();
-  assert.equal(run(db, JUDGE_SUS, ['spam uji jelas', 'now', 'actor', 'act-win', 'victim', 'owner@berbirru.com']), 1);
+  assert.equal(run(db, JUDGE_SUS, ['spam uji jelas', 'now', 'actor', 'act-win', 'victim', 'owner@kitatulis.com']), 1);
   // request B membaca pra-state 'active' tapi hakimnya kalah; delete B pakai marker B:
   assert.equal(run(db, DEL_SUS, ['victim', 'victim', 'act-B']), 0, 'loser tidak menyentuh sesi');
   assert.equal(cnt(db, "SELECT COUNT(*) c FROM sessions WHERE user_id='victim'"), 3, 'sesi masih ada utk/delete pemenang');
@@ -108,7 +108,7 @@ const cnt = (db: any, sql: string, ...args: any[]): number => {
   db.exec('BEGIN');
   const m = 'act-rb';
   try {
-    assert.equal(run(db, JUDGE_SUS, ['rollback uji jelas', 'now', 'actor', m, 'victim', 'owner@berbirru.com']), 1);
+    assert.equal(run(db, JUDGE_SUS, ['rollback uji jelas', 'now', 'actor', m, 'victim', 'owner@kitatulis.com']), 1);
     run(db, DEL_SUS, ['victim', 'victim', m]);
     db.exec("DROP TABLE social_account_actions"); // induce audit-path failure
     run(db, AUD_SUS, ['a3', 'actor', 'actor@x.invalid', 'rollback uji jelas', 'now', 'victim', m]);
@@ -123,15 +123,15 @@ const cnt = (db: any, sql: string, ...args: any[]): number => {
 {
   const db = fresh();
   const ms = 'act-1';
-  run(db, JUDGE_SUS, ['spam uji jelas', 'now', 'actor', ms, 'victim', 'owner@berbirru.com']);
+  run(db, JUDGE_SUS, ['spam uji jelas', 'now', 'actor', ms, 'victim', 'owner@kitatulis.com']);
   run(db, DEL_SUS, ['victim', 'victim', ms]);
   run(db, AUD_SUS, ['a1', 'actor', 'actor@x.invalid', 'spam uji jelas', 'now', 'victim', ms]);
   const mr = 'act-re';
-  assert.equal(run(db, JUDGE_REI, [mr, 'victim', 'owner@berbirru.com']), 1);
+  assert.equal(run(db, JUDGE_REI, [mr, 'victim', 'owner@kitatulis.com']), 1);
   assert.equal(run(db, AUD_REI, ['a4', 'actor', 'actor@x.invalid', 'dikembalikan jelas', 'now', 'victim', mr]), 1);
   assert.equal(cnt(db, "SELECT COUNT(*) c FROM users WHERE id='victim' AND account_status='active' AND suspended_reason IS NULL AND account_action_id=?", mr), 1);
   assert.equal(cnt(db, "SELECT COUNT(*) c FROM sessions WHERE user_id='victim'"), 0, 'reinstate tidak menghidupkan sesi');
-  assert.equal(run(db, JUDGE_REI, ['act-re2', 'victim', 'owner@berbirru.com']), 0, 're-reinstate 409 (state salah)');
+  assert.equal(run(db, JUDGE_REI, ['act-re2', 'victim', 'owner@kitatulis.com']), 0, 're-reinstate 409 (state salah)');
   assert.equal(cnt(db, "SELECT COUNT(*) c FROM social_account_actions"), 2, 'dua audit: satu suspend, satu reinstate');
   db.close();
 }
@@ -141,7 +141,7 @@ const cnt = (db: any, sql: string, ...args: any[]): number => {
   let winners = 0;
   for (let i = 0; i < 10; i++) {
     const m = `act-${i}`;
-    if (run(db, JUDGE_SUS, [`spam gelombang ${i} jelas`, 'now', 'actor', m, 'victim', 'owner@berbirru.com']) === 1) {
+    if (run(db, JUDGE_SUS, [`spam gelombang ${i} jelas`, 'now', 'actor', m, 'victim', 'owner@kitatulis.com']) === 1) {
       run(db, DEL_SUS, ['victim', 'victim', m]);
       run(db, AUD_SUS, [`a-${i}`, 'actor', 'actor@x.invalid', `spam gelombang ${i} jelas`, 'now', 'victim', m]);
       winners++;

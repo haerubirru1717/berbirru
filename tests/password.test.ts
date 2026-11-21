@@ -15,7 +15,7 @@ assert((await verifyPassword('rahasiaYangKuat123', h1)).ok === true, 'password b
 assert((await verifyPassword('salahSekali', h1)).ok === false, 'password salah diterima');
 
 // 3. Format lama (SHA-256 + salt statis) DITOLAK total (Strix #31) — reset lewat OTP.
-const enc = new TextEncoder().encode('password123' + 'berbirru-salt-2026');
+const enc = new TextEncoder().encode('password123' + 'kitatulis-salt-2026');
 const buf = await crypto.subtle.digest('SHA-256', enc);
 const legacy = Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
 const vLegacy = await verifyPassword('password123', legacy);

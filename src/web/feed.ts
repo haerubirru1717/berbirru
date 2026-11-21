@@ -9,11 +9,11 @@ export function renderFeedPage(user: any = null): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beranda Warkah — BERBIRRU.COM</title>
+  <title>Beranda Warkah — KITATULIS.COM</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.ico">
-  <meta property="og:title" content="Beranda Warkah — BERBIRRU.COM">
+  <meta property="og:title" content="Beranda Warkah — KITATULIS.COM">
   <meta property="og:description" content="Linimasa sastra, puisi, dan sambung bait kata bersama.">
-  <meta property="og:image" content="https://berbirru.com/og-image.png">
+  <meta property="og:image" content="https://kitatulis.com/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700;1,6..72,500&family=Roboto+Mono:wght@600;700&display=swap" rel="stylesheet">
@@ -375,7 +375,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
       <a href="/" class="brand-wrap">
         <div class="brand-badge">
           <svg class="ico" style="width:16px;height:16px;" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-          <h1>BERBIRRU</h1>
+          <h1>KITATULIS</h1>
         </div>
         <span class="brand-com-tag">.com</span>
       </a>

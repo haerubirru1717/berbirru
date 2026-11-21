@@ -278,7 +278,7 @@ app.post('/api/auth/login', async (c: any) => {
   // (pariti "sandi salah") supaya login tidak membocorkan status akun.
   if (!inserted.meta.changes) return c.json(BAD_CRED, 401);
 
-  setCookie(c, 'berbirru_session', token, { path: '/', httpOnly: true, secure: true, sameSite: 'Lax', maxAge: 60 * 60 * 24 * 30 });
+  setCookie(c, 'kitatulis_session', token, { path: '/', httpOnly: true, secure: true, sameSite: 'Lax', maxAge: 60 * 60 * 24 * 30 });
   return c.json({ ok: true, user: { id: user.id, pen_name: user.pen_name } });
 });
 
@@ -316,7 +316,7 @@ app.post('/api/auth/change-password', async (c: any) => {
     // dan artefak flow otpf_ selamat; underscore di-escape agar prefix tidak tertukar.
     c.env.DB.prepare(
       "DELETE FROM sessions WHERE user_id = ? AND ((token_hash IS NOT NULL AND token_hash <> ? AND token_hash NOT LIKE 'otpf\\_%' ESCAPE '\\' AND EXISTS (SELECT 1 FROM users cu WHERE cu.id = ? AND cu.account_status = 'active')) OR (token LIKE 'otp\\_%' ESCAPE '\\'))"
-    ).bind(user.id, await sha256hex(getCookie(c, 'berbirru_session') || ''), user.id),
+    ).bind(user.id, await sha256hex(getCookie(c, 'kitatulis_session') || ''), user.id),
   ]);
   if (!passwordBatch[0]?.meta?.changes) return c.json({ error: 'Sesi tidak valid. Muat ulang halaman.' }, 401);
 
@@ -326,7 +326,7 @@ app.post('/api/auth/change-password', async (c: any) => {
 // ---- RESET SANDI: OTP → tiket sekali pakai → sandi baru ----
 // Tiga langkah terpisah supaya OTP tidak pernah langsung berwenang mengganti sandi
 // akun aktif. Tiket: 32 byte acak, disimpan sebagai hash, TTL 15 menit, sekali pakai.
-const RESET_COOKIE = 'berbirru_reset';
+const RESET_COOKIE = 'kitatulis_reset';
 
 const issueResetOtp = async (env: any, userId: string, email: string): Promise<boolean> => {
   const kode = String(crypto.getRandomValues(new Uint32Array(1))[0] % 1000000).padStart(6, '0');
@@ -480,7 +480,7 @@ app.post('/api/auth/reset/finish', async (c: any) => {
   return c.json({ ok: true });
 });
 
-const OTP_FLOW_COOKIE = 'berbirru_otp_flow';
+const OTP_FLOW_COOKIE = 'kitatulis_otp_flow';
 
 async function issueOtpFlow(c: any, userId: string): Promise<void> {
   const raw = crypto.randomUUID() + '-' + crypto.randomUUID();
@@ -679,16 +679,16 @@ app.post('/api/auth/verify-otp', async (c: any) => {
   }
 
   setCookie(c, OTP_FLOW_COOKIE, '', { path: '/', httpOnly: true, secure: true, sameSite: 'Lax', maxAge: 0 });
-  setCookie(c, 'berbirru_session', sessionToken, { path: '/', httpOnly: true, secure: true, sameSite: 'Lax', maxAge: 60 * 60 * 24 * 30 });
+  setCookie(c, 'kitatulis_session', sessionToken, { path: '/', httpOnly: true, secure: true, sameSite: 'Lax', maxAge: 60 * 60 * 24 * 30 });
   return c.json({ ok: true, user: { id: user.id, pen_name: user.pen_name } });
 });
 
 app.post('/api/auth/logout', async (c: any) => {
-  const token = getCookie(c, 'berbirru_session');
+  const token = getCookie(c, 'kitatulis_session');
   if (token) {
     await c.env.DB.prepare('DELETE FROM sessions WHERE token_hash = ?').bind(await sha256hex(token)).run();
   }
-  deleteCookie(c, 'berbirru_session');
+  deleteCookie(c, 'kitatulis_session');
   return c.json({ ok: true });
 });
 
@@ -697,7 +697,7 @@ app.post('/api/auth/logout', async (c: any) => {
 app.post('/api/auth/logout-all', async (c: any) => {
   const user = await getAuthUser(c);
   if (!user) return c.json({ error: 'Silakan masuk terlebih dahulu' }, 401);
-  const token = getCookie(c, 'berbirru_session') || '';
+  const token = getCookie(c, 'kitatulis_session') || '';
   // Sesi lain + OTP yang masih menggantung ikut dimatikan.
   await c.env.DB.prepare("DELETE FROM sessions WHERE user_id = ? AND (token_hash IS NULL OR token_hash != ?) AND EXISTS (SELECT 1 FROM users lu WHERE lu.id = ? AND lu.account_status = 'active')").bind(user.id, await sha256hex(token), user.id).run();
   return c.json({ ok: true });

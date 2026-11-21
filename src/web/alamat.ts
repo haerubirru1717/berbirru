@@ -41,7 +41,7 @@ const KEPALA = (judul: string, sub: string) =>
 
 const bungkus = (user: any, judul: string, isi: string) => `<!DOCTYPE html>
 <html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${judul} | BERBIRRU</title>
+<title>${judul} | KITATULIS</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.ico">
 ${PASAR_BASE_CSS}
 <style>

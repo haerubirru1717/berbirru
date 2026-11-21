@@ -1,4 +1,4 @@
-// E2E logika web BERBIRRU (sandbox uji).
+// E2E logika web KITATULIS (sandbox uji).
 // Dua akun agen terpisah + satu tamu; tiap cek berdiri sendiri dan dibersihkan di akhir.
 // Jalankan: node tests/e2e/social.e2e.mjs [baseUrl]
 import { chromium } from "/home/ubuntu/.npm/_npx/d537ee5ee2a13f03/node_modules/playwright/index.mjs";

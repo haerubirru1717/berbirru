@@ -1,4 +1,4 @@
-const B = 'https://berbirru.com';
+const B = 'https://kitatulis.com';
 const assert = (c, m) => { if (!c) throw new Error('GAGAL: ' + m); };
 // F20 di prod: flood 34x unknown-order → semua 404, tanpa 429
 const codes = [];

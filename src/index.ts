@@ -71,7 +71,7 @@ app.onError((err, c) => {
 // CORS dikunci ke domain sendiri (sebelumnya `*` = siapa pun bisa memanggil API
 // dengan kredensial; bagian dari temuan vuln-0009). Tanpa origin (same-origin
 // fetch dari browser tidak mengirim Origin) → tanpa header CORS, tetap aman.
-const ALLOWED_ORIGINS = ['https://berbirru.com', 'https://www.berbirru.com'];
+const ALLOWED_ORIGINS = ['https://kitatulis.com', 'https://www.kitatulis.com'];
 app.use('*', cors({
   origin: (origin: string) => (ALLOWED_ORIGINS.includes(origin) ? origin : null),
   credentials: true,
@@ -98,7 +98,7 @@ app.use('*', async (c, next) => {
   if (method !== 'GET' && method !== 'HEAD' && method !== 'OPTIONS') {
     const origin = c.req.header('origin');
     // dev: request ke host lokal (wrangler dev) boleh bawa origin localhost.
-    // produksi: host selalu berbirru.com → origin localhost asing tetap ditolak.
+    // produksi: host selalu kitatulis.com → origin localhost asing tetap ditolak.
     const requestUrl = new URL(c.req.url);
     const reqHost = requestUrl.hostname;
     const devHost = reqHost === 'localhost' || reqHost === '127.0.0.1';
@@ -280,12 +280,12 @@ Allow: /feed
 Allow: /u/
 Disallow: /api/
 
-Sitemap: https://${c.env.APP_DOMAIN || 'berbirru.com'}/sitemap.xml`;
+Sitemap: https://${c.env.APP_DOMAIN || 'kitatulis.com'}/sitemap.xml`;
   return c.text(robots, 200, { 'Content-Type': 'text/plain' });
 });
 
 app.get('/sitemap.xml', async (c) => {
-  const domain = c.env.APP_DOMAIN || 'berbirru.com';
+  const domain = c.env.APP_DOMAIN || 'kitatulis.com';
   const users = await c.env.DB.prepare('SELECT pen_name FROM users LIMIT 100').all();
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

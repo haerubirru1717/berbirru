@@ -76,7 +76,7 @@ export function renderOrderPage(o: any, p: any, photos: string[], viewer: any, a
       <button class="btn b-ghost" onclick="showDispute()">Ada Masalah (Sengketa)</button>
       <div class="st-sub" style="margin-top:8px;">Menunggu penjual menyerahkan buku…</div>`;
   } else if (st === 'disputed') {
-    actions = `<div class="st-sub">Owner BERBIRRU sedang meninjau sengketa ini. Semua pesan & kwitansi sudah terkirim ke owner.</div>`;
+    actions = `<div class="st-sub">Owner KITATULIS sedang meninjau sengketa ini. Semua pesan & kwitansi sudah terkirim ke owner.</div>`;
   } else if (st === 'completed' && isSeller) {
     actions = `<div class="st-sub">Saldo bertambah Rp${(Number(o.price) - 5000 + Number(o.shipping)).toLocaleString('id-ID')} (fee rekber Rp5.000 dipotong).</div>
       <a class="btn b-ghost" style="text-align:center;" href="/saldo">Lihat Saldo & Tarik Dana</a>`;
@@ -100,7 +100,7 @@ export function renderOrderPage(o: any, p: any, photos: string[], viewer: any, a
 
   return `<!DOCTYPE html>
 <html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pesanan | BERBIRRU</title>
+<title>Pesanan | KITATULIS</title>
 ${PASAR_BASE_CSS}
 <style>${PAGE_CSS}</style></head>
 <body>

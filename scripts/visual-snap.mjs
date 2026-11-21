@@ -49,7 +49,7 @@ async function pngDiffPct(br, bufA, bufB) {
 mkdirSync(DIR, { recursive: true });
 const br = await chromium.launch();
 const ctx = await br.newContext();
-await ctx.addCookies([{ name: 'berbirru_session', value: SESSION, domain: new URL(B).hostname, path: '/' }]);
+await ctx.addCookies([{ name: 'kitatulis_session', value: SESSION, domain: new URL(B).hostname, path: '/' }]);
 const page = await ctx.newPage();
 
 let fail = 0, total = 0;

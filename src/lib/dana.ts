@@ -20,7 +20,7 @@ export function posisiDana(o: any, peran: 'pembeli' | 'penjual'): Posisi {
   }
   if (st === 'paid') {
     return peran === 'pembeli'
-      ? { judul: `${rp(ditahan)} ditahan BERBIRRU`, isi: 'Uangmu aman di rekber. Penjual baru menerima setelah buku sampai dan kamu konfirmasi.', tone: 'kuning' }
+      ? { judul: `${rp(ditahan)} ditahan KITATULIS`, isi: 'Uangmu aman di rekber. Penjual baru menerima setelah buku sampai dan kamu konfirmasi.', tone: 'kuning' }
       : { judul: `${rp(ditahan)} ditahan rekber`, isi: 'Uang sudah masuk tapi BELUM jadi saldomu. Kirim buku, lalu dana cair saat pembeli konfirmasi (otomatis D+5).', tone: 'kuning' };
   }
   if (st === 'handed') {

@@ -1,6 +1,6 @@
 import { THEME } from './theme';
 import { WARKAH_CARD_CSS, WARKAH_EMPTY, renderWarkahCard } from './warkahCard';
-// Landing BERBIRRU — komposisi mengikuti template clone depobudget.com
+// Landing KITATULIS — komposisi mengikuti template clone depobudget.com
 // (hero kobalt bergrid, marquee lime, kartu tebal berwarna, galeri ungu,
 // grid teal, FAQ merah, marquee kuning, CTA kobalt, footer hitam).
 export function renderLandingPage(user: any = null, warkah: any[] = [], tz: string = 'Asia/Jakarta'): string {
@@ -30,22 +30,22 @@ export function renderLandingPage(user: any = null, warkah: any[] = [], tz: stri
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#FAF7F2">
-<title>BERBIRRU.COM — Pustaka tulisan &amp; kolaborasi kata</title>
+<title>KITATULIS.COM — Pustaka tulisan &amp; kolaborasi kata</title>
 <meta name="description" content="Ruang tenang untuk menulis dan membaca: puisi, kutipan, cerita lintas kota. Tanpa algoritma bising, bebas iklan.">
 <link rel="icon" type="image/svg+xml" href="/favicon.ico">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://berbirru.com/">
-<meta property="og:title" content="BERBIRRU.COM — Merawat rasa, menguntai kata">
+<meta property="og:url" content="https://kitatulis.com/">
+<meta property="og:title" content="KITATULIS.COM — Merawat rasa, menguntai kata">
 <meta property="og:description" content="Pustaka tulisan &amp; kolaborasi kata. Tulis karyamu, arsipkan kutipan, sambung estafet lintas kota.">
-<meta property="og:image" content="https://berbirru.com/og-image.png?v=15">
-<meta property="og:image:secure_url" content="https://berbirru.com/og-image.png?v=15">
+<meta property="og:image" content="https://kitatulis.com/og-image.png?v=15">
+<meta property="og:image:secure_url" content="https://kitatulis.com/og-image.png?v=15">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="BERBIRRU.COM — Merawat rasa, menguntai kata">
+<meta name="twitter:title" content="KITATULIS.COM — Merawat rasa, menguntai kata">
 <meta name="twitter:description" content="Pustaka tulisan &amp; kolaborasi kata. Tulis karyamu, arsipkan kutipan, sambung estafet lintas kota.">
-<meta name="twitter:image" content="https://berbirru.com/og-image.png?v=15">
+<meta name="twitter:image" content="https://kitatulis.com/og-image.png?v=15">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;700;800&family=Roboto+Mono:wght@600;700&display=swap" rel="stylesheet">
@@ -85,7 +85,7 @@ ${WARKAH_CARD_CSS}
   /* ---------- header ---------- */
   header{position:sticky;top:0;z-index:50;border-bottom:3px solid var(--ink);background:var(--page);color:var(--ink)}
   .nav{display:flex;align-items:center;justify-content:space-between;padding:9px 0}
-  /* Logo resmi BERBIRRU — disalin utuh dari src/web/login.ts (.brand-header) */
+  /* Logo resmi KITATULIS — disalin utuh dari src/web/login.ts (.brand-header) */
   .brandplaque{display:inline-flex;align-items:center;transform:scale(.86);transform-origin:left center;margin-right:-30px}
   .brand-wrap{display:inline-flex;align-items:center;text-decoration:none;position:relative;max-width:100%}
   .brand-badge{display:inline-flex;align-items:center;gap:6px;background:#1769E8;color:#fff;padding:6px 14px;border:3px solid var(--ink);border-radius:8px;box-shadow:4px 4px 0 var(--ink);transform:rotate(-1deg);position:relative;z-index:2}
@@ -295,8 +295,8 @@ ${WARKAH_CARD_CSS}
 <header id="hdr">
   <div class="wrap">
     <div class="nav">
-      <a class="brandplaque brand-wrap" href="/" aria-label="Berbirru beranda">
-        <span class="brand-badge"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg><h1>BERBIRRU</h1></span>
+      <a class="brandplaque brand-wrap" href="/" aria-label="Kitatulis beranda">
+        <span class="brand-badge"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg><h1>KITATULIS</h1></span>
         <span class="brand-com-tag">.com</span>
       </a>
       <nav class="navlinks" aria-label="Navigasi utama">
@@ -334,11 +334,11 @@ ${WARKAH_CARD_CSS}
             <div class="sparkle" aria-hidden="true">
               <svg viewBox="0 0 100 100"><path d="M 50,10 L 56,40 L 90,50 L 56,60 L 50,90 L 44,60 L 10,50 L 44,40 Z" fill="#C8E832" stroke="#111" stroke-width="5" stroke-linejoin="miter"/></svg>
             </div>
-            <div class="phone" aria-label="Tampilan aplikasi Berbirru">
+            <div class="phone" aria-label="Tampilan aplikasi Kitatulis">
               <div class="island" aria-hidden="true"></div>
               <div class="screen"><div class="appbar" aria-hidden="true"><time data-tz="${tz}">${jam}</time>
                   <svg viewBox="0 0 42 10"><rect x="0" y="6" width="2.4" height="4" rx=".6" fill="#111"/><rect x="4.4" y="4.4" width="2.4" height="5.6" rx=".6" fill="#111"/><rect x="8.8" y="2.8" width="2.4" height="7.2" rx=".6" fill="#111"/><rect x="13.2" y="1.2" width="2.4" height="8.8" rx=".6" fill="#111"/><path d="M19.5 4.9a7 7 0 0 1 8.4 0" stroke="#111" stroke-width="1.2" fill="none" stroke-linecap="round"/><circle cx="23.7" cy="7.5" r="1.1" fill="#111"/><rect x="32" y="2.6" width="9" height="5.6" rx="1.5" stroke="#111" stroke-width=".9" fill="none"/><rect x="33.3" y="3.9" width="5.6" height="3" rx=".7" fill="#111"/><rect x="41.4" y="4.4" width="1.2" height="2" rx=".5" fill="#111"/></svg></div>
-                <img src="/app-preview.png" alt="Linimasa warkah di aplikasi Berbirru" width="390" height="844" loading="lazy">
+                <img src="/app-preview.png" alt="Linimasa warkah di aplikasi Kitatulis" width="390" height="844" loading="lazy">
                 <div class="appnav" aria-hidden="true">
                 <span class="on"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Beranda</span>
                 <span><svg viewBox="0 0 24 24"><path d="M6 7h12l1 13H5L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>Pasar</span>
@@ -352,7 +352,7 @@ ${WARKAH_CARD_CSS}
           <div class="hero-copy">
             <div class="pill">Pustaka tulisan &amp; kolaborasi kata</div>
             <h1 class="typing" aria-label="Merawat rasa, menguntai kata."><span aria-hidden="true">Merawat <span class="tw"><span class="ghost">rasa</span><em class="ty ty1">rasa</em></span>,<br><span class="l2">menguntai <span class="tw"><span class="ghost">kata</span><em class="ty ty2">kata</em></span>.</span></span></h1>
-            <p>Pernah menulis ide bagus di sembarang tempat, lalu lupa di mana menyimpannya? Berbirru rumahnya — tempat mengabadikan setiap patah kata agar tersimpan rapi, mudah ditemukan, dan bisa dilanjutkan bersama.</p>
+            <p>Pernah menulis ide bagus di sembarang tempat, lalu lupa di mana menyimpannya? Kitatulis rumahnya — tempat mengabadikan setiap patah kata agar tersimpan rapi, mudah ditemukan, dan bisa dilanjutkan bersama.</p>
             <div class="hero-ctas">
               <a class="btn coral" href="${ctaHref}">Mulai menulis →</a>
               <a class="btn ghost" href="/feed?tab=latest">Lihat Warkah →</a>
@@ -360,7 +360,7 @@ ${WARKAH_CARD_CSS}
           </div>
         </div>
       </div>
-      <div class="marquee" aria-label="Untuk siapa Berbirru">
+      <div class="marquee" aria-label="Untuk siapa Kitatulis">
         <div class="marquee-track">
           <b>Untuk yang menulis</b><b>Untuk yang membaca</b><b>Untuk yang menyimpan kutipan</b><b>Estafet lintas kota</b><b>Bebas iklan</b><b>Tanpa algoritma bising</b><b>Ramah pemula</b><b>Ruang aman terkurasi</b>
           <b aria-hidden="true">Untuk yang menulis</b><b aria-hidden="true">Untuk yang membaca</b><b aria-hidden="true">Untuk yang menyimpan kutipan</b><b aria-hidden="true">Estafet lintas kota</b><b aria-hidden="true">Bebas iklan</b><b aria-hidden="true">Tanpa algoritma bising</b><b aria-hidden="true">Ramah pemula</b><b aria-hidden="true">Ruang aman terkurasi</b>
@@ -489,11 +489,11 @@ ${WARKAH_CARD_CSS}
       <div class="wrap">
         <div class="faq">
           <h2 class="display center" style="margin-bottom:16px">Pertanyaan yang sering masuk</h2>
-          <p class="center" style="max-width:42rem;margin:0 auto 32px;font-size:18px;line-height:1.6;color:rgba(17,17,17,.8)">Ini yang paling sering ditanyakan ke admin@berbirru.com. Kalau belum terjawab, kirim email.</p>
-          <details open><summary><h3>Apakah Berbirru gratis?</h3><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Ya. Membaca, menulis, menyimpan, dan menyambung estafet gratis. Tidak ada paywall bacaan dan tidak ada iklan. Biaya hanya muncul di Pasar Buku sebagai biaya layanan rekber saat kamu berjualan.</p></details>
+          <p class="center" style="max-width:42rem;margin:0 auto 32px;font-size:18px;line-height:1.6;color:rgba(17,17,17,.8)">Ini yang paling sering ditanyakan ke admin@kitatulis.com. Kalau belum terjawab, kirim email.</p>
+          <details open><summary><h3>Apakah Kitatulis gratis?</h3><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Ya. Membaca, menulis, menyimpan, dan menyambung estafet gratis. Tidak ada paywall bacaan dan tidak ada iklan. Biaya hanya muncul di Pasar Buku sebagai biaya layanan rekber saat kamu berjualan.</p></details>
           <details><summary><h3>Apakah tulisan saya bisa dilihat semua orang?</h3><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Kamu yang menentukan per warkah. Sakelar privat membuat warkah hanya terlihat olehmu — termasuk dari tautan langsung, pencarian, dan halaman profil.</p></details>
           <details><summary><h3>Apa itu estafet kota?</h3><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Warkah bisa dilanjutkan penulis lain sebagai bait berikutnya. Rantainya tampil terbuka, jadi pembaca bisa melihat siapa menulis bagian mana dan dari kota mana.</p></details>
-          <details><summary><h3>Apakah saya harus jadi penulis hebat?</h3><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Tidak. Berbirru dibuat untuk orang yang baru mulai. Tidak ada skor, tidak ada peringkat, dan tidak ada tombol tidak-suka untuk menjatuhkan tulisan orang.</p></details>
+          <details><summary><h3>Apakah saya harus jadi penulis hebat?</h3><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Tidak. Kitatulis dibuat untuk orang yang baru mulai. Tidak ada skor, tidak ada peringkat, dan tidak ada tombol tidak-suka untuk menjatuhkan tulisan orang.</p></details>
           <details><summary><h3>Bagaimana konten toxic ditangani?</h3><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Dua lapis: penyaring otomatis untuk ujaran kebencian dan pelecehan, lalu kurasi manusia untuk etika estafet dan laporan pembaca. Warkah yang dilaporkan bisa disembunyikan sementara.</p></details>
           <details><summary><h3>Apakah data saya dijual?</h3><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Tidak. Tidak ada pelacak iklan pihak ketiga. Email hanya dipakai untuk verifikasi akun dan notifikasi transaksi yang kamu picu sendiri.</p></details>
         </div>
@@ -505,7 +505,7 @@ ${WARKAH_CARD_CSS}
     <section class="pad yellow">
       <div class="wrap">
         <h2 class="display">Kalimat yang sering disalin</h2>
-        <p class="lead">Bukan ulasan pengguna. Ini kalimat dari penulis yang paling sering disalin pembaca Berbirru.</p>
+        <p class="lead">Bukan ulasan pengguna. Ini kalimat dari penulis yang paling sering disalin pembaca Kitatulis.</p>
       </div>
       <div class="tm" aria-label="Kutipan penulis">
         <div class="tm-track">
@@ -528,7 +528,7 @@ ${WARKAH_CARD_CSS}
       <div class="deco b" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M 50,10 L 56,40 L 90,50 L 56,60 L 50,90 L 44,60 L 10,50 L 44,40 Z" fill="#FF5B45" stroke="#111" stroke-width="5" stroke-linejoin="miter"/></svg></div>
       <div class="inner">
         <h2>Tulis satu bait malam ini</h2>
-        <p>Buka Berbirru, tulis yang tadi kepikiran. Tidak harus rapi.</p>
+        <p>Buka Kitatulis, tulis yang tadi kepikiran. Tidak harus rapi.</p>
         <div class="acts">
           <a class="btn coral" href="${ctaHref}">${user ? 'Buka bilik warkah →' : 'Masuk / buka bilik warkah →'}</a>
           <a class="btn ghost" href="/feed">Baca dulu</a>
@@ -543,8 +543,8 @@ ${WARKAH_CARD_CSS}
   <div class="wrap">
     <div class="fcols">
       <div class="fcol fabout">
-        <a class="brand-wrap" href="/" aria-label="Berbirru beranda">
-          <span class="brand-badge"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg><h1>BERBIRRU</h1></span>
+        <a class="brand-wrap" href="/" aria-label="Kitatulis beranda">
+          <span class="brand-badge"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg><h1>KITATULIS</h1></span>
           <span class="brand-com-tag">.com</span>
         </a>
         <p>Pustaka warkah dan ruang kolaborasi rasa. Merawat setiap bait kata, perenungan hidup, dan cerita lintas kota.</p>
@@ -562,8 +562,8 @@ ${WARKAH_CARD_CSS}
       </div>
       <div class="fcol">
         <p class="t">Bantuan</p>
-        <a href="mailto:admin@berbirru.com">admin@berbirru.com</a>
-        <a href="mailto:developer@berbirru.com">developer@berbirru.com</a>
+        <a href="mailto:admin@kitatulis.com">admin@kitatulis.com</a>
+        <a href="mailto:developer@kitatulis.com">developer@kitatulis.com</a>
         <a href="/lupa-sandi">Lupa sandi</a>
       </div>
       <div class="fcol">
@@ -572,7 +572,7 @@ ${WARKAH_CARD_CSS}
         <a href="/ketentuan">Ketentuan</a>
       </div>
     </div>
-    <p class="fbottom">© 2026 BERBIRRU.COM · Dirawat dengan rasa. Bebas iklan · Bebas pelacak pihak ketiga.</p>
+    <p class="fbottom">© 2026 KITATULIS.COM · Dirawat dengan rasa. Bebas iklan · Bebas pelacak pihak ketiga.</p>
   </div>
 </footer>
 

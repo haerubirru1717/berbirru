@@ -1,4 +1,4 @@
-# 📜 Rencana Implementasi Arsitektur Backend Berbirru (BERBIRRU.COM)
+# 📜 Rencana Implementasi Arsitektur Backend Kitatulis (KITATULIS.COM)
 
 ## 1. Stack & Runtime
 - **Edge Runtime:** Cloudflare Workers (TypeScript)

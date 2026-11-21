@@ -91,8 +91,8 @@ function bbShareCard(p) {
 
   // wordmark
   x.fillStyle = ink; x.font = "700 52px 'Newsreader', Georgia, serif";
-  x.fillText('BERBIRRU', 96, 96);
-  var wBer = x.measureText('BERBIRRU').width;
+  x.fillText('KITATULIS', 96, 96);
+  var wBer = x.measureText('KITATULIS').width;
   x.fillStyle = oranye; x.fillText('.COM', 96 + wBer, 96);
   x.fillRect(96, 176, W - 192, 2);
 
@@ -134,7 +134,7 @@ function bbShareCard(p) {
   x.fillStyle = abu; x.font = "500 38px 'DM Sans', Arial, sans-serif";
   x.fillText(who, 96, footY);
   x.fillStyle = ink; x.font = "700 42px 'Newsreader', Georgia, serif";
-  x.fillText('Baca selengkapnya di BERBIRRU.COM', 96, footY + 88);
+  x.fillText('Baca selengkapnya di KITATULIS.COM', 96, footY + 88);
   x.fillStyle = oranye; x.fillRect(96, footY + 148, 260, 6);
 
   return new Promise(function (res) { cv.toBlob(function (b) { res(b); }, 'image/png'); });
@@ -154,7 +154,7 @@ function sharePostBtn(btn) {
   var excerpt = tEl ? tEl.textContent.trim() : q('.thread-text');
   var p = { id: id, pen_name: pen, city: city, title: title, excerpt: excerpt };
 
-  var url = 'https://berbirru.com/chain/' + root;
+  var url = 'https://kitatulis.com/chain/' + root;
   var baruL = String.fromCharCode(10);
   var emD = String.fromCharCode(8212), kiri = String.fromCharCode(8220), kanan = String.fromCharCode(8221), titik = String.fromCharCode(8230), panah = String.fromCharCode(8594), titikDua = String.fromCharCode(183);
   var longPost = (title.length + excerpt.length) > 260;
@@ -168,13 +168,13 @@ function sharePostBtn(btn) {
     // kutipan pendek: langsung utuh (sama seperti yang tampil di gambar)
     hookUtama = (title || excerpt).slice(0, 160);
   }
-  var hook = kiri + hookUtama + kanan + ' ' + emD + ' @' + pen + (city ? ' ' + titikDua + ' ' + city : '') + baruL + 'Baca selengkapnya di BERBIRRU.COM ' + panah + ' ' + url;
+  var hook = kiri + hookUtama + kanan + ' ' + emD + ' @' + pen + (city ? ' ' + titikDua + ' ' + city : '') + baruL + 'Baca selengkapnya di KITATULIS.COM ' + panah + ' ' + url;
 
   bbShareCard(p).then(function (blob) {
     var file = null;
     try { file = new File([blob], 'warkah-' + id.slice(0, 8) + '.png', { type: 'image/png' }); } catch (e) {}
     if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
-      navigator.share({ files: [file], title: 'BERBIRRU', text: hook, url: url }).catch(function () {});
+      navigator.share({ files: [file], title: 'KITATULIS', text: hook, url: url }).catch(function () {});
       return;
     }
     // Fallback desktop: salin hook + unduh PNG

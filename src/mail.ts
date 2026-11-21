@@ -1,6 +1,6 @@
 export async function sendOtpEmail(toEmail: string, otpCode: string, env: any = null): Promise<boolean> {
   const apiKey = (env && env.RESEND_API_KEY) || '';
-  const fromEmail = (env && env.RESEND_FROM) || 'BERBIRRU.COM <noreply@berbirru.com>';
+  const fromEmail = (env && env.RESEND_FROM) || 'KITATULIS.COM <noreply@kitatulis.com>';
 
   if (!apiKey) {
     console.warn('RESEND_API_KEY is not configured in environment');
@@ -13,7 +13,7 @@ export async function sendOtpEmail(toEmail: string, otpCode: string, env: any = 
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Kode Masuk OTP — BERBIRRU.COM</title>
+      <title>Kode Masuk OTP — KITATULIS.COM</title>
     </head>
     <body style="margin:0;padding:24px 12px;background-color:#F0F6FE;font-family:-apple-system,BlinkMacSystemFont,'Plus Jakarta Sans','Segoe UI',Roboto,Helvetica,sans-serif;color:#0B192C;">
       <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:480px;background:#FFFFFF;border:3px solid #0B192C;border-radius:16px;box-shadow:5px 5px 0 #1E293B;overflow:hidden;">
@@ -23,7 +23,7 @@ export async function sendOtpEmail(toEmail: string, otpCode: string, env: any = 
             <table border="0" cellpadding="0" cellspacing="0">
               <tr>
                 <td style="background:#1D61E7;border:2px solid #0B192C;border-radius:10px;padding:6px 12px;">
-                  <span style="font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:900;color:#FFFFFF;letter-spacing:0.5px;">BERBIRRU</span>
+                  <span style="font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:900;color:#FFFFFF;letter-spacing:0.5px;">KITATULIS</span>
                 </td>
                 <td style="padding-left:6px;">
                   <span style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:900;color:#1D61E7;text-decoration:underline;text-decoration-color:#FDE047;">.com</span>
@@ -39,7 +39,7 @@ export async function sendOtpEmail(toEmail: string, otpCode: string, env: any = 
           <td style="padding:28px 24px;">
             <h3 style="margin:0 0 12px;font-size:20px;font-weight:800;color:#0B192C;line-height:1.3;">Kode Masuk Verifikasi</h3>
             <p style="margin:0 0 18px;font-size:14px;color:#334155;line-height:1.6;">
-              Gunakan 6 digit kode OTP di bawah ini untuk masuk atau mengatur ulang akun <strong>BERBIRRU.COM</strong> Anda:
+              Gunakan 6 digit kode OTP di bawah ini untuk masuk atau mengatur ulang akun <strong>KITATULIS.COM</strong> Anda:
             </p>
 
             <!-- OTP Code Badge -->
@@ -66,7 +66,7 @@ export async function sendOtpEmail(toEmail: string, otpCode: string, env: any = 
         <tr>
           <td style="background:#0F172A;padding:18px 24px;border-top:2px solid #0B192C;text-align:center;">
             <p style="margin:0 0 4px;font-size:11.5px;font-weight:700;color:#CBD5E1;">
-              © 2026 BERBIRRU.COM · Dirawat dengan rasa dan integritas karya.
+              © 2026 KITATULIS.COM · Dirawat dengan rasa dan integritas karya.
             </p>
             <p style="margin:0;font-size:10.5px;color:#64748B;">
               Layanan Sastra Serverless &amp; Bebas Pelacak Pihak Ketiga
@@ -90,7 +90,7 @@ export async function sendOtpEmail(toEmail: string, otpCode: string, env: any = 
       body: JSON.stringify({
         from: fromEmail,
         to: [toEmail],
-        subject: `Kode Masuk OTP — BERBIRRU.COM`,
+        subject: `Kode Masuk OTP — KITATULIS.COM`,
         html: htmlContent
       })
     });
@@ -110,11 +110,11 @@ export async function sendOtpEmail(toEmail: string, otpCode: string, env: any = 
 /** Notifikasi: sandi akun berubah (kontrol deteksi wajib saat reset). */
 export async function sendPasswordChangedEmail(toEmail: string, env: any = null): Promise<boolean> {
   const apiKey = (env && env.RESEND_API_KEY) || '';
-  const fromEmail = (env && env.RESEND_FROM) || 'BERBIRRU.COM <noreply@berbirru.com>';
+  const fromEmail = (env && env.RESEND_FROM) || 'KITATULIS.COM <noreply@kitatulis.com>';
   if (!apiKey) return false;
   const html = `<!DOCTYPE html><html lang="id"><body style="margin:0;padding:24px 12px;background:#F0F6FE;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#0B192C;">
   <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:480px;background:#fff;border:3px solid #0B192C;border-radius:16px;overflow:hidden;">
-    <tr><td style="background:#E0EEFD;padding:18px 22px;border-bottom:2px solid #0B192C;font-weight:900;letter-spacing:.5px;">BERBIRRU</td></tr>
+    <tr><td style="background:#E0EEFD;padding:18px 22px;border-bottom:2px solid #0B192C;font-weight:900;letter-spacing:.5px;">KITATULIS</td></tr>
     <tr><td style="padding:22px;">
       <h1 style="margin:0 0 10px;font-size:20px;">Sandi akunmu baru saja diubah</h1>
       <p style="margin:0 0 12px;font-size:14px;line-height:1.6;">Kami mencatat perubahan sandi untuk akun <b>${toEmail}</b>. Semua perangkat lain sudah dikeluarkan.</p>
@@ -126,7 +126,7 @@ export async function sendPasswordChangedEmail(toEmail: string, env: any = null)
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + apiKey, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: fromEmail, to: [toEmail], subject: 'Sandi akun BERBIRRU diubah', html }),
+      body: JSON.stringify({ from: fromEmail, to: [toEmail], subject: 'Sandi akun KITATULIS diubah', html }),
     });
     return res.ok;
   } catch { return false; }

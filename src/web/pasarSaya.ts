@@ -149,7 +149,7 @@ export function renderPasarSaya(user: any, tab: string, sub: string, d: HubData)
 
   return `<!DOCTYPE html>
 <html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pasar Saya — BERBIRRU</title>
+<title>Pasar Saya — KITATULIS</title>
 ${PASAR_BASE_CSS}
 <style>
     :root{--muted:${THEME.muted};--ink-soft:${THEME.inkSoft};--line-soft:${THEME.lineSoft};}${SHELL_CSS}${PESANAN_CSS}${TOKO_CSS}${SALDO_CSS}</style></head>
@@ -169,7 +169,7 @@ ${PASAR_BASE_CSS}
 <div class="hub-body">${isi}</div>
 ${approved && user.shop_slug ? `<div class="wrap" style="padding-top:0"><div class="shop-link">
       <div class="sl-t">Toko publik</div>
-      <div class="sl-u">berbirru.com/toko/${escapeHtml(user.shop_slug)}</div>
+      <div class="sl-u">kitatulis.com/toko/${escapeHtml(user.shop_slug)}</div>
       <div class="sl-b"><a href="/toko/${escapeHtml(user.shop_slug)}">Lihat</a><button type="button" onclick="salinToko(this)">Salin link</button></div>
     </div>
     <script>function salinToko(b){var u='https://'+location.host+'/toko/${escapeHtml(user.shop_slug)}';if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(function(){b.textContent='Tersalin ✓'},function(){prompt('Salin:',u)})}else{prompt('Salin:',u)}}</script></div>` : ''}

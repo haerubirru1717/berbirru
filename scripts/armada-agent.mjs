@@ -1,4 +1,4 @@
-// Armada agent E2E berbirru — 1 akun per agent, API-level, sesi diinjeksi parent.
+// Armada agent E2E kitatulis — 1 akun per agent, API-level, sesi diinjeksi parent.
 // Pakai: node scripts/armada-agent.mjs <SELF_EMAIL> <SELF_PEN> <TARGET_PEN> <PREV_PEN|-> <TOKEN> <DONE_PATH>
 // Kontrak: TIDAK deploy, TIDAK ubah source, TIDAK SQL, TIDAK menghapus data siapa pun.
 const [SELF_EMAIL, SELF_PEN, TARGET_PEN, PREV_PEN, TOKEN, DONE_PATH] = process.argv.slice(2);
@@ -7,7 +7,7 @@ if (!SELF_EMAIL || !SELF_PEN || !TARGET_PEN || !TOKEN || !DONE_PATH) {
 }
 const BASE = process.env.BASE_URL || 'https://berbirru-uji.haerubirru17.workers.dev';
 const MARK = '#' + SELF_PEN.replace('agen', '');           // "#01".."#10"
-const COOKIE = 'berbirru_session=' + TOKEN;
+const COOKIE = 'kitatulis_session=' + TOKEN;
 const results = [], skip = [];
 function check(name, ok, detail = '') {
   results.push({ name, ok, detail });

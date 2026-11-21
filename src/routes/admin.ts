@@ -24,7 +24,7 @@ export function mountAdmin(app: any) {
     const status = c.req.query('status') || 'quarantined';
     if (status !== 'visible' && status !== 'quarantined') {
       c.header('Cache-Control', 'no-store');
-      return c.html('<!doctype html><html lang="id"><head><meta charset="utf-8"><title>Status tidak valid | BERBIRRU</title></head><body><main><h1>Status tidak valid</h1><a href="/admin/posts">Kembali ke Warkah</a></main></body></html>', 400);
+      return c.html('<!doctype html><html lang="id"><head><meta charset="utf-8"><title>Status tidak valid | KITATULIS</title></head><body><main><h1>Status tidak valid</h1><a href="/admin/posts">Kembali ke Warkah</a></main></body></html>', 400);
     }
     const posts = await loadAdminPosts(c.env.DB, status);
     c.header('Cache-Control', 'no-store');

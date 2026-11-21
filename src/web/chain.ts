@@ -52,7 +52,7 @@ export function renderChainPage(opts: {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lembar Sambungan — BERBIRRU.COM</title>
+  <title>Lembar Sambungan — KITATULIS.COM</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -157,7 +157,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
       <a href="/feed" class="brand-wrap">
         <div class="brand">
           <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-          <h1>BERBIRRU</h1>
+          <h1>KITATULIS</h1>
         </div>
         <span class="brand-com-tag">.com</span>
       </a>

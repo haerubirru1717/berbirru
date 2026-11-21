@@ -18,7 +18,7 @@ bucket_name = "berbirru-media-uji"
 [vars]
 # Satu-satunya akun yang boleh membuka /owner (putus sengketa + cairkan saldo).
 OWNER_EMAIL = "haeru@berbirru.com"
-APP_NAME = "BERBIRRU"
+APP_NAME = "KITATULIS"
 APP_DOMAIN = "berbirru-uji.haerubirru17.workers.dev"
 KERN_THEME_PRESET = "kern"
 # Mode scan Strix R6 (±): gate sandbox DIBUKA sementara utk pentest. Kembalikan ke "1" segera

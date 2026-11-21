@@ -36,7 +36,7 @@ const pasarBody = `
 <article class="post"><div class="post-head"><div class="avatar">L</div><div class="author"><div class="author-name">Laut Bercerita</div><div class="author-meta">Leila S. Chudori · KPG</div></div></div><h2 class="post-title casual">Rp60.000</h2><div class="post-text">Seperti baru, dibaca sekali. Termasuk kartu nama penulis.</div><div class="post-foot"><div class="post-actions"><button class="post-action">Beli →</button><button class="post-action">Tawar</button></div></div></article>`;
 const pasarCss = `<style>.tools{border-bottom:var(--rule);padding:10px 16px}.tools-label{font:500 9px var(--mono);text-transform:uppercase;letter-spacing:.07em}.post .post-title{font-size:30px}.post-action{border:var(--rule);padding:7px 10px;font:600 9px var(--mono);text-transform:uppercase;color:var(--ink)}.post-action:first-child{background:var(--ink);color:var(--paper)}</style>`;
 
-writeFileSync('/tmp/main-merge/scripts/kern-pg-profil.html', shell('BERBIRRU — Profil', profilCss + profilBody, 5).replace('Beranda / Warkah Society','Profil'));
-writeFileSync('/tmp/main-merge/scripts/kern-pg-notif.html', shell('BERBIRRU — Notifikasi', notifCss + notifBody, 4));
-writeFileSync('/tmp/main-merge/scripts/kern-pg-pasar.html', shell('BERBIRRU — Pasar Buku', pasarCss + pasarBody, 2).replace('Beranda / Warkah Society','Pasar'));
+writeFileSync('/tmp/main-merge/scripts/kern-pg-profil.html', shell('KITATULIS — Profil', profilCss + profilBody, 5).replace('Beranda / Warkah Society','Profil'));
+writeFileSync('/tmp/main-merge/scripts/kern-pg-notif.html', shell('KITATULIS — Notifikasi', notifCss + notifBody, 4));
+writeFileSync('/tmp/main-merge/scripts/kern-pg-pasar.html', shell('KITATULIS — Pasar Buku', pasarCss + pasarBody, 2).replace('Beranda / Warkah Society','Pasar'));
 console.log('3 halaman ditulis');

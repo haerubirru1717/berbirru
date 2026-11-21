@@ -36,7 +36,7 @@ assert.equal((auth.match(/insertActiveLoginSession\(/g) || []).length, 1, 'passw
 assert.equal((auth.match(/capLoginSessions\(/g) || []).length, 1, 'password login pakai helper cap');
 assert.equal((auth.match(/capLoginSessionsStmt\(/g) || []).length, 1, 'verify-OTP pakai cap bentuk stmt (batch)');
 assert.match(auth, /const inserted = await insertActiveLoginSession\(c\.env\.DB, user\.id,[\s\S]{0,200}if \(!inserted\.meta\.changes\)[\s\S]{0,120}BAD_CRED/);
-assert.equal((auth.match(/setCookie\(\s*c,\s*'berbirru_session'/g) || []).length, 2, 'cookie login hanya dari dua jalur resmi');
+assert.equal((auth.match(/setCookie\(\s*c,\s*'kitatulis_session'/g) || []).length, 2, 'cookie login hanya dari dua jalur resmi');
 assert.doesNotMatch(auth, /account_status\s*=\s*'suspended'/, 'login tidak boleh bocorkan status (respons generik)');
 
 // 4. Task 3: tiga finalizer + change-password atomik = empat batch.

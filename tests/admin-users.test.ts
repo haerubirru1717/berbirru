@@ -53,7 +53,7 @@ const { renderAdminUsersPage } = await import(new URL('../src/web/admin-users.ts
 const page = renderAdminUsersPage([
   { id: '00000000-0000-0000-0000-000000000001', penName: '<x>pen', displayName: 'Disp A', emailMasked: 'pe***@x.invalid', status: 'active', isOwner: false },
   { id: '00000000-0000-0000-0000-000000000002', penName: 'suspen', displayName: 'Disp S', emailMasked: 'su***@x.invalid', status: 'suspended', isOwner: false },
-  { id: '00000000-0000-0000-0000-000000000003', penName: 'ownerpen', displayName: 'Disp O', emailMasked: 'ow***@berbirru.com', status: 'active', isOwner: true },
+  { id: '00000000-0000-0000-0000-000000000003', penName: 'ownerpen', displayName: 'Disp O', emailMasked: 'ow***@kitatulis.com', status: 'active', isOwner: true },
 ]);
 assert.ok(!page.includes('<x>pen'), 'XSS: penName di-escape');
 assert.match(page, /data-action="suspend"/, 'satu action sesuai status (aktif → suspend)');

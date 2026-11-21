@@ -91,7 +91,7 @@ export function renderPesananPage(user: any, orders: any[], tab: string, embed =
   if (embed) return inner;
   return `<!DOCTYPE html>
 <html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pesanan Saya — Pasar Buku BERBIRRU</title>
+<title>Pesanan Saya — Pasar Buku KITATULIS</title>
 ${PASAR_BASE_CSS}
 <style>
     :root{--muted:${THEME.muted};--ink-soft:${THEME.inkSoft};--line-soft:${THEME.lineSoft};}${PAGE_CSS}</style></head>

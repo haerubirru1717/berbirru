@@ -55,7 +55,7 @@ const COMMON = new Set([
   'qwerty123', 'qwertyui', 'iloveyou', 'admin123', 'administrator', 'letmein1',
   'welcome1', 'welcome123', 'monkey123', 'dragon123', 'football', 'baseball',
   'sunshine', 'princess', 'abcd1234', 'a1b2c3d4', 'passw0rd', 'p@ssw0rd',
-  'berbirru', 'berbirru123', 'katasandi', 'rahasia123', 'indonesia1',
+  'kitatulis', 'berbirru123', 'katasandi', 'rahasia123', 'indonesia1',
 ]);
 
 /** Kembalikan pesan masalah, atau null bila kata sandi lolos kebijakan. */

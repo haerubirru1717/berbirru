@@ -1,8 +1,8 @@
 {
-  "name": "berbirru",
+  "name": "kitatulis",
   "version": "1.0.0",
   "type": "module",
-  "description": "BERBIRRU.COM — Pustaka Tulisan & Kolaborasi Kata di Edge Cloudflare",
+  "description": "KITATULIS.COM — Pustaka Tulisan & Kolaborasi Kata di Edge Cloudflare",
   "main": "src/index.ts",
   "scripts": {
     "dev": "wrangler dev",

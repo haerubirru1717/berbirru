@@ -74,7 +74,7 @@ export async function getAuthUser(c: any): Promise<{ id: string; email: string; 
   addr_receiver?: string | null; addr_phone?: string | null; addr_postal?: string | null; addr_text?: string | null;
   addr_province_id?: string | null; addr_province_name?: string | null; addr_city_id?: string | null;
   addr_city_name?: string | null; addr_district_id?: string | null; addr_district_name?: string | null; is_owner?: boolean; owner_pending?: number } | null> {
-  const token = getCookie(c, 'berbirru_session');
+  const token = getCookie(c, 'kitatulis_session');
   if (!token) return null;
   const session: any = await c.env.DB.prepare(
     // Baris OTP pending (`otp_<hash>`, token_hash NULL) BUKAN sesi: tanpa filter ini,

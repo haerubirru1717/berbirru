@@ -112,7 +112,7 @@ const CSS = `
 
 const BUNGKUS = (judul: string, isi: string, kelaskan = '') => `<!DOCTYPE html>
 <html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${judul} | BERBIRRU</title>${FONTS}<style>${CSS}</style>
+<title>${judul} | KITATULIS</title>${FONTS}<style>${CSS}</style>
 <style>@page{size:${kelaskan === 'a5' ? 'A5' : '80mm 115mm'};margin:0}</style></head>
 <body class="${kelaskan}">
 <div class="bar"><span>${judul} <em>· ${kelaskan === 'a5' ? 'A5' : '8 × 11,5 cm'}</em></span>
@@ -130,10 +130,10 @@ export function renderNotaPengiriman(o: any, p: any, seller: any): string {
   <div class="stk">
     <div class="stk-in">
       <div class="head">
-        <div class="atas">Berbirru</div>
+        <div class="atas">Kitatulis</div>
         <div class="marks">
           <div class="postmark">CILEGON<br>${tglPendek(o.created_at).replace(/ · /g, '·')}<br>2026</div>
-          <div class="stamp"><div class="in2">Berbirru<br>Rekber<br>2026</div></div>
+          <div class="stamp"><div class="in2">Kitatulis<br>Rekber<br>2026</div></div>
         </div>
         <h1>Nota Pengiriman</h1>
         <div class="it">“Setiap buku punya jalan pulangnya”</div>
@@ -159,8 +159,8 @@ export function renderNotaPengiriman(o: any, p: any, seller: any): string {
       <div class="fine"><span>Tanggal</span><b>${tglPanjang(o.created_at)}</b></div>
 
       <div class="foot">
-        <div class="qr">${svgQr(`https://berbirru.com/pasar/order/${o.id}`, { sel: 2, margin: 1 })}</div>
-        <div class="ft"><b>Berbirru</b><br>Pindai untuk melacak pesanan<br>berbirru.com · ${kode}</div>
+        <div class="qr">${svgQr(`https://kitatulis.com/pasar/order/${o.id}`, { sel: 2, margin: 1 })}</div>
+        <div class="ft"><b>Kitatulis</b><br>Pindai untuk melacak pesanan<br>kitatulis.com · ${kode}</div>
       </div>
     </div>
   </div>`;
@@ -185,7 +185,7 @@ export function renderNotaPembelian(o: any, p: any, seller: any, buyer: any, pih
       <div class="kop">
         <div class="atas">Pasar Buku · Rekber</div>
         <h1>Nota Pembelian</h1>
-        <div class="sub">berbirru.com — jual beli buku fisik dengan rekber</div>
+        <div class="sub">kitatulis.com — jual beli buku fisik dengan rekber</div>
         <div class="orn">✦ ────────── ✦ ────────── ✦</div>
       </div>
       <div class="statuscap">${escapeHtml(status)}</div>
@@ -194,7 +194,7 @@ export function renderNotaPembelian(o: any, p: any, seller: any, buyer: any, pih
         <div>
           <div class="r"><span class="k">Nomor</span><span class="v">${kode}</span></div>
           <div class="r"><span class="k">Tanggal</span><span class="v">${tglPanjang(o.created_at)}</span></div>
-          <div class="r"><span class="k">Pembayaran</span><span class="v">${o.paid_with === 'saldo' ? 'Saldo Berbirru' : 'QRIS'}</span></div>
+          <div class="r"><span class="k">Pembayaran</span><span class="v">${o.paid_with === 'saldo' ? 'Saldo Kitatulis' : 'QRIS'}</span></div>
         </div>
         <div class="kanan">
           Kepada Yth.<br><b>${escapeHtml(pihak === 'pembeli' ? (o.receiver_name || pembeli) : penjual)}</b><br>
@@ -229,8 +229,8 @@ export function renderNotaPembelian(o: any, p: any, seller: any, buyer: any, pih
       ${o.kesepakatan ? `<div class="ket2" style="border-top:0;padding-top:1mm;"><div class="k">Catatan pembeli</div><q>${escapeHtml(o.kesepakatan)}</q></div>` : ''}
 
       <div class="foot">
-        <div class="kecil">Dokumen ini diterbitkan otomatis oleh sistem Berbirru sebagai bukti ${pihak === 'pembeli' ? 'pembelian' : 'penjualan'}. Simpan untuk keperluan sengketa atau klaim.</div>
-        <div class="stempel">${pihak === 'pembeli' ? 'BUKTI<br>PEMBELIAN' : 'SALINAN<br>PENJUAL'}<br>BERBIRRU</div>
+        <div class="kecil">Dokumen ini diterbitkan otomatis oleh sistem Kitatulis sebagai bukti ${pihak === 'pembeli' ? 'pembelian' : 'penjualan'}. Simpan untuk keperluan sengketa atau klaim.</div>
+        <div class="stempel">${pihak === 'pembeli' ? 'BUKTI<br>PEMBELIAN' : 'SALINAN<br>PENJUAL'}<br>KITATULIS</div>
       </div>
     </div>
   </div>`;

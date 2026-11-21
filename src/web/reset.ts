@@ -6,7 +6,7 @@ export function renderResetPage(siteKey = ''): string {
   const sk = escapeHtml(siteKey);
   return `<!DOCTYPE html>
 <html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Atur Ulang Sandi — BERBIRRU.COM</title>
+<title>Atur Ulang Sandi — KITATULIS.COM</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.ico">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,700&display=swap" rel="stylesheet">
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>

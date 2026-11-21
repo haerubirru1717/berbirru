@@ -1,4 +1,4 @@
-// Notifikasi Berbirru — pembungkus SweetAlert2 (vendor: /vendor/sweetalert2.js).
+// Notifikasi Kitatulis — pembungkus SweetAlert2 (vendor: /vendor/sweetalert2.js).
 // bbToast = pengganti alert(); bbConfirm = pengganti confirm() (return Promise<boolean>).
 // Gaya neobrutalism: border tinta 2px, radius 10px, shadow offset, font sistem app.
 import { THEME } from './theme';
@@ -8,7 +8,7 @@ export const NOTIFY_HTML = `
 <script src="/vendor/sweetalert2.js" defer></script>
 <style>
     :root{--muted:${THEME.muted};--ink-soft:${THEME.inkSoft};--line-soft:${THEME.lineSoft};}
-  /* ==== SweetAlert2 :: neobrutalism Berbirru ==== */
+  /* ==== SweetAlert2 :: neobrutalism Kitatulis ==== */
   .swal2-popup { border: 2px solid var(--ink) !important; border-radius: 10px !important; box-shadow: 4px 4px 0 rgba(11,25,44,0.9) !important; font-family: 'Poppins', system-ui, sans-serif !important; }
   .swal2-title { font-family: 'Space Grotesk', sans-serif !important; font-size: 16px !important; font-weight: 800 !important; color: var(--ink) !important; }
   .swal2-html-container { font-size: 13px !important; font-weight: 600 !important; color: #334155 !important; }

@@ -22,7 +22,7 @@ export function renderBuktiPencairan(w: any, opts: { owner: boolean; penName: st
   const total = Number(w.amount) + Number(w.fee || 0);
   return `<!DOCTYPE html>
 <html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bukti Pencairan ${escapeHtml(w.kode || '')} — BERBIRRU</title>
+<title>Bukti Pencairan ${escapeHtml(w.kode || '')} — KITATULIS</title>
 <style>
   :root{--ink:${THEME.ink};--dim:#52627A;--muted:${THEME.muted};--ink-soft:${THEME.inkSoft};--line-soft:${THEME.lineSoft};--line:#CBD5E1;--blue:${THEME.blue}}
   *{box-sizing:border-box}
@@ -61,7 +61,7 @@ export function renderBuktiPencairan(w: any, opts: { owner: boolean; penName: st
 </div>
 <div class="paper">
   <div class="head">
-    <div class="brand">BERBIRRU<span>PASAR BUKU · BUKTI PENCAIRAN</span></div>
+    <div class="brand">KITATULIS<span>PASAR BUKU · BUKTI PENCAIRAN</span></div>
     <div class="stamp">${st.t}</div>
   </div>
 
@@ -97,7 +97,7 @@ export function renderBuktiPencairan(w: any, opts: { owner: boolean; penName: st
   ${w.status === 'requested' ? `<div class="note">Permintaan masih menunggu diproses owner. Saldo sudah dikunci sebesar total di atas.</div>` : ''}
 
   <div class="foot">
-    Dokumen internal BERBIRRU · dibuat otomatis, tidak perlu tanda tangan.<br>
+    Dokumen internal KITATULIS · dibuat otomatis, tidak perlu tanda tangan.<br>
     Bukan bukti transfer bank — bukti transfer tetap dari bank/e-wallet tujuan.
     ${opts.owner ? '<div class="owner">Dibuka dalam mode owner. Catatan internal tidak ditampilkan di halaman ini.</div>' : ''}
   </div>

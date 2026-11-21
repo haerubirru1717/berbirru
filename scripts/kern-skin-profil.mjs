@@ -2,7 +2,7 @@
 const { chromium } = await import('/home/ubuntu/.npm/_npx/d537ee5ee2a13f03/node_modules/playwright/index.mjs');
 const br = await chromium.launch();
 const ctx = await br.newContext({ viewport: { width: 412, height: 915 } });
-await ctx.addCookies([{ name: 'berbirru_session', value: 'snap-session-token-01', domain: 'berbirru-uji.haerubirru17.workers.dev', path: '/' }]);
+await ctx.addCookies([{ name: 'kitatulis_session', value: 'snap-session-token-01', domain: 'berbirru-uji.haerubirru17.workers.dev', path: '/' }]);
 const page = await ctx.newPage();
 await page.goto('https://berbirru-uji.haerubirru17.workers.dev/u/senja_kelabu', { waitUntil: 'domcontentloaded', timeout: 45000 });
 await page.waitForTimeout(2500);

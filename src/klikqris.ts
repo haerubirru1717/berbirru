@@ -49,7 +49,7 @@ export async function createQrisTransaction(env: KlikQrisEnv, opts: { orderId: s
   try {
     const res = await fetch(createUrl(env), {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-api-key': env.KLIKQRIS_API_KEY, 'id_merchant': env.KLIKQRIS_MERCHANT_ID, 'User-Agent': 'Mozilla/5.0 (Berbirru; rekber)' },
+      headers: { 'Content-Type': 'application/json', 'x-api-key': env.KLIKQRIS_API_KEY, 'id_merchant': env.KLIKQRIS_MERCHANT_ID, 'User-Agent': 'Mozilla/5.0 (Kitatulis; rekber)' },
       body: JSON.stringify({ order_id: opts.orderId, amount: opts.amount, id_merchant: env.KLIKQRIS_MERCHANT_ID, keterangan: opts.description.slice(0, 120), callback_url: env.KLIKQRIS_CALLBACK_URL }),
     });
     const raw: any = await res.json().catch(() => null);
@@ -65,7 +65,7 @@ export async function createQrisTransaction(env: KlikQrisEnv, opts: { orderId: s
 export async function getQrisStatus(env: KlikQrisEnv, orderId: string): Promise<QrisStatusResult> {
   if (!env.KLIKQRIS_API_KEY || !env.KLIKQRIS_MERCHANT_ID) return { ok: false, error: 'Kredensial KlikQRIS belum diset' };
   try {
-    const res = await fetch(statusUrl(env, orderId), { headers: { 'x-api-key': env.KLIKQRIS_API_KEY, 'id_merchant': env.KLIKQRIS_MERCHANT_ID, 'User-Agent': 'Mozilla/5.0 (Berbirru; rekber)' } });
+    const res = await fetch(statusUrl(env, orderId), { headers: { 'x-api-key': env.KLIKQRIS_API_KEY, 'id_merchant': env.KLIKQRIS_MERCHANT_ID, 'User-Agent': 'Mozilla/5.0 (Kitatulis; rekber)' } });
     const raw: any = await res.json().catch(() => null);
     if (!res.ok) return { ok: false, error: `KlikQRIS status HTTP ${res.status}` };
     const data = payload(raw);

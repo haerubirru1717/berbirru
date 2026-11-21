@@ -7,10 +7,10 @@ export function renderSearchPage(user: any = null): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Telusuri — BERBIRRU.COM</title>
+  <title>Telusuri — KITATULIS.COM</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.ico">
-  <meta property="og:title" content="Telusuri — BERBIRRU.COM">
-  <meta property="og:description" content="Cari penulis dan warkah di BERBIRRU.">
+  <meta property="og:title" content="Telusuri — KITATULIS.COM">
+  <meta property="og:description" content="Cari penulis dan warkah di KITATULIS.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700;1,6..72,500&family=Roboto+Mono:wght@600;700&display=swap" rel="stylesheet">

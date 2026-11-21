@@ -18,11 +18,11 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@${penName} — Paspor Penulis BERBIRRU.COM</title>
+  <title>@${penName} — Paspor Penulis KITATULIS.COM</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.ico">
-  <meta property="og:title" content="@${penName} — Paspor Penulis BERBIRRU.COM">
+  <meta property="og:title" content="@${penName} — Paspor Penulis KITATULIS.COM">
   <meta property="og:description" content="Kumpulan antologi puisi, warkah, dan kutipan rasa dari @${penName}.">
-  <meta property="og:image" content="https://berbirru.com/og-image.png">
+  <meta property="og:image" content="https://kitatulis.com/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700;1,6..72,500&family=Roboto+Mono:wght@600;700&display=swap" rel="stylesheet">
@@ -380,7 +380,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
     <!-- Profile Card with Cover/Banner Header -->
     <div class="profile-card">
       <div class="cover-banner" ${isMe ? `onclick="if(!event.target.closest('.banner-floating-nav'))document.getElementById('coverInput').click()" style="cursor:pointer" title="Ganti foto sampul"` : ''}>
-        <a href="/" class="kern-profile-brand" aria-label="BERBIRRU Beranda" onclick="event.stopPropagation()"><span class="kbrand-word">BERBIRRU</span><span class="kbrand-com">.COM</span></a>
+        <a href="/" class="kern-profile-brand" aria-label="KITATULIS Beranda" onclick="event.stopPropagation()"><span class="kbrand-word">KITATULIS</span><span class="kbrand-com">.COM</span></a>
       ${isMe ? '<input type="file" id="coverInput" data-kind="cover" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="pickMedia(this)">' : ''}
         ${isMe ? `
         <div class="cover-edit-badge media-edit-badge" onclick="event.stopPropagation(); document.getElementById('coverInput').click();" title="Ganti foto sampul">
@@ -471,12 +471,12 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
         </div>
 
         <div class="pen-name-group">
-          <span class="pen-name" id="penNameDisplay">@${penName}</span><span class="admin-badge" id="adminBadge" hidden title="Akun admin BERBIRRU"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#1D61E7"/><path d="M7.5 12.5l3 3 6-6.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="sr-only">Akun admin</span></span>
+          <span class="pen-name" id="penNameDisplay">@${penName}</span><span class="admin-badge" id="adminBadge" hidden title="Akun admin KITATULIS"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#1D61E7"/><path d="M7.5 12.5l3 3 6-6.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="sr-only">Akun admin</span></span>
           <span class="display-name-main" id="displayNameDisplay">${penName}</span>
         </div>
 
         <div class="bio-box" id="bioDisplay">
-          "Goresan perenungan rasa dan bait kata di Berbirru."
+          "Goresan perenungan rasa dan bait kata di Kitatulis."
         </div>
 
         <div class="stats-inline">
@@ -574,7 +574,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
   <div class="follow-sheet-backdrop" id="infoSheetBackdrop" onclick="closeInfoSheet()"></div>
   <section class="follow-sheet" id="infoSheet" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
     <div class="follow-sheet-head">
-      <div><div class="follow-sheet-title" id="infoTitle">Informasi Akun</div><div class="follow-sheet-hint">Data akunmu di Berbirru.</div></div>
+      <div><div class="follow-sheet-title" id="infoTitle">Informasi Akun</div><div class="follow-sheet-hint">Data akunmu di Kitatulis.</div></div>
       <button class="follow-sheet-close" type="button" aria-label="Tutup" onclick="closeInfoSheet()">&times;</button>
     </div>
     <div class="info-head">
@@ -737,7 +737,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
           applyAvatar(data.user.avatar_url, data.user.pen_name);
           applyCover(data.user.cover_url);
           document.getElementById('cityDisplay').textContent = data.user.city || 'Nusantara';
-          document.getElementById('bioDisplay').textContent = '"' + (data.user.bio || 'Goresan perenungan rasa dan bait kata di Berbirru.') + '"';
+          document.getElementById('bioDisplay').textContent = '"' + (data.user.bio || 'Goresan perenungan rasa dan bait kata di Kitatulis.') + '"';
           document.getElementById('countPosts').textContent = data.user.posts_count || 0;
           document.getElementById('countFollowers').textContent = data.user.followers_count || 0;
           document.getElementById('countFollowing').textContent = data.user.following_count || 0;

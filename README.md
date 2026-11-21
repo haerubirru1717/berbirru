@@ -1,7 +1,7 @@
-# 🌊 BERBIRRU.COM — Pustaka Tulisan & Kolaborasi Kata di Edge
+# 🌊 KITATULIS.COM — Pustaka Tulisan & Kolaborasi Kata di Edge
 
 > **Platform Sastra & Kolaborasi Warkah Berbasis Edge Cloudflare**  
-> Live Production: [https://berbirru.com](https://berbirru.com)  
+> Live Production: [https://kitatulis.com](https://kitatulis.com)  
 > Arsitektur: **Zero-DevOps Serverless Edge** (Hono + Cloudflare Workers + D1 Database + Native WebCrypto)
 
 ---
@@ -20,7 +20,7 @@
 ## 📁 Struktur Repositori
 
 ```
-berbirru/
+kitatulis/
 ├── wrangler.toml              # Konfigurasi Cloudflare Workers, Zone, & D1 Database Binding
 ├── schema.sql                 # Skema D1 SQLite utama (Users, Posts, Likes, Bookmarks, Sessions)
 ├── migrations/
@@ -38,11 +38,11 @@ berbirru/
 │   │
 │   └── web/                   # Lapisan View SSR (HTML Template Literal)
 │       ├── layout.ts          # Komponen bersama (DRY 5-Tab Lucide Bottom Navbar)
-│       ├── landing.ts         # Landing Page utama (berbirru.com/)
-│       ├── login.ts           # Halaman Masuk, Daftar, & Request OTP (berbirru.com/login)
-│       ├── feed.ts            # Halaman Linimasa Warkah & Compose Modal (berbirru.com/feed)
-│       ├── notifications.ts   # Halaman Riwayat Aktivitas Interaksi (berbirru.com/notifications)
-│       └── profile.ts         # Halaman Paspor Penulis & Pengaturan (berbirru.com/u/:pen_name)
+│       ├── landing.ts         # Landing Page utama (kitatulis.com/)
+│       ├── login.ts           # Halaman Masuk, Daftar, & Request OTP (kitatulis.com/login)
+│       ├── feed.ts            # Halaman Linimasa Warkah & Compose Modal (kitatulis.com/feed)
+│       ├── notifications.ts   # Halaman Riwayat Aktivitas Interaksi (kitatulis.com/notifications)
+│       └── profile.ts         # Halaman Paspor Penulis & Pengaturan (kitatulis.com/u/:pen_name)
 │
 ├── tests/                     # Unit Test Suite Mandiri (Node.js Test Runner)
 │   ├── password.test.ts       # Verifikasi hashing, salt, & resistansi timing attack

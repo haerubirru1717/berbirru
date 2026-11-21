@@ -41,7 +41,7 @@ export function renderCheckoutPage(user: any, p: any, saldo = 0, addresses: any[
 
   return `<!DOCTYPE html>
 <html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Beli — ${escapeHtml(p.title)} | BERBIRRU</title>
+<title>Beli — ${escapeHtml(p.title)} | KITATULIS</title>
 ${PASAR_BASE_CSS}
 <style>${PAGE_CSS}</style></head>
 <body>
@@ -91,7 +91,7 @@ ${PASAR_BASE_CSS}
     <textarea class="inp" id="kesepakatan" minlength="10" maxlength="500"
       placeholder="Contoh: buku dibungkus plastik + kardus, kirim hari ini."></textarea>
     <div class="hint">Teks ini <b>terkunci</b> setelah bayar dan terlihat penjual — jadi bahan bukti kalau ada perbedaan.</div>
-    <div class="note">Uang ditahan rekber BERBIRRU dan baru diteruskan ke penjual setelah kamu mengonfirmasi pesanan diterima.</div>
+    <div class="note">Uang ditahan rekber KITATULIS dan baru diteruskan ke penjual setelah kamu mengonfirmasi pesanan diterima.</div>
   </div>
 
   <div class="kw-card">
@@ -103,7 +103,7 @@ ${PASAR_BASE_CSS}
   </div>
 </div>
 
-<div style="font:600 10.5px/1.5 'DM Sans';color:var(--muted);margin:0 0 90px">*Biaya layanan QRIS dihitung otomatis oleh penyedia pembayaran (bukan oleh BERBIRRU) dan tampil di halaman pesanan.</div>
+<div style="font:600 10.5px/1.5 'DM Sans';color:var(--muted);margin:0 0 90px">*Biaya layanan QRIS dihitung otomatis oleh penyedia pembayaran (bukan oleh KITATULIS) dan tampil di halaman pesanan.</div>
 <div id="saldoBox" style="display:none;background:#FEF3C7;border:2.5px solid var(--ink);box-shadow:4px 5px 0 var(--ink-soft);padding:12px;margin:0 0 90px;">
   <label style="display:flex;gap:9px;align-items:flex-start;font:800 13px 'DM Sans';">
     <input type="checkbox" id="fSaldo" onchange="pakaiSaldo()" style="width:20px;height:20px;margin-top:1px;">

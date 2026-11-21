@@ -7,7 +7,7 @@ register(new URL('./ts-ext-hook.mjs', import.meta.url));
 const adminLib = await import('../src/lib/admin-social.ts');
 const adminWeb = await import('../src/web/admin.ts');
 
-assert.equal(adminLib.maskEmail('haeru@berbirru.com'), 'ha***@berbirru.com');
+assert.equal(adminLib.maskEmail('haeru@kitatulis.com'), 'ha***@kitatulis.com');
 assert.equal(adminLib.maskEmail('a@x.id'), 'a***@x.id');
 
 const issued: string[] = [];

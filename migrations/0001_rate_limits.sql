@@ -1,4 +1,4 @@
--- Migrasi audit Strix berbirru_a5ac (2026-10-10)
+-- Migrasi audit Strix kitatulis_a5ac (2026-10-10)
 -- Tabel rate limiting global (vuln-0004, vuln-0005).
 -- Diterapkan dengan:
 --   npx wrangler d1 execute berbirru-db --remote --file migrations/0001_rate_limits.sql

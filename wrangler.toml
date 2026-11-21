@@ -1,14 +1,14 @@
-name = "berbirru"
+name = "kitatulis"
 main = "src/index.ts"
 compatibility_date = "2025-06-01"
 
 # Strix R5 vuln-0001: worker prod tidak boleh terekspos via workers.dev (parallel host
-# di luar zone berbirru.com). Hanya lewat 2 routes zone di bawah.
+# di luar zone kitatulis.com). Hanya lewat 2 routes zone di bawah.
 workers_dev = false
 
 routes = [
-  { pattern = "berbirru.com/*", zone_name = "berbirru.com" },
-  { pattern = "www.berbirru.com/*", zone_name = "berbirru.com" }
+  { pattern = "kitatulis.com/*", zone_name = "kitatulis.com" },
+  { pattern = "www.kitatulis.com/*", zone_name = "kitatulis.com" }
 ]
 
 [[d1_databases]]
@@ -23,10 +23,10 @@ bucket_name = "berbirru-media"
 [vars]
 # Satu-satunya akun yang boleh membuka /owner (putus sengketa + cairkan saldo).
 OWNER_EMAIL = "haeru@berbirru.com"
-APP_NAME = "BERBIRRU"
-APP_DOMAIN = "berbirru.com"
+APP_NAME = "KITATULIS"
+APP_DOMAIN = "kitatulis.com"
 TURNSTILE_SITE_KEY = "0x4AAAAAAFTEI0GwdODJRhtT"
-KLIKQRIS_CALLBACK_URL = "https://berbirru.com/api/klikqris/webhook"
+KLIKQRIS_CALLBACK_URL = "https://kitatulis.com/api/klikqris/webhook"
 # Strix run-4 followup: Pasar Buku ditutup sementara ("1" = gate aktif). Buka: hapus baris ini → deploy.
 PASAR_TUTUP = "1"
 

@@ -1,7 +1,7 @@
-# 🛡️ Kebijakan & Kerangka Audit Keamanan (Enterprise Security & Audit Baseline) — BERBIRRU.COM
+# 🛡️ Kebijakan & Kerangka Audit Keamanan (Enterprise Security & Audit Baseline) — KITATULIS.COM
 
 > **Referensi Standar:** [Cloudflare Security Audit Framework (`cloudflare/security-audit-skill`)](https://github.com/cloudflare/security-audit-skill)  
-> **Ruang Lingkup:** `https://berbirru.com`, Cloudflare Edge Workers, Cloudflare D1 Database, dan API Subdomain.  
+> **Ruang Lingkup:** `https://kitatulis.com`, Cloudflare Edge Workers, Cloudflare D1 Database, dan API Subdomain.  
 > **Klasifikasi:** Enterprise Zero-Trust Security Baseline  
 > **Terakhir Diperbarui:** Oktober 2026
 
@@ -9,10 +9,10 @@
 
 ## 1. Komitmen Keamanan & Pelaporan Kerentanan (Vulnerability Disclosure)
 
-Tim **Berbirru** berkomitmen menjaga integritas data pengguna, kerahasiaan identitas penulis, dan ketersediaan layanan dengan standar keamanan tertinggi. Kami menyambut baik laporan riset keamanan dari komunitas *ethical hacker*.
+Tim **Kitatulis** berkomitmen menjaga integritas data pengguna, kerahasiaan identitas penulis, dan ketersediaan layanan dengan standar keamanan tertinggi. Kami menyambut baik laporan riset keamanan dari komunitas *ethical hacker*.
 
 ### 📬 Jalur Kontak Resmi:
-- **Surel Pelaporan:** `security@berbirru.com` *(atau via Telegram Admin: `@haerubirru17`)*
+- **Surel Pelaporan:** `security@kitatulis.com` *(atau via Telegram Admin: `@haerubirru17`)*
 - **PGP/Enkripsi:** Tersedia atas permintaan untuk pengungkapan laporan sensitif.
 
 ### ⏱️ SLA Respons Insiden (Standar Cloudflare Audit):
@@ -33,7 +33,7 @@ Kami tidak akan mengambil tindakan hukum terhadap peneliti yang:
 
 ## 2. Taksonomi Audit Keamanan Cloudflare (6-Domain Security Controls)
 
-Mengadopsi taksonomi resmi **Cloudflare Security Audit Harness**, seluruh lapisan arsitektur Berbirru diaudit berdasarkan 6 domain keamanan berikut:
+Mengadopsi taksonomi resmi **Cloudflare Security Audit Harness**, seluruh lapisan arsitektur Kitatulis diaudit berdasarkan 6 domain keamanan berikut:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -114,7 +114,7 @@ Mengadopsi taksonomi resmi **Cloudflare Security Audit Harness**, seluruh lapisa
 
 ## 4. Validasi Keamanan Otomatis (Pre-Deploy Security Gate)
 
-Setiap rilis kode ke produksi `https://berbirru.com` wajib melewati uji validasi keamanan otomatis:
+Setiap rilis kode ke produksi `https://kitatulis.com` wajib melewati uji validasi keamanan otomatis:
 ```bash
 # Uji kepatuhan skema & sanitasi kode
 npm test

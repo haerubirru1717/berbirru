@@ -227,7 +227,7 @@ async function hapusListing(id, btn){
   if (embed) return inner;
   return `<!DOCTYPE html>
 <html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Toko Saya — Pasar Buku BERBIRRU</title>
+<title>Toko Saya — Pasar Buku KITATULIS</title>
 ${PASAR_BASE_CSS}
 <style>
     :root{--muted:${THEME.muted};--ink-soft:${THEME.inkSoft};--line-soft:${THEME.lineSoft};}${PAGE_CSS}</style></head>

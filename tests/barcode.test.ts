@@ -39,7 +39,7 @@ test('svg: barcode dan qr menghasilkan svg sah', () => {
   const bc = svgCode128('KAJ0310243286785');
   assert.match(bc, /^<svg xmlns/);
   assert.ok((bc.match(/<rect /g) || []).length > 20);
-  const qr = svgQr('https://berbirru.com/pasar/order/x');
+  const qr = svgQr('https://kitatulis.com/pasar/order/x');
   assert.match(qr, /^<svg xmlns/);
   assert.ok((qr.match(/<rect /g) || []).length > 50);
 });

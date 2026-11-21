@@ -233,7 +233,7 @@ export function renderOwnerPage(disputes: any[], withdrawals: any[], calonPenjua
 
   return `<!DOCTYPE html>
 <html lang="id" data-bs-theme="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Owner — Pasar Buku BERBIRRU</title>
+<title>Owner — Pasar Buku KITATULIS</title>
 <script>${THEME_JS}</script>
 <link rel="stylesheet" href="/assets/tabler.min.css">
 <style>
@@ -242,7 +242,7 @@ export function renderOwnerPage(disputes: any[], withdrawals: any[], calonPenjua
 <header class="navbar navbar-expand-md d-print-none">
   <div class="container-xl">
     <div class="navbar-brand navbar-brand-autodark d-flex align-items-center gap-2">
-      <span class="brandmark">B</span><span class="fw-bold">Berbirru</span>
+      <span class="brandmark">B</span><span class="fw-bold">Kitatulis</span>
       <span class="badge badge-owner ms-1">OWNER</span>
     </div>
     <div class="navbar-nav flex-row order-md-last align-items-center gap-2">
