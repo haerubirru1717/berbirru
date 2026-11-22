@@ -380,11 +380,13 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
        pemisah garis rambut. Ia TIDAK meminjam apa pun dari sistem lama. */
     .stg-backdrop { display:none; position:fixed; inset:0; z-index:1000; background:rgba(9,9,11,.42); }
     .stg { --s-bg:#FAFAF9; --s-ink:#0B0C0E; --s-mut:#71717A; --s-line:#E7E7E9; --s-hi:#E5484D;
-      display:none; position:fixed; z-index:1001; inset:0; width:min(430px,100%); margin:0 auto;
-      background:var(--s-bg); color:var(--s-ink); overflow:auto;
+      /* Lembar menempel bawah dengan tinggi MENGIKUTI ISI (bukan layar penuh) */
+      display:none; position:fixed; z-index:1001; bottom:0; left:50%; transform:translateX(-50%);
+      width:min(430px,100%); max-height:88vh; overflow:auto; border-radius:20px 20px 0 0;
+      background:var(--s-bg); color:var(--s-ink); box-shadow:0 -10px 40px rgba(9,9,11,.18);
       font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
       -webkit-font-smoothing:antialiased; }
-    .stg-head { position:sticky; top:0; z-index:3; display:flex; align-items:center; gap:10px; padding:16px 18px 14px; background:rgba(250,250,249,.94); backdrop-filter:blur(12px); border-bottom:1px solid var(--s-line); }
+    .stg-head { display:flex; align-items:center; gap:10px; padding:16px 18px 14px; background:var(--s-bg); border-bottom:1px solid var(--s-line); }
     .stg-title { font-size:17px; font-weight:700; letter-spacing:-.01em; }
     .stg-x, .stg-back { width:32px; height:32px; flex:none; display:grid; place-items:center; border:0; border-radius:50%; background:transparent; color:var(--s-mut); font:400 19px/1 inherit; cursor:pointer; }
     .stg-x:active, .stg-back:active { background:#EFEFED; color:var(--s-ink); }
@@ -403,7 +405,10 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
     .stg-row svg { width:18px; height:18px; flex:none; stroke:var(--s-ink); stroke-width:1.7; fill:none; stroke-linecap:round; stroke-linejoin:round; }
     .stg-row .chev { margin-left:auto; color:#C4C4C8; font-size:17px; }
     .stg-row.danger, .stg-row.danger svg { color:var(--s-hi); }
-    .stg-sub { display:none; position:absolute; inset:0; background:var(--s-bg); overflow:auto; }
+    /* Sub-panel mengalir normal supaya tinggi lembar ikut isinya */
+    .stg-root { display:block; }
+    .stg.sub-open .stg-root { display:none; }
+    .stg-sub { display:none; }
     .stg-sub.on { display:block; }
     .stg-sec { display:none; padding-bottom:24px; }
     .stg-sec.on { display:block; }
@@ -648,6 +653,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
   ${isMe ? `
   <div class="stg-backdrop" id="stgBackdrop" onclick="closeSettings()"></div>
   <section class="stg" id="stgPanel" data-panel="pengaturan" role="dialog" aria-modal="true" aria-labelledby="stgTitle">
+    <div class="stg-root">
     <div class="stg-head">
       <div class="stg-title" id="stgTitle">Pengaturan</div>
       <button class="stg-x" type="button" aria-label="Tutup" onclick="closeSettings()">&times;</button>
@@ -692,6 +698,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
         <svg viewBox="0 0 24 24"><path d="M15 4h4a1 1 0 011 1v14a1 1 0 01-1 1h-4M10 8l-4 4 4 4M6 12h10"/></svg>
         <span>Keluar Akun</span>
       </button>
+    </div>
     </div>
     <section class="stg-sub" id="stgSub" data-sub="">
       <div class="stg-head">
@@ -1251,6 +1258,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
       p.style.display = 'none'; b.style.display = 'none';
       const sub = document.getElementById('stgSub');
       if (sub) sub.classList.remove('on');
+      p.classList.remove('sub-open');
       document.body.style.overflow = '';
     }
     function stgOpen(sec) {
@@ -1260,10 +1268,11 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
       sub.querySelectorAll('.stg-sec').forEach(el => el.classList.toggle('on', el.dataset.sec === sec));
       sub.dataset.sub = sec;
       sub.classList.add('on');
+      document.getElementById('stgPanel').classList.add('sub-open');
     }
     function stgBack() {
       const sub = document.getElementById('stgSub');
-      if (sub && sub.classList.contains('on')) { sub.classList.remove('on'); return; }
+      if (sub && sub.classList.contains('on')) { sub.classList.remove('on'); document.getElementById('stgPanel').classList.remove('sub-open'); return; }
       closeSettings();
     }
     document.getElementById('followSheet')?.addEventListener('touchstart', e => { followTouchX = e.touches[0].clientX; }, { passive: true });

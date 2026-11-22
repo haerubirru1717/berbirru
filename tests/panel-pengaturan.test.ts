@@ -40,5 +40,13 @@ for (const lama of ['border-thick', 'shadow-offset', 'Archivo Black', 'var(--ink
 assert.match(blokPanel, /--s-bg:#FAFAF9/, 'panel wajib memakai token bahasa baru');
 assert.match(profile, /family=Inter/, 'font Inter wajib dimuat untuk bahasa baru');
 
+// 7. Jendela TIDAK layar penuh: lembar menempel bawah, tinggi mengikuti isi
+const aturanStg = blokPanel.slice(blokPanel.indexOf('.stg {'), blokPanel.indexOf('.stg-head'));
+assert.match(aturanStg, /bottom:0/, 'panel wajib menempel di bawah');
+assert.match(aturanStg, /max-height:88vh/, 'panel wajib dibatasi tinggi, bukan layar penuh');
+assert.ok(!/inset:0/.test(aturanStg), 'aturan .stg tidak boleh memenuhi layar (inset:0)');
+assert.match(profile, /class="stg-root"/, 'isi root wajib dibungkus agar sub-panel bisa menggantikannya');
+
+console.log('OK — jendela setinggi isi (bukan layar penuh)');
 console.log('OK — panel memakai bahasa desain baru (bukan sistem lama)');
 console.log('OK — kontrak panel pengaturan (bentuk C) + tanggal bergabung privat');
