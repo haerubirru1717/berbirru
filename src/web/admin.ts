@@ -21,7 +21,7 @@ export function renderAdminPage(d: AdminDashboard): string {
     <a href="/u/${encodeURIComponent(u.penName)}" aria-label="Lihat profil @${escapeHtml(u.penName)}">Lihat profil</a>
   </div>`).join('');
   const LABEL_ALASAN: Record<string, string> = { spam: 'Spam', harassment: 'Pelecekan', fraud: 'Penipuan', other: 'Lainnya' };
-  const laporan = (d.reports?.latest || []).map((r) => `<div class="notice warn"><span class="n-icon">!</span><div><b>@${escapeHtml(r.penName)} &middot; ${LABEL_ALASAN[r.reason] || escapeHtml(r.reason)}</b><small>${r.note ? escapeHtml(r.note) + ' &middot; ' : ''}dilaporkan @${escapeHtml(r.reporter)} &middot; ${escapeHtml(date(r.createdAt))}</small></div><span>laporan</span></div>`).join('');
+  const laporan = (d.reports?.latest || []).map((r) => `<div class="notice warn"><span class="n-icon">!</span><div><b>@${escapeHtml(r.penName)} &middot; ${LABEL_ALASAN[r.reason] || escapeHtml(r.reason)}</b><small>${r.note ? escapeHtml(r.note) + ' &middot; ' : ''}dilaporkan @${escapeHtml(r.reporter)} &middot; ${escapeHtml(date(r.createdAt))}</small></div></div>`).join('');
   const p1 = pct(i.likes, i.total), p2 = p1 + pct(i.bookmarks, i.total), p3 = p2 + pct(i.follows, i.total);
 
   return `<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
