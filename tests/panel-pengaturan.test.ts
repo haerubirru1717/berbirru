@@ -37,7 +37,12 @@ const blokPanel = profile.slice(profile.indexOf('Panel Pengaturan (bentuk C) —
 for (const lama of ['border-thick', 'shadow-offset', 'Archivo Black', 'var(--ink)', 'var(--blue)', 'var(--white)']) {
   assert.ok(!blokPanel.includes(lama), `panel tidak boleh memakai sistem lama: ${lama}`);
 }
-assert.match(blokPanel, /--s-bg:#FAFAF9/, 'panel wajib memakai token bahasa baru');
+const token = baca('src/web/design-baru.ts');
+assert.match(token, /--s-bg:\s*#FAFAF9/, 'berkas token bahasa baru wajib memuat palet');
+assert.match(token, /--s-hi:\s*#E5484D/, 'berkas token wajib memuat aksen tunggal');
+assert.match(blokPanel, /var\(--s-bg\)|var\(--s-line\)/, 'panel wajib memakai token bersama');
+assert.ok(!/--s-bg:#/.test(blokPanel), 'panel tidak boleh mendefinisikan tokennya sendiri lagi');
+assert.match(profile, /from '\.\/design-baru'/, 'profil wajib mengimpor token bersama');
 assert.match(profile, /family=Inter/, 'font Inter wajib dimuat untuk bahasa baru');
 
 // 7. Jendela TIDAK layar penuh: lembar menempel bawah, tinggi mengikuti isi

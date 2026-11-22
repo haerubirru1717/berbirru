@@ -1,5 +1,6 @@
 import { THEME } from './theme';
 import { renderBottomNav } from './layout';
+import { TOKEN_CSS, FONT_URL } from './design-baru';
 import { NOTIFY_HTML } from './notify';
 
 export function renderProfilePage(penName: string, isMe = false, currentUser: any = null, isOwnerUser = false): string {
@@ -28,7 +29,9 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Archivo+Black&family=DM+Sans:wght@500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700;1,6..72,500&family=Roboto+Mono:wght@600;700&display=swap" rel="stylesheet">
+  <link href="${FONT_URL}" rel="stylesheet">
   <style>
+    ${TOKEN_CSS}
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root{--blue:${THEME.blue};--deep:${THEME.blueDeep};--ink:${THEME.ink};--paper:#FFF9E9;--white:#FFFEF8;--yellow:${THEME.accent};--coral:#FF735F;--mint:#88E6BD;--soft:#E0EEFD;--red:#EF4444;--green:#059669;--muted:${THEME.muted};--ink-soft:${THEME.inkSoft};--line-soft:${THEME.lineSoft};--line:3px solid var(--ink);--thin:2px solid var(--ink);--shadow:6px 7px 0 ${THEME.inkSoft};--small-shadow:3px 4px 0 ${THEME.inkSoft};--bg-main:var(--paper);--bg-card:#fff;--bg-blue-subtle:var(--soft);--shadow-ink:var(--ink-soft);--blue-primary:var(--blue);--blue-deep:var(--deep);--blue-light:#60A5FA;--accent-yellow:var(--yellow);--border-thick:var(--line);--border-med:3px solid var(--ink);--border-thin:var(--thin);--shadow-hard:var(--small-shadow);--shadow-hard-lg:var(--shadow);--shadow-hard-sm:2px 3px 0 ${THEME.inkSoft};--radius:0;--radius-sm:0}
     body {
@@ -379,12 +382,13 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
        tanpa warna merek, tanpa bayangan keras, hierarki lewat tipografi,
        pemisah garis rambut. Ia TIDAK meminjam apa pun dari sistem lama. */
     .stg-backdrop { display:none; position:fixed; inset:0; z-index:1000; background:rgba(9,9,11,.42); }
-    .stg { --s-bg:#FAFAF9; --s-ink:#0B0C0E; --s-mut:#71717A; --s-line:#E7E7E9; --s-hi:#E5484D;
+    /* Token --s-* berasal dari src/web/design-baru.ts — satu sumber untuk semua layar */
+    .stg {
       /* Lembar menempel bawah dengan tinggi MENGIKUTI ISI (bukan layar penuh) */
       display:none; position:fixed; z-index:1001; bottom:0; left:50%; transform:translateX(-50%);
       width:min(430px,100%); max-height:88vh; overflow:auto; border-radius:20px 20px 0 0;
       background:var(--s-bg); color:var(--s-ink); box-shadow:0 -10px 40px rgba(9,9,11,.18);
-      font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+      font-family:var(--s-font);
       -webkit-font-smoothing:antialiased; }
     .stg-head { display:flex; align-items:center; gap:10px; padding:16px 18px 14px; background:var(--s-bg); border-bottom:1px solid var(--s-line); }
     .stg-title { font-size:17px; font-weight:700; letter-spacing:-.01em; }
@@ -395,7 +399,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
     .stg-acct .n { font-size:15px; font-weight:600; }
     .stg-acct .h { font-size:12.5px; color:var(--s-mut); margin-top:2px; }
     .stg-tiles { display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:16px 18px 4px; }
-    .stg-tile { display:flex; flex-direction:column; gap:18px; text-align:left; padding:14px; cursor:pointer; border:1px solid var(--s-line); border-radius:16px; background:#FFF; }
+    .stg-tile { display:flex; flex-direction:column; gap:18px; text-align:left; padding:14px; cursor:pointer; border:1px solid var(--s-line); border-radius:var(--s-radius); background:var(--s-card); }
     .stg-tile:active { background:#F4F4F3; }
     .stg-tile .l { display:block; font-size:13.5px; font-weight:600; letter-spacing:-.01em; }
     .stg-tile .v { display:block; font-size:11.5px; color:var(--s-mut); margin-top:3px; }
@@ -413,7 +417,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
     .stg-sec { display:none; padding-bottom:24px; }
     .stg-sec.on { display:block; }
     .stg-note { padding:14px 18px 0; font-size:11.5px; color:var(--s-mut); line-height:1.55; }
-    .stg-flag { display:inline-block; margin-left:8px; padding:2px 7px; border:1px solid var(--s-line); border-radius:999px; font-size:10px; font-weight:600; color:var(--s-mut); }
+    .stg-flag { display:inline-block; margin-left:8px; padding:2px 7px; border:1px solid var(--s-line); border-radius:var(--s-radius-pill); font-size:10px; font-weight:600; color:var(--s-mut); }
     .stg-belum { margin:14px 18px; padding:14px; border:1px dashed var(--s-line); border-radius:12px; font-size:12px; color:var(--s-mut); }
     /* Isi sub-panel memakai bahasa baru juga — hanya di dalam .stg (sheet lama tidak tersentuh) */
     .stg .info-head { display:flex; align-items:center; gap:13px; padding:16px 18px 8px;  box-shadow:none;}
@@ -424,7 +428,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
     .stg .info-k { font-size:13px; font-weight:400; color:var(--s-mut); }
     .stg .info-v { font-size:13.5px; font-weight:600; color:var(--s-ink); text-align:right; max-width:240px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .stg .info-stats { display:flex; gap:10px; padding:16px 18px 0; }
-    .stg .info-st { flex:1; border:1px solid var(--s-line); border-radius:14px; text-align:center; padding:12px 0; background:#FFF; box-shadow:none; }
+    .stg .info-st { flex:1; border:1px solid var(--s-line); border-radius:var(--s-radius); text-align:center; padding:12px 0; background:var(--s-card); box-shadow:none; }
     .stg .info-st b { display:block; font-size:17px; font-weight:700; color:var(--s-ink); }
     .stg .info-st span { font-size:10px; color:var(--s-mut); text-transform:uppercase; letter-spacing:.06em; }
   </style>
