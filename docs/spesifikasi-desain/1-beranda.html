@@ -1,0 +1,96 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=390,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FAFAF9;--ink:#0B0C0E;--mut:#71717A;--line:#E7E7E9;--hi:#E5484D}
+*{box-sizing:border-box;margin:0}
+body{width:390px;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,-apple-system,sans-serif}
+.top{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;padding:14px 16px 10px;background:rgba(250,250,249,.92);backdrop-filter:blur(12px)}
+.logo{font:700 18px Inter;letter-spacing:-.03em}.logo b{font-weight:400;color:var(--mut)}
+.ic{display:flex;gap:16px}
+.tabs{display:flex;gap:22px;padding:2px 16px 0;font:600 13px Inter;color:var(--mut)}
+.tabs .on{color:var(--ink)}.tabs .on::after{content:'';display:block;height:2px;border-radius:2px;background:var(--ink);margin-top:8px}
+.post{display:flex;gap:12px;padding:16px;border-bottom:1px solid var(--line)}
+.av{width:36px;height:36px;border-radius:50%;background:#18181B;color:#fff;font:600 14px/36px Inter;text-align:center;flex:none}
+.av.b{background:linear-gradient(135deg,#3F3F46,#71717A)}
+.bd{flex:1;min-width:0}
+.who{font:600 14.5px Inter;letter-spacing:-.01em}
+.who em{font-style:normal;font-weight:400;color:var(--mut);margin-left:5px;font-size:13.5px}
+.hd{display:flex;align-items:flex-start}
+.dots{margin-left:auto;color:var(--mut);font-size:16px;line-height:1;padding:0 2px}
+.ttl{font:650 16px Inter;letter-spacing:-.01em;margin:3px 0 2px}
+.txt{color:#27272A}
+.par{margin:8px 0 0;padding:8px 10px;border-left:2px solid var(--line);color:var(--mut);font-size:13.5px}
+.par b{color:#3F3F46;font-weight:600}
+.acts{display:flex;align-items:center;gap:20px;margin-top:12px;color:var(--mut);font:500 12px Inter}
+.acts svg{width:17px;height:17px;stroke:var(--mut);fill:none;stroke-width:1.7}
+.acts .g{display:flex;align-items:center;gap:5px}
+.acts .liked,.acts .liked svg{color:var(--hi);stroke:var(--hi)}
+.menu{position:relative;margin-left:auto}
+.pop{position:absolute;right:0;top:22px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);font:500 13px Inter;width:132px;overflow:hidden;z-index:9}
+.pop span{display:block;padding:10px 12px}
+.pop span+span{border-top:1px solid var(--line)}
+.pop .del{color:var(--hi)}
+.nav{position:fixed;bottom:0;width:390px;display:flex;align-items:center;justify-content:space-around;padding:10px 10px 20px;background:rgba(250,250,249,.95);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+.nav svg{width:23px;height:23px;stroke:#52525B;fill:none;stroke-width:1.6}
+.nav .on svg{stroke:#0B0C0E;stroke-width:1.9}
+.plus{width:40px;height:40px;border-radius:50%;background:#0B0C0E;display:grid;place-items:center}
+.plus svg{stroke:#fff;width:19px;height:19px;stroke-width:2}
+</style></head><body>
+<div class="top"><div class="logo">kitatulis<b>.com</b></div><div class="ic">
+<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#0B0C0E" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#0B0C0E" stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div></div>
+<div class="tabs"><span class="on">Menggema</span><span>Teranyar</span><span>Diikuti</span></div>
+
+<div class="post">
+  <div class="av">u</div>
+  <div class="bd">
+    <div class="hd"><div class="who">uji1 <em>@uji1 · 2j</em></div><div class="dots">⋯</div></div>
+    <div class="ttl">Warkah pertama saya</div>
+    <div class="txt">Hari ini aku mulai menulis di sini. Sepi tapi tenang.</div>
+    <div class="acts">
+      <span class="g"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 01-9 8.4L4 21l1.1-4A8.4 8.4 0 1121 11.5z"/></svg>3</span>
+      <span class="g"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l8.8 8.8 8.8-8.8a5.5 5.5 0 000-7.8z"/></svg><span class="liked">1</span></span>
+      <span class="g"><svg viewBox="0 0 24 24"><path d="M6 3h12a1 1 0 011 1v17l-7-4-7 4V4a1 1 0 011-1z"/></svg></span>
+    </div>
+  </div>
+</div>
+
+<div class="post">
+  <div class="av b">u</div>
+  <div class="bd">
+    <div class="hd"><div class="who">uji2 <em>@uji2 · Makassar · 1j</em></div><div class="dots">⋯</div></div>
+    <div class="ttl">Bait balasan</div>
+    <div class="txt">Aku menyambung baitmu: menulis itu menunggu, bukan memaksa.</div>
+    <div class="par"><b>Membalas warkah @uji1:</b> Hari ini aku mulai menulis di sini…</div>
+    <div class="acts">
+      <span class="g"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 01-9 8.4L4 21l1.1-4A8.4 8.4 0 1121 11.5z"/></svg></span>
+      <span class="g"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l8.8 8.8 8.8-8.8a5.5 5.5 0 000-7.8z"/></svg></span>
+      <span class="g"><svg viewBox="0 0 24 24"><path d="M6 3h12a1 1 0 011 1v17l-7-4-7 4V4a1 1 0 011-1z"/></svg></span>
+    </div>
+  </div>
+</div>
+
+<div class="post">
+  <div class="av">u</div>
+  <div class="bd">
+    <div class="hd"><div class="who">uji1 <em>@uji1 · 5j</em></div>
+      <div class="menu"><div class="dots">⋯</div>
+        <div class="pop"><span>Sunting</span><span class="del">Hapus warkah</span></div></div></div>
+    <div class="ttl">Catatan malam</div>
+    <div class="txt">Suara kucing di atap jadi rima yang tak pernah kubayar.</div>
+    <div class="acts">
+      <span class="g"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 01-9 8.4L4 21l1.1-4A8.4 8.4 0 1121 11.5z"/></svg></span>
+      <span class="g"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l8.8 8.8 8.8-8.8a5.5 5.5 0 000-7.8z"/></svg></span>
+      <span class="g"><svg viewBox="0 0 24 24"><path d="M6 3h12a1 1 0 011 1v17l-7-4-7 4V4a1 1 0 011-1z"/></svg></span>
+    </div>
+  </div>
+</div>
+
+<div class="nav">
+  <span class="on"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/></svg></span>
+  <span><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></span>
+  <span class="plus"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+  <span><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 10-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg></span>
+  <span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+</div>
+</body></html>

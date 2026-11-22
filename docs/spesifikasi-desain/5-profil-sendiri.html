@@ -1,0 +1,72 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=390,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FAFAF9;--ink:#0B0C0E;--mut:#71717A;--line:#E7E7E9;--hi:#E5484D}
+*{box-sizing:border-box;margin:0}
+body{width:390px;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,-apple-system,sans-serif;padding-bottom:84px}
+.top{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;gap:12px;padding:14px 16px;z-index:6}
+.ic{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(10,10,12,.42);backdrop-filter:blur(6px)}
+.ic svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:2}
+.top .sp{flex:1}
+.cover{width:390px;height:220px;background:url('/tmp/mockups3/cover.jpg') center/cover no-repeat;position:relative}
+.cover::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.34) 0%,rgba(0,0,0,0) 42%)}
+.head{padding:0 16px}
+.av{width:92px;height:92px;border-radius:50%;background:url('/tmp/mockups3/avatar.jpg') center/cover no-repeat;border:3px solid var(--bg);margin-top:-46px;position:relative;z-index:2}
+.name{font:500 27px/1.1 Newsreader,Georgia,serif;margin-top:10px;letter-spacing:-.01em}
+.at{font:400 13px Inter;color:var(--mut);margin-top:3px}
+.bio{font:400 14.5px/1.55 Inter;color:#27272A;margin-top:10px}
+.stats{display:flex;gap:20px;margin-top:13px;font:400 13px Inter;color:var(--mut)}
+.stats b{font-weight:650;color:var(--ink);font-variant-numeric:tabular-nums}
+.btns{display:flex;gap:8px;margin:15px 0 0}
+.btn{border:0;border-radius:999px;padding:10px 22px;font:650 13.5px Inter}
+.btn.p{background:var(--ink);color:#fff}.btn.s{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.tabs{display:flex;gap:20px;padding:18px 16px 0;font:600 13px Inter;color:var(--mut);border-bottom:1px solid var(--line);margin-top:16px}
+.tabs .on{color:var(--ink)}.tabs .on::after{content:'';display:block;height:2px;border-radius:2px;background:var(--ink);margin-top:10px}
+.w{padding:16px;border-bottom:1px solid var(--line)}
+.wh{display:flex;align-items:center;gap:8px;font:500 12.5px Inter;color:var(--mut)}
+.wav{width:24px;height:24px;border-radius:50%;background:url('/tmp/mockups3/avatar.jpg') center/cover no-repeat}
+.wh b{font-weight:650;color:var(--ink);font-size:13.5px}
+.ttl{font:650 16px Inter;letter-spacing:-.01em;margin:7px 0 3px}
+.bd{color:#27272A;font-size:14.5px}
+.mt{display:flex;gap:14px;margin-top:10px;font:500 12px Inter;color:var(--mut)}
+.mt .lk{color:var(--hi)}
+.nav{position:fixed;bottom:0;width:390px;display:flex;align-items:center;justify-content:space-around;padding:10px 10px 20px;background:rgba(250,250,249,.95);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+.nav svg{width:23px;height:23px;stroke:#52525B;fill:none;stroke-width:1.6}
+.nav .on svg{stroke:#0B0C0E;stroke-width:1.9}
+.plus{width:40px;height:40px;border-radius:50%;background:#0B0C0E;display:grid;place-items:center}
+.plus svg{stroke:#fff;width:19px;height:19px;stroke-width:2}
+.covbadge{position:absolute;top:170px;right:14px;background:rgba(10,10,12,.62);color:#fff;font:600 11.5px Inter;padding:7px 11px;border-radius:999px;z-index:5}
+.edbadge{position:absolute;margin:-24px 0 0 62px;background:rgba(10,10,12,.62);color:#fff;font:600 11.5px Inter;padding:6px 10px;border-radius:999px;z-index:3}
+</style></head><body>
+<div class="top"><div class="ic"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></div><div class="sp"></div>
+<div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7M12 3v12M8 7l4-4 4 4"/></svg></div></div>
+<div class="cover"></div><div class="covbadge">Ubah sampul</div>
+<div class="head">
+  <div class="av"></div><div class="edbadge">Ubah foto</div>
+  <div class="name">uji1</div>
+  <div class="at">@uji1 · Bandung</div>
+  <div class="bio">Kucoba kitatulis di laptop. Menulis pelan-pelan, biasanya soal malam dan hujan.</div>
+  <div class="stats"><span><b>12</b> warkah</span><span><b>84</b> pengikut</span><span><b>23</b> mengikuti</span></div>
+  <div class="btns"><button class="btn p">Sunting Profil</button><button class="btn s">Bagikan</button></div>
+  <div class="tabs"><span class="on">Karya</span><span>Disukai</span><span>Tersimpan</span><span>Balasan</span></div>
+</div>
+<div class="w">
+  <div class="wh"><span class="wav"></span><b>uji1</b> · 21 Nov</div>
+  <div class="ttl">Catatan malam</div>
+  <div class="bd">Suara kucing di atap jadi rima yang tak pernah kubayar.</div>
+  <div class="mt"><span>Balas</span><span class="lk">♥ 2</span><span>Simpan</span></div>
+</div>
+<div class="w">
+  <div class="wh"><span class="wav"></span><b>uji1</b> · 20 Nov</div>
+  <div class="ttl">Warkah pertama saya</div>
+  <div class="bd">Hari ini aku mulai menulis di sini. Sepi tapi tenang.</div>
+  <div class="mt"><span>3 balasan</span><span class="lk">♥ 1</span><span>Simpan</span></div>
+</div>
+<div class="nav">
+  <span><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/></svg></span>
+  <span><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></span>
+  <span class="plus"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+  <span><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 10-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg></span>
+  <span class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+</div>
+</body></html>
