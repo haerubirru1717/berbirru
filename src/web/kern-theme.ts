@@ -231,9 +231,6 @@ body .ctamini a{background:transparent!important;border:1px solid var(--kink)!im
 </style>`;
 
 export function applyKernTheme(html: string): string {
-  // Halaman yang sudah pindah ke bahasa desain baru membawa penandanya sendiri;
-  // penimpa krem lama (yang menyasar nama kelas neobrutalism) tidak boleh lagi menempel.
-  if (html.includes('data-bahasa="baru"')) return html;
   if (!/<html\b/i.test(html) || !/<head\b/i.test(html)) return html;
   return html.replace(/<\/head\s*>/i, `${KERN_THEME_HTML}</head>`);
 }
