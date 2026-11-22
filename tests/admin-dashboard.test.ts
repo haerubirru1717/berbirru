@@ -82,7 +82,7 @@ for (const w of ['admin-posts', 'admin-users', 'admin-audit']) {
 const index = readFileSync(new URL('../src/index.ts', import.meta.url), 'utf8');
 assert(index.includes('mountAdmin(app)'), 'route admin wajib dipasang');
 assert(index.includes("c.req.path.startsWith('/admin')"), 'visual /admin tidak boleh ditimpa skin sosial');
-const akun = readFileSync(new URL('../src/web/akun.ts', import.meta.url), 'utf8');
-assert(akun.includes("baris('/admin'"), 'akun owner wajib punya tautan dashboard sosial');
+const profileSrc = readFileSync(new URL('../src/web/profile.ts', import.meta.url), 'utf8');
+assert(profileSrc.includes('Bilik Admin'), 'panel pengaturan owner wajib punya tautan dashboard sosial');
 
 console.log('OK — dashboard sosial admin read-only, owner-gated, dan data-minimal');

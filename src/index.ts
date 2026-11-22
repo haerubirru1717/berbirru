@@ -17,7 +17,6 @@ import { renderSearchPage } from './web/search';
 import { renderProfilePage } from './web/profile';
 import { renderNotificationsPage } from './web/notifications';
 import { renderChainPage } from './web/chain';
-import { renderAkunPage } from './web/akun';
 import { applyKernTheme, wantsKern } from './web/kern-theme';
 import { INTERACTION_CSS } from './web/interaction';
 import { bolehLihatPesanan, bolehUnggahBukti, jenisDokumen, kunciBukti, kunciDokumen, MAKS_BUKTI_PER_PIHAK } from './lib/berkas';
@@ -149,17 +148,16 @@ app.get('/login', async (c) => {
 
 app.get('/lupa-sandi', async (c) => {
   const user = await getAuthUser(c);
-  if (user) return c.redirect('/akun');
+  if (user) return c.redirect('/feed');
   return c.html(renderResetPage(c.env.TURNSTILE_SITE_KEY || ''));
 });
 
-// Halaman akun: pengaturan profil, tampilan, dan keamanan.
-// (Rute ini dulu menempel di modul Pasar saat Pasar masih menyatu; dipulihkan di sini
-//  tanpa bagian Pasar-nya.)
+// /akun dialihkan ke profil sendiri: semua pengaturan kini di panel "Pengaturan"
+// pada halaman profil. Rute tetap ada supaya tautan lama tidak mati (tidak 404).
 app.get('/akun', async (c) => {
   const user = await getAuthUser(c);
   if (!user) return c.redirect('/login');
-  return c.html(renderAkunPage(user, isOwner(c.env, user)));
+  return c.redirect('/u/' + encodeURIComponent(user.pen_name));
 });
 
 app.get('/feed', async (c) => {

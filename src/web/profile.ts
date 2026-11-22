@@ -4,16 +4,6 @@ import { TOKEN_CSS, FONT_URL } from './design-baru';
 import { NOTIFY_HTML } from './notify';
 
 export function renderProfilePage(penName: string, isMe = false, currentUser: any = null, isOwnerUser = false): string {
-  const SKIN_MENU_ITEMS = `
-              <div class="settings-divider"></div>
-              <div class="settings-item" data-skin="neo" onclick="setSkin('neo')" title="Ganti gaya halaman">
-                <svg style="width:14px;height:14px;stroke:currentColor;stroke-width:2.2;fill:none;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20M2 12h20"/></svg>
-                <span>Klasik · Neobrutalism</span>
-              </div>
-              <div class="settings-item" data-skin="kern" onclick="setSkin('kern')" title="Ganti gaya halaman">
-                <svg style="width:14px;height:14px;stroke:currentColor;stroke-width:2.2;fill:none;" viewBox="0 0 24 24"><path d="M2 3h20v18H2z"/><path d="M2 8h20M8 3v5"/></svg>
-                <span>Kern · Kertas Krem</span>
-              </div>`;
   const emailSafe = String(currentUser?.email || '').replace(/[<>&\"]/g, (ch: string) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '\"': '&quot;' } as any)[ch] || ch);
 
   return `<!DOCTYPE html>
@@ -77,20 +67,14 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
     .nav-btn-glass:active, .nav-menu-glass:active { transform: translate(1px, 1px); box-shadow: none; }
 
     /* Settings Menu Dropdown */
-    .settings-popover {
       display: none; position: absolute; top: 48px; right: 10px; width: 190px;
       background: #FFFFFF; border: var(--border-thick); border-radius: var(--radius-sm);
       box-shadow: var(--shadow-hard); z-index: 950; padding: 6px; flex-direction: column; gap: 2px;
     }
-    .settings-item {
       padding: 8px 10px; border-radius: 6px; font-size: 11.5px; font-weight: 800;
       color: var(--ink); display: flex; align-items: center; gap: 8px; cursor: pointer;
       text-decoration: none;
     }
-    .settings-item:hover, .settings-item:active { background: var(--bg-blue-subtle); color: var(--blue-primary); }
-    .settings-item.danger { color: var(--accent-red); }
-    .settings-item.danger:hover, .settings-item.danger:active { background: #FEE2E2; }
-    .settings-divider { height: 1px; background: #E2E8F0; margin: 3px 6px; }
 
     /* Profile Content */
     .profile-meta-wrap { padding: 0 16px 16px; }
@@ -183,7 +167,6 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
     .info-st { flex:1; border:2px solid var(--ink); border-radius:12px; text-align:center; padding:9px 0; box-shadow:3px 3px 0 var(--ink-soft); }
     .info-st b { display:block; font-size:17px; font-weight:800; color:#1D61E7; }
     .info-st span { font-size:9px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; }
-    #infoSheet { padding-bottom:26px; }
     .follow-switch { display:grid; grid-template-columns:1fr 1fr; margin:13px 0 8px; border:2px solid var(--ink); background:#FFF; }
     .follow-switch button { border:0; padding:9px 6px; background:#FFF; color:var(--muted); font:800 11px 'DM Sans',sans-serif; cursor:pointer; }
     .follow-switch button.active { background:var(--blue); color:#FFF; }
@@ -337,7 +320,6 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
     }
     .crop-hint { font-size: 11px; font-weight: 600; color: var(--muted); margin-top: 8px; text-align: center; }
 
-    .edit-modal {
       display: none; background: #FFF; border: var(--border-thick); border-radius: var(--radius);
       padding: 18px; margin-bottom: 20px; box-shadow: var(--shadow-hard);
     }
@@ -419,6 +401,15 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
     .stg-note { padding:14px 18px 0; font-size:11.5px; color:var(--s-mut); line-height:1.55; }
     .stg-flag { display:inline-block; margin-left:8px; padding:2px 7px; border:1px solid var(--s-line); border-radius:var(--s-radius-pill); font-size:10px; font-weight:600; color:var(--s-mut); }
     .stg-belum { margin:14px 18px; padding:14px; border:1px dashed var(--s-line); border-radius:12px; font-size:12px; color:var(--s-mut); }
+    .stg-form { padding:4px 18px 0; }
+    .stg-form label { display:block; margin:14px 0 5px; font-size:12px; font-weight:600; color:var(--s-mut); }
+    .stg-form label em { font-style:normal; font-weight:400; }
+    .stg-form input, .stg-form textarea { width:100%; padding:11px 12px; border:1px solid var(--s-line); border-radius:12px; background:var(--s-card); color:var(--s-ink); font:400 14px var(--s-font); }
+    .stg-form textarea { height:86px; resize:vertical; }
+    .stg-form input:focus, .stg-form textarea:focus { outline:2px solid var(--s-ink); outline-offset:-1px; }
+    .stg-actions { display:flex; gap:8px; padding:18px 18px 0; }
+    .stg-btn { flex:1; padding:12px; border:1px solid var(--s-line); border-radius:12px; background:var(--s-card); color:var(--s-ink); font:600 14px var(--s-font); cursor:pointer; }
+    .stg-btn.primary { background:var(--s-ink); border-color:var(--s-ink); color:#FFF; }
     /* Isi sub-panel memakai bahasa baru juga — hanya di dalam .stg (sheet lama tidak tersentuh) */
     .stg .info-head { display:flex; align-items:center; gap:13px; padding:16px 18px 8px;  box-shadow:none;}
     .stg .info-ava { width:52px; height:52px; border:0; border-radius:50%; background:#18181B; color:#FFF; display:grid; place-items:center; font-size:19px; font-weight:600; background-size:cover; background-position:center; }
@@ -452,53 +443,9 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
             <span>Feed</span>
           </a>
 
-          <button class="nav-menu-glass" onclick="toggleSettingsMenu(event)" aria-label="Menu Pengaturan">
+          <button class="nav-menu-glass" onclick="openSettings()" aria-label="Pengaturan">
             <svg style="width:16px;height:16px;stroke:currentColor;stroke-width:2.4;fill:none;stroke-linecap:round;" viewBox="0 0 24 24"><line x1="4" x2="20" y1="7" y2="7"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="17" y2="17"/></svg>
           </button>
-          <div class="settings-popover" id="settingsPopover">
-            ${isMe ? `
-              <div class="settings-item" onclick="toggleSettingsMenu(false); openSettings();">
-                <svg style="width:14px;height:14px;stroke:currentColor;stroke-width:2.2;fill:none;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.3 6.3l1.4 1.4M16.3 16.3l1.4 1.4M17.7 6.3l-1.4 1.4M7.7 16.3l-1.4 1.4"/></svg>
-                <span>Pengaturan</span>
-              </div>
-              <div class="settings-item" onclick="toggleEditModal(true); toggleSettingsMenu(false);">
-                <svg style="width:14px;height:14px;stroke:currentColor;stroke-width:2.2;fill:none;" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-                <span>Edit Profil</span>
-              </div>
-              <div class="settings-item" onclick="openInfoSheet(); toggleSettingsMenu(false);">
-                <svg style="width:14px;height:14px;stroke:currentColor;stroke-width:2.2;fill:none;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-                <span>Informasi Akun</span>
-              </div>
-              ${isOwnerUser ? `
-              <div class="settings-item" onclick="event.stopPropagation(); var s=document.getElementById('bilikSub'); s.style.display=s.style.display==='flex'?'none':'flex';" title="Bilik admin: dashboard sosial">
-                <svg style="width:14px;height:14px;stroke:currentColor;stroke-width:2.2;fill:none;" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                <span>Bilik Admin</span>
-                <svg style="width:10px;height:10px;margin-left:6px;stroke:currentColor;stroke-width:2.5;fill:none;" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
-              </div>
-              <div id="bilikSub" style="display:none;flex-direction:column;">
-                <a class="settings-item" style="padding-left:24px;" href="/admin" onclick="toggleSettingsMenu(false)">
-                  <svg style="width:14px;height:14px;stroke:currentColor;stroke-width:2.2;fill:none;" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                  <span>Admin Sosial</span>
-                </a>
-              </div>` : ''}
-              <div class="settings-divider"></div>
-              <div class="settings-item danger" onclick="handleLogout()">
-                <svg style="width:14px;height:14px;stroke:currentColor;stroke-width:2.2;fill:none;" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                <span>Keluar Akun</span>
-              </div>
-            ` : `
-              <div class="settings-item" onclick="navigator.clipboard.writeText(location.href); bbToast('Tautan profil disalin!', 'success'); toggleSettingsMenu(false);">
-                <svg style="width:14px;height:14px;stroke:currentColor;stroke-width:2.2;fill:none;" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                <span>Salin Tautan</span>
-              </div>
-              <div class="settings-divider"></div>
-              <div class="settings-item danger" onclick="bbToast('Laporan diterima untuk ditinjau.', 'success'); toggleSettingsMenu(false);">
-                <svg style="width:14px;height:14px;stroke:currentColor;stroke-width:2.2;fill:none;" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg>
-                <span>Laporkan Akun</span>
-              </div>
-            `}
-            ${SKIN_MENU_ITEMS}
-          </div>
         </div>
       </div>
 
@@ -554,40 +501,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
       </div>
     </div>
 
-    <!-- Edit Profile Modal -->
-    <div class="edit-modal" id="editModal">
-      <h3 style="font-family:'Archivo Black';font-size:15px;font-weight:800;margin-bottom:10px;">Perbarui Profil Anda</h3>
-      <div style="margin-bottom:10px;">
-        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:4px;">Nama Pena <span style="color:var(--muted);font-weight:600;">(@handle, unik)</span></label>
-        <input type="text" id="editPenName" style="width:100%;padding:8px;border:2px solid var(--ink);border-radius:8px;font-weight:700;">
-      </div>
-      <div style="margin-bottom:10px;">
-        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:4px;">Nama Tampilan <span style="color:var(--muted);font-weight:600;">(opsional)</span></label>
-        <input type="text" id="editDisplayName" maxlength="40" placeholder="Kosongkan = pakai nama pena" style="width:100%;padding:8px;border:2px solid var(--ink);border-radius:8px;font-weight:700;">
-      </div>
-      <div style="margin-bottom:10px;">
-        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:4px;">Kota / Asal</label>
-        <input type="text" id="editCity" style="width:100%;padding:8px;border:2px solid var(--ink);border-radius:8px;font-weight:700;">
-      </div>
-      <div style="margin-bottom:12px;">
-        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:4px;">Bio / Catatan Pribadi <span id="bioCount" style="color:var(--muted);font-weight:600;float:right;"></span></label>
-        <textarea id="editBio" maxlength="300" oninput="document.getElementById('bioCount').textContent=this.value.length + '/300';" style="width:100%;height:60px;padding:8px;border:2px solid var(--ink);border-radius:8px;font-weight:600;"></textarea>
-      </div>
-      <div style="margin-bottom:12px;">
-        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:4px;">Kata Sandi Baru <span style="color:var(--muted);font-weight:600;">(opsional)</span></label>
-        <input type="password" id="editPassword" autocomplete="new-password" placeholder="Kosongkan bila tidak diganti" oninput="document.getElementById('currentPasswordRow').style.display=this.value?'block':'none'" style="width:100%;padding:8px;border:2px solid var(--ink);border-radius:8px;font-weight:700;">
-      </div>
-      <div style="margin-bottom:12px;display:none;" id="currentPasswordRow">
-        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:4px;">Kata Sandi Saat Ini <span style="color:var(--muted);font-weight:600;">(wajib bila ganti sandi)</span></label>
-        <input type="password" id="editCurrentPassword" autocomplete="current-password" placeholder="Sandi yang kamu pakai sekarang" style="width:100%;padding:8px;border:2px solid var(--ink);border-radius:8px;font-weight:700;">
-      </div>
-      <div style="display:flex;justify-content:flex-end;gap:8px;">
-        <button onclick="toggleEditModal(false)" style="padding:6px 12px;border:2px solid var(--ink);border-radius:6px;font-weight:800;background:#FFF;cursor:pointer;">Batal</button>
-        <button onclick="saveProfile()" style="padding:6px 14px;border:2px solid var(--ink);border-radius:6px;font-weight:900;background:var(--blue);color:#FFF;cursor:pointer;">Simpan</button>
-      </div>
-    </div>
 
-    <!-- Crop Preview Modal -->
     <div class="crop-overlay" id="cropOverlay">
       <div class="crop-box">
         <h3 style="font-family:'Archivo Black';font-size:14px;font-weight:800;margin-bottom:10px;" id="cropTitle">Atur Posisi Foto</h3>
@@ -629,29 +543,6 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
     <div class="follow-list" id="followList"><div class="follow-loading">Pilih daftar untuk melihat akun.</div></div>
   </section>
 
-  <div class="follow-sheet-backdrop" id="infoSheetBackdrop" onclick="closeInfoSheet()"></div>
-  <section class="follow-sheet" id="infoSheet" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
-    <div class="follow-sheet-head">
-      <div><div class="follow-sheet-title" id="infoTitle">Informasi Akun</div><div class="follow-sheet-hint">Data akunmu di Kitatulis.</div></div>
-      <button class="follow-sheet-close" type="button" aria-label="Tutup" onclick="closeInfoSheet()">&times;</button>
-    </div>
-    <div class="info-head">
-      <div class="info-ava" id="infoAva">${(penName[0] || 'D').toUpperCase()}</div>
-      <div>
-        <div class="info-pen" id="infoPen">@${penName}</div>
-        <div class="info-status" id="infoStatus">Penulis</div>
-      </div>
-    </div>
-    <div class="info-row"><span class="info-k">Nama tampilan</span><span class="info-v" id="infoDisplayName">—</span></div>
-    <div class="info-row"><span class="info-k">Email</span><span class="info-v" id="infoEmail">${currentUser && currentUser.email ? String(currentUser.email).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') : '—'}</span></div>
-    <div class="info-row"><span class="info-k">Kota</span><span class="info-v" id="infoCity">—</span></div>
-    <div class="info-row"><span class="info-k">Bergabung</span><span class="info-v" id="infoSince">—</span></div>
-    <div class="info-stats">
-      <div class="info-st"><b id="infoCountKarya">0</b><span>Karya</span></div>
-      <div class="info-st"><b id="infoCountFollowers">0</b><span>Pengikut</span></div>
-      <div class="info-st"><b id="infoCountFollowing">0</b><span>Mengikuti</span></div>
-    </div>
-  </section>
 
   <!-- 5-TAB DOCKED BOTTOM NAVBAR -->
   ${isMe ? `
@@ -698,6 +589,11 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
         <span>Tentang</span><span class="chev">&rsaquo;</span>
       </button>
+      ${isOwnerUser ? `
+      <button class="stg-row" data-tile="admin" onclick="location.href='/admin'">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Bilik Admin &middot; Admin Sosial</span><span class="chev">&rsaquo;</span>
+      </button>` : ''}
       <button class="stg-row danger" data-tile="keluar" onclick="handleLogout()">
         <svg viewBox="0 0 24 24"><path d="M15 4h4a1 1 0 011 1v14a1 1 0 01-1 1h-4M10 8l-4 4 4 4M6 12h10"/></svg>
         <span>Keluar Akun</span>
@@ -725,12 +621,78 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
         </div>
         <div class="stg-note">Email dan tanggal bergabung tidak pernah ditampilkan di profil publik.</div>
       </div>
-      <div class="stg-sec" data-sec="profil"><div class="stg-belum">Form nama pena, nama tampilan, bio, dan kota sedang dipindah ke panel ini (batch 2).</div></div>
-      <div class="stg-sec" data-sec="keamanan"><div class="stg-belum">Ubah sandi dan keluar dari semua perangkat sedang dipindah ke panel ini (batch 2).</div></div>
-      <div class="stg-sec" data-sec="tampilan"><div class="stg-belum">Pilihan gaya halaman sedang dipindah ke panel ini (batch 2).</div></div>
-      <div class="stg-sec" data-sec="foto"><div class="stg-belum">Pintu ubah foto &amp; sampul sedang dipindah ke panel ini (batch 2).</div></div>
-      <div class="stg-sec" data-sec="bantuan"><div class="stg-belum">Salin tautan dan laporan sedang dipindah ke panel ini (batch 2).</div></div>
-      <div class="stg-sec" data-sec="tentang"><div class="stg-belum">Versi dan kebijakan sedang dipindah ke panel ini (batch 2).</div></div>
+      <div class="stg-sec" data-sec="profil">
+        <div class="stg-form">
+          <label>Nama pena <em>(@handle, unik)</em></label>
+          <input type="text" id="editPenName">
+          <label>Nama tampilan <em>(opsional)</em></label>
+          <input type="text" id="editDisplayName" maxlength="40" placeholder="Kosongkan = pakai nama pena">
+          <label>Kota / asal</label>
+          <input type="text" id="editCity">
+          <label>Bio / catatan pribadi <span id="bioCount"></span></label>
+          <textarea id="editBio" maxlength="300" oninput="document.getElementById('bioCount').textContent=this.value.length + '/300';"></textarea>
+          <label>Kata sandi baru <em>(opsional)</em></label>
+          <input type="password" id="editPassword" autocomplete="new-password" placeholder="Kosongkan bila tidak diganti" oninput="document.getElementById('currentPasswordRow').style.display=this.value?'block':'none'">
+          <div id="currentPasswordRow" style="display:none">
+            <label>Kata sandi saat ini <em>(wajib bila ganti sandi)</em></label>
+            <input type="password" id="editCurrentPassword" autocomplete="current-password" placeholder="Sandi yang kamu pakai sekarang">
+          </div>
+        </div>
+        <div class="stg-actions">
+          <button class="stg-btn" onclick="stgBack()">Batal</button>
+          <button class="stg-btn primary" onclick="saveProfile()">Simpan</button>
+        </div>
+      </div>
+      <div class="stg-sec" data-sec="keamanan">
+        <button class="stg-row" onclick="bukaUbahSandi()">
+          <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+          <span>Ubah sandi</span><span class="chev">&rsaquo;</span>
+        </button>
+        <button class="stg-row danger" onclick="logoutAllDevices()">
+          <svg viewBox="0 0 24 24"><path d="M15 4h4a1 1 0 011 1v14a1 1 0 01-1 1h-4M10 8l-4 4 4 4M6 12h10"/></svg>
+          <span>Keluar dari semua perangkat</span>
+        </button>
+        <div class="stg-note">Keluar dari semua perangkat memutus seluruh sesi, termasuk di perangkat lain. Kamu harus masuk lagi di setiap perangkat.</div>
+      </div>
+      <div class="stg-sec" data-sec="tampilan">
+        <button class="stg-row" data-skin="neo" onclick="setSkin('neo')">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a15 15 0 010 18M12 3a15 15 0 000 18M3 12h18"/></svg>
+          <span>Klasik &middot; Neobrutalism</span><span class="chev">&rsaquo;</span>
+        </button>
+        <button class="stg-row" data-skin="kern" onclick="setSkin('kern')">
+          <svg viewBox="0 0 24 24"><path d="M3 4h18v16H3zM3 9h18M9 4v5"/></svg>
+          <span>Kern &middot; Kertas Krem</span><span class="chev">&rsaquo;</span>
+        </button>
+        <div class="stg-note">Halaman dimuat ulang setelah gaya diganti. Bahasa desain baru (panel ini) berlaku di kedua gaya.</div>
+      </div>
+      <div class="stg-sec" data-sec="foto">
+        <button class="stg-row" onclick="document.getElementById('avatarInput').click()">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+          <span>Ubah foto profil</span><span class="chev">&rsaquo;</span>
+        </button>
+        <button class="stg-row" onclick="document.getElementById('coverInput').click()">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 16l5-4 4 3 3-2 6 5"/></svg>
+          <span>Ubah sampul</span><span class="chev">&rsaquo;</span>
+        </button>
+        <div class="stg-note">Foto dipotong bulat (1:1), sampul dipotong 16:9. Mengetuk foto atau sampul di halaman profil juga membuka pengaturan yang sama.</div>
+      </div>
+      <div class="stg-sec" data-sec="bantuan">
+        <button class="stg-row" onclick="navigator.clipboard.writeText(location.href); bbToast('Tautan profil disalin!', 'success');">
+          <svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V5a1 1 0 011-1h11"/></svg>
+          <span>Salin tautan profil</span><span class="chev">&rsaquo;</span>
+        </button>
+        <button class="stg-row" onclick="bbToast('Laporan diterima untuk ditinjau.', 'success');">
+          <svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg>
+          <span>Laporkan akun</span><span class="chev">&rsaquo;</span>
+        </button>
+        <div class="stg-note">Laporkan akun dicatat untuk ditinjau pemilik.</div>
+      </div>
+      <div class="stg-sec" data-sec="tentang">
+        <div class="info-row"><span class="info-k">Produk</span><span class="info-v">KitaTulis</span></div>
+        <div class="info-row"><span class="info-k">Alamat</span><span class="info-v">kitatulis.com</span></div>
+        <div class="info-row"><span class="info-k">Versi</span><span class="info-v">1.0</span></div>
+        <div class="stg-note">Media sosial penulisan Indonesia: menulis, membaca, membalas. Bahasa desain baru sedang diuji di panel ini.</div>
+      </div>
     </section>
   </section>` : ''}
 
@@ -739,17 +701,8 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
   <script>
     const currentPenName = '${penName}';
     let currentUserData = null;
+    let activeProfileTab = 'original';
 
-    function toggleSettingsMenu(show) {
-      const pop = document.getElementById('settingsPopover');
-      if (pop) {
-        if (typeof show === 'boolean') {
-          pop.style.display = show ? 'flex' : 'none';
-        } else {
-          pop.style.display = pop.style.display === 'flex' ? 'none' : 'flex';
-        }
-      }
-    }
     function setSkin(v) {
       document.cookie = 'bb_skin=' + v + ';path=/;max-age=31536000;SameSite=Lax';
       location.reload();
@@ -758,23 +711,17 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
     (function markActiveSkin() {
       const m = /(?:^|;\\s*)bb_skin=(kern|neo)(?:;|$)/.exec(document.cookie || '');
       const cur = m ? m[1] : 'neo';
-      document.querySelectorAll('#settingsPopover .settings-item[data-skin]').forEach(el => {
-        if (el.dataset.skin === cur) el.querySelector('span')?.before('✓ ');
+      const nama = { neo: 'Klasik \u00b7 Neobrutalism', kern: 'Kern \u00b7 Kertas Krem' }[cur] || 'Gaya halaman';
+      const nilai = document.getElementById('stgSkinValue');
+      if (nilai) nilai.textContent = nama;
+      document.querySelectorAll('#stgPanel [data-skin]').forEach(el => {
+        if (el.dataset.skin === cur) el.querySelector('span')?.insertAdjacentText('afterbegin', '\u2713 ');
       });
     })();
 
-    document.addEventListener('click', (e) => {
-      const pop = document.getElementById('settingsPopover');
-      const btn = document.querySelector('.nav-menu-glass');
-      if (pop && btn && !btn.contains(e.target) && !pop.contains(e.target)) {
-        pop.style.display = 'none';
-      }
-    });
-
-    function toggleEditModal(show) {
-      document.getElementById('editModal').style.display = show ? 'block' : 'none';
-
-      if (show && currentUserData) {
+    function isiFormProfil() {
+      if (!currentUserData) return;
+      {
         document.getElementById('editPenName').value = currentUserData.pen_name;
         document.getElementById('editDisplayName').value = currentUserData.display_name || '';
         document.getElementById('editCity').value = currentUserData.city || 'Nusantara';
@@ -784,6 +731,22 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
         document.getElementById('editCurrentPassword').value = '';
       }
     }
+    function bukaUbahSandi() {
+      stgOpen('profil');
+      setTimeout(() => { const el = document.getElementById('editPassword'); if (el) el.focus(); }, 220);
+    }
+    async function logoutAllDevices() {
+      if (!confirm('Keluar dari semua perangkat? Sesi di perangkat ini juga berakhir dan kamu harus masuk lagi.')) return;
+      try {
+        const res = await fetch('/api/auth/logout-all', { method: 'POST', headers: { 'Content-Type': 'application/json' } });
+        if (!res.ok) throw new Error('gagal');
+        location.href = '/login';
+      } catch (e) {
+        bbToast('Gagal keluar dari semua perangkat. Coba lagi.', 'error');
+      }
+    }
+    window.bukaUbahSandi = bukaUbahSandi;
+    window.logoutAllDevices = logoutAllDevices;
 
     async function saveProfile() {
       const pen_name = document.getElementById('editPenName').value.trim();
@@ -816,7 +779,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
           if (!cp.ok) throw new Error(cpData.error || 'Gagal mengganti kata sandi');
         }
 
-        toggleEditModal(false);
+        stgBack();
         window.location.href = '/u/' + encodeURIComponent(data.user.pen_name);
       } catch (err) {
         bbToast(err.message || 'Gagal menyimpan profil.', 'error');
@@ -881,8 +844,6 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
           document.getElementById('countFollowing').textContent = data.user.following_count || 0;
           const joined = data.user.created_at && new Date(data.user.created_at).getFullYear();
           const setTxt = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = String(v == null ? '\u2014' : v); };
-          const sinceTxt = document.getElementById('infoSince');
-          if (sinceTxt) sinceTxt.textContent = Number.isFinite(joined) ? 'Sejak ' + joined : '\u2014';
           setTxt('stgJoined', Number.isFinite(joined) ? joined : null);
           setTxt('stgPosts', data.user.posts_count || 0);
           setTxt('stgFollowers', data.user.followers_count || 0);
@@ -1221,32 +1182,6 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
       loadFollowList(type);
     }
     function closeFollowSheet() { clearTimeout(followListTimer); document.getElementById('followSheet').style.display = 'none'; document.getElementById('followSheetBackdrop').style.display = 'none'; document.body.style.overflow = ''; }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeFollowSheet(); closeInfoSheet(); stgBack(); } });
-    function openInfoSheet() {
-      const d = currentUserData || {};
-      const ab = document.getElementById('avatarLetter') || document.getElementById('avatarBox');
-      const cs = getComputedStyle(ab);
-      const img = cs.backgroundImage;
-      const ava = document.getElementById('infoAva');
-      ava.style.backgroundImage = img && img !== 'none' ? img : 'none';
-      ava.textContent = (currentPenName[0] || 'D').toUpperCase();
-      ava.style.color = img && img !== 'none' ? 'transparent' : '#FFF';
-      document.getElementById('infoPen').textContent = '@' + currentPenName;
-      const isAdmin = !document.getElementById('adminBadge').hidden;
-      document.getElementById('infoStatus').textContent = isAdmin ? 'Akun admin — terverifikasi' : 'Penulis';
-      document.getElementById('infoDisplayName').textContent = d.display_name || currentPenName;
-      document.getElementById('infoCity').textContent = d.city || 'Nusantara';
-      const sinceEl = document.getElementById('stgJoined');
-      const since = sinceEl && sinceEl.textContent !== '\u2014' ? 'Sejak ' + sinceEl.textContent : '';
-      document.getElementById('infoSince').textContent = since || '\u2014';
-      document.getElementById('infoCountKarya').textContent = String(parseInt(document.getElementById('profileTabTotal').textContent) || 0);
-      document.getElementById('infoCountFollowers').textContent = document.getElementById('countFollowers').textContent || '0';
-      document.getElementById('infoCountFollowing').textContent = document.getElementById('countFollowing').textContent || '0';
-      document.getElementById('infoSheet').style.display = 'block';
-      document.getElementById('infoSheetBackdrop').style.display = 'block';
-      document.body.style.overflow = 'hidden';
-    }
-    function closeInfoSheet() { document.getElementById('infoSheet').style.display = 'none'; document.getElementById('infoSheetBackdrop').style.display = 'none'; document.body.style.overflow = ''; }
 
     // ===== Panel Pengaturan (bentuk C: kotak cepat + daftar) =====
     const STG_TITLES = { akun: 'Informasi akun', profil: 'Profil', keamanan: 'Keamanan', tampilan: 'Tampilan', foto: 'Foto & Sampul', bantuan: 'Bantuan', tentang: 'Tentang' };
@@ -1268,6 +1203,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
     function stgOpen(sec) {
       const sub = document.getElementById('stgSub');
       if (!sub) return;
+      if (sec === 'profil') isiFormProfil();
       document.getElementById('stgSubTitle').textContent = STG_TITLES[sec] || '\u2014';
       sub.querySelectorAll('.stg-sec').forEach(el => el.classList.toggle('on', el.dataset.sec === sec));
       sub.dataset.sub = sec;
@@ -1279,10 +1215,8 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
       if (sub && sub.classList.contains('on')) { sub.classList.remove('on'); document.getElementById('stgPanel').classList.remove('sub-open'); return; }
       closeSettings();
     }
-    document.getElementById('followSheet')?.addEventListener('touchstart', e => { followTouchX = e.touches[0].clientX; }, { passive: true });
-    document.getElementById('followSheet')?.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - followTouchX; if (Math.abs(dx) > 45) openFollowSheet(dx < 0 ? 'following' : 'followers'); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeFollowSheet(); stgBack(); } });
 
-    let activeProfileTab = 'original';
     async function loadProfilePosts(tab = 'original') {
       const container = document.getElementById('profileFeed');
       // Strix run-4 lanjutan: shimmer skeleton sama seperti beranda saat pindah tab
@@ -1379,7 +1313,6 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
 
     // fungsi dipanggil onclick inline -> wajib global (module scope tak terlihat oleh atribut HTML)
     window.saveProfile = saveProfile;
-    window.toggleEditModal = toggleEditModal;
     window.openSettings = openSettings;
     window.closeSettings = closeSettings;
     window.stgOpen = stgOpen;
@@ -1451,7 +1384,6 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
     window.editPost = editPost; window.closePostEdit = closePostEdit; window.savePostEdit = savePostEdit;
 
     window.deletePost = deletePost;
-    window.toggleSettingsMenu = toggleSettingsMenu;
     window.toggleFollow = toggleFollow;
     window.openFollowSheet = openFollowSheet;
     window.closeFollowSheet = closeFollowSheet;

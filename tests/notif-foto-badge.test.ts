@@ -17,7 +17,10 @@ const profile = readFileSync(new URL('../src/web/profile.ts', import.meta.url), 
 // 1. Token merah: didefinisikan sekali, dipakai banyak tempat (kalau hilang, deklarasinya dibuang browser)
 assert.match(interaction, /:root \{ --accent-red: #E11D48; \}/, 'CSS global mendefinisikan --accent-red');
 const pemakai = [notif, feed, profile].join('\n');
-assert.ok((pemakai.match(/var\(--accent-red\)/g) || []).length >= 5, 'pemakai --accent-red tetap ada (dijamin terdefinisi)');
+// Bahasa desain baru memakai nama sendiri (--s-hi) untuk aksen merah; yang penting
+// token merahnya benar-benar dipakai, bukan sekadar didefinisikan.
+const jumlahMerah = (pemakai.match(/var\(--accent-red\)/g) || []).length + (pemakai.match(/var\(--s-hi\)/g) || []).length;
+assert.ok(jumlahMerah >= 5, `pemakai token merah tetap ada (dapat ${jumlahMerah})`);
 
 // 2. Badge: garis neobrutal 2px + hijau dari palet (bukan hex asing)
 assert.match(notif, /\.action-badge \{[^}]*border: 2px solid var\(--ink\)/, 'badge bergaris 2px (bahasa neobrutal)');
