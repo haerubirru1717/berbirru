@@ -13,6 +13,8 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
                 <svg style="width:14px;height:14px;stroke:currentColor;stroke-width:2.2;fill:none;" viewBox="0 0 24 24"><path d="M2 3h20v18H2z"/><path d="M2 8h20M8 3v5"/></svg>
                 <span>Kern · Kertas Krem</span>
               </div>`;
+  const emailSafe = String(currentUser?.email || '').replace(/[<>&\"]/g, (ch: string) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '\"': '&quot;' } as any)[ch] || ch);
+
   return `<!DOCTYPE html>
 <html lang="id">
 <head>
@@ -371,7 +373,35 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
 
     .ico { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 
-    .kern-profile-brand,.profile-eyebrow,.profile-since{display:none}
+    .kern-profile-brand,.profile-eyebrow{display:none}
+    /* ===== Panel Pengaturan (bentuk C: kotak cepat + daftar) ===== */
+    .stg-backdrop { display:none; position:fixed; inset:0; z-index:1000; background:rgba(11,25,44,.42); }
+    .stg { display:none; position:fixed; z-index:1001; top:0; bottom:0; left:50%; transform:translateX(-50%); width:min(480px,100%); background:var(--bg-main); overflow:auto; }
+    .stg-head { position:sticky; top:0; z-index:2; display:flex; align-items:center; gap:10px; padding:14px 16px; background:var(--bg-main); border-bottom:var(--border-thick); }
+    .stg-title { font-family:'Archivo Black',sans-serif; font-size:16px; font-weight:800; }
+    .stg-x, .stg-back { width:34px; height:34px; flex:none; border:var(--border-thick); background:var(--white); box-shadow:var(--shadow-offset); font-size:16px; font-weight:800; cursor:pointer; }
+    .stg-x { margin-left:auto; }
+    .stg-acct { display:flex; align-items:center; gap:12px; padding:14px 16px; border-bottom:1px solid #E2E8F0; }
+    .stg-ava { width:46px; height:46px; flex:none; border:2px solid var(--ink); border-radius:50%; background:var(--blue); color:#FFF; display:grid; place-items:center; font:800 18px 'DM Sans',sans-serif; background-size:cover; background-position:center; }
+    .stg-acct .n { font-size:14.5px; font-weight:800; }
+    .stg-acct .h { font-size:11.5px; font-weight:700; color:var(--muted); margin-top:2px; }
+    .stg-tiles { display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:14px 16px 6px; }
+    .stg-tile { display:flex; flex-direction:column; gap:14px; text-align:left; padding:12px; cursor:pointer; border:var(--border-thick); background:var(--white); box-shadow:var(--shadow-offset); }
+    .stg-tile .l { display:block; font-size:13px; font-weight:800; }
+    .stg-tile .v { display:block; font-size:10.5px; font-weight:700; color:var(--muted); margin-top:3px; }
+    .stg-tile svg { width:17px; height:17px; stroke:currentColor; stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+    .stg-grp { padding:16px 16px 6px; font:800 10px 'DM Sans',sans-serif; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); }
+    .stg-row { display:flex; align-items:center; gap:12px; width:100%; text-align:left; padding:13px 16px; border:0; border-top:1px solid #E2E8F0; background:transparent; font:700 13.5px 'DM Sans',sans-serif; color:var(--ink); cursor:pointer; }
+    .stg-row svg { width:17px; height:17px; flex:none; stroke:currentColor; stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+    .stg-row .chev { margin-left:auto; color:var(--muted); font-weight:800; }
+    .stg-row.danger, .stg-row.danger svg { color:var(--accent-red); }
+    .stg-sub { display:none; position:absolute; inset:0; background:var(--bg-main); overflow:auto; }
+    .stg-sub.on { display:block; }
+    .stg-sec { display:none; }
+    .stg-sec.on { display:block; }
+    .stg-note { padding:12px 16px 0; font:700 11px 'DM Sans',sans-serif; color:var(--muted); }
+    .stg-flag { display:inline-block; margin-left:8px; padding:2px 7px; border:1.5px solid var(--line-soft); font:800 9.5px 'DM Sans',sans-serif; color:var(--muted); }
+    .stg-belum { margin:12px 16px; padding:14px; border:2px dashed var(--line-soft); font:700 12px 'DM Sans',sans-serif; color:var(--muted); }
   </style>
 </head>
 <body>
@@ -398,6 +428,10 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
           </button>
           <div class="settings-popover" id="settingsPopover">
             ${isMe ? `
+              <div class="settings-item" onclick="toggleSettingsMenu(false); openSettings();">
+                <svg style="width:14px;height:14px;stroke:currentColor;stroke-width:2.2;fill:none;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.3 6.3l1.4 1.4M16.3 16.3l1.4 1.4M17.7 6.3l-1.4 1.4M7.7 16.3l-1.4 1.4"/></svg>
+                <span>Pengaturan</span>
+              </div>
               <div class="settings-item" onclick="toggleEditModal(true); toggleSettingsMenu(false);">
                 <svg style="width:14px;height:14px;stroke:currentColor;stroke-width:2.2;fill:none;" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
                 <span>Edit Profil</span>
@@ -442,7 +476,6 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
       <div class="profile-meta-wrap">
         <div class="profile-eyebrow"><span class="eyebrow-base">Profil publik</span><span class="eyebrow-role"> / Penulis</span></div>
         <div class="profile-cover-photo" id="profileCoverPhoto" ${isMe ? 'onclick="document.getElementById(\'coverInput\').click()" role="button" tabindex="0" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();document.getElementById(\'coverInput\').click()}" aria-label="Ganti foto sampul"' : 'aria-hidden="true"'}></div>
-        <div class="profile-since" id="profileSince"></div>
         <div class="avatar-action-row">
           <div class="avatar-wrapper">
             <div class="avatar-box" id="avatarLetter" ${isMe ? 'onclick="document.getElementById(\'avatarInput\').click()" style="cursor:pointer" title="Ganti foto profil"' : ''}>
@@ -592,6 +625,84 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
   </section>
 
   <!-- 5-TAB DOCKED BOTTOM NAVBAR -->
+  ${isMe ? `
+  <div class="stg-backdrop" id="stgBackdrop" onclick="closeSettings()"></div>
+  <section class="stg" id="stgPanel" data-panel="pengaturan" role="dialog" aria-modal="true" aria-labelledby="stgTitle">
+    <div class="stg-head">
+      <div class="stg-title" id="stgTitle">Pengaturan</div>
+      <button class="stg-x" type="button" aria-label="Tutup" onclick="closeSettings()">&times;</button>
+    </div>
+    <div class="stg-acct">
+      <div class="stg-ava" id="stgAva">${(penName[0] || 'D').toUpperCase()}</div>
+      <div><div class="n">${penName}</div><div class="h">@${penName}${currentUser && currentUser.city ? ' &middot; ' + currentUser.city : ''}</div></div>
+    </div>
+    <div class="stg-tiles">
+      <button class="stg-tile" data-tile="akun" onclick="stgOpen('akun')">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        <span><span class="l">Informasi akun</span><span class="v">Email, kota, gabung</span></span>
+      </button>
+      <button class="stg-tile" data-tile="profil" onclick="stgOpen('profil')">
+        <svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>
+        <span><span class="l">Profil</span><span class="v">Nama, bio, kota</span></span>
+      </button>
+      <button class="stg-tile" data-tile="keamanan" onclick="stgOpen('keamanan')">
+        <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+        <span><span class="l">Keamanan</span><span class="v">Sandi, perangkat</span></span>
+      </button>
+      <button class="stg-tile" data-tile="tampilan" onclick="stgOpen('tampilan')">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+        <span><span class="l">Tampilan</span><span class="v" id="stgSkinValue">Gaya halaman</span></span>
+      </button>
+    </div>
+    <div class="stg-grp">Lainnya</div>
+    <div class="stg-list">
+      <button class="stg-row" data-tile="foto" onclick="stgOpen('foto')">
+        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/></svg>
+        <span>Foto &amp; Sampul</span><span class="chev">&rsaquo;</span>
+      </button>
+      <button class="stg-row" data-tile="bantuan" onclick="stgOpen('bantuan')">
+        <svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 10-12 0c0 7-3 8-3 8h18s-3-1-3-8"/></svg>
+        <span>Bantuan</span><span class="chev">&rsaquo;</span>
+      </button>
+      <button class="stg-row" data-tile="tentang" onclick="stgOpen('tentang')">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+        <span>Tentang</span><span class="chev">&rsaquo;</span>
+      </button>
+      <button class="stg-row danger" data-tile="keluar" onclick="handleLogout()">
+        <svg viewBox="0 0 24 24"><path d="M15 4h4a1 1 0 011 1v14a1 1 0 01-1 1h-4M10 8l-4 4 4 4M6 12h10"/></svg>
+        <span>Keluar Akun</span>
+      </button>
+    </div>
+    <section class="stg-sub" id="stgSub" data-sub="">
+      <div class="stg-head">
+        <button class="stg-back" type="button" aria-label="Kembali" onclick="stgBack()">&lsaquo;</button>
+        <div class="stg-title" id="stgSubTitle">&mdash;</div>
+      </div>
+      <div class="stg-sec" data-sec="akun">
+        <div class="info-head">
+          <div class="info-ava" id="stgAva2">${(penName[0] || 'D').toUpperCase()}</div>
+          <div><div class="info-pen">@${penName}</div><div class="info-status">Penulis</div></div>
+        </div>
+        <div class="info-row"><span class="info-k">Nama tampilan</span><span class="info-v" id="stgDisplayName">${penName}</span></div>
+        <div class="info-row"><span class="info-k">Email</span><span class="info-v">${emailSafe || '&mdash;'}</span></div>
+        <div class="info-row"><span class="info-k">Kota</span><span class="info-v" id="stgCity">${currentUser && currentUser.city ? currentUser.city : 'Nusantara'}</span></div>
+        <div class="info-row"><span class="info-k">Bergabung</span><span class="info-v"><span id="stgJoined">&mdash;</span><span class="stg-flag">hanya kamu</span></span></div>
+        <div class="info-stats">
+          <div class="info-st"><b id="stgPosts">0</b><span>Karya</span></div>
+          <div class="info-st"><b id="stgFollowers">0</b><span>Pengikut</span></div>
+          <div class="info-st"><b id="stgFollowing">0</b><span>Mengikuti</span></div>
+        </div>
+        <div class="stg-note">Email dan tanggal bergabung tidak pernah ditampilkan di profil publik.</div>
+      </div>
+      <div class="stg-sec" data-sec="profil"><div class="stg-belum">Form nama pena, nama tampilan, bio, dan kota sedang dipindah ke panel ini (batch 2).</div></div>
+      <div class="stg-sec" data-sec="keamanan"><div class="stg-belum">Ubah sandi dan keluar dari semua perangkat sedang dipindah ke panel ini (batch 2).</div></div>
+      <div class="stg-sec" data-sec="tampilan"><div class="stg-belum">Pilihan gaya halaman sedang dipindah ke panel ini (batch 2).</div></div>
+      <div class="stg-sec" data-sec="foto"><div class="stg-belum">Pintu ubah foto &amp; sampul sedang dipindah ke panel ini (batch 2).</div></div>
+      <div class="stg-sec" data-sec="bantuan"><div class="stg-belum">Salin tautan dan laporan sedang dipindah ke panel ini (batch 2).</div></div>
+      <div class="stg-sec" data-sec="tentang"><div class="stg-belum">Versi dan kebijakan sedang dipindah ke panel ini (batch 2).</div></div>
+    </section>
+  </section>` : ''}
+
   ${renderBottomNav('profile', currentUser, isMe)}
 
   <script>
@@ -738,7 +849,13 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
           document.getElementById('countFollowers').textContent = data.user.followers_count || 0;
           document.getElementById('countFollowing').textContent = data.user.following_count || 0;
           const joined = data.user.created_at && new Date(data.user.created_at).getFullYear();
-          document.getElementById('profileSince').textContent = Number.isFinite(joined) ? 'Sejak ' + joined : '';
+          const setTxt = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = String(v == null ? '\u2014' : v); };
+          const sinceTxt = document.getElementById('infoSince');
+          if (sinceTxt) sinceTxt.textContent = Number.isFinite(joined) ? 'Sejak ' + joined : '\u2014';
+          setTxt('stgJoined', Number.isFinite(joined) ? joined : null);
+          setTxt('stgPosts', data.user.posts_count || 0);
+          setTxt('stgFollowers', data.user.followers_count || 0);
+          setTxt('stgFollowing', data.user.following_count || 0);
           setFollowBtn(!!data.user.is_following);
         }
       } catch (err) { console.error(err); }
@@ -1073,7 +1190,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
       loadFollowList(type);
     }
     function closeFollowSheet() { clearTimeout(followListTimer); document.getElementById('followSheet').style.display = 'none'; document.getElementById('followSheetBackdrop').style.display = 'none'; document.body.style.overflow = ''; }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeFollowSheet(); closeInfoSheet(); } });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeFollowSheet(); closeInfoSheet(); stgBack(); } });
     function openInfoSheet() {
       const d = currentUserData || {};
       const ab = document.getElementById('avatarLetter') || document.getElementById('avatarBox');
@@ -1088,8 +1205,9 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
       document.getElementById('infoStatus').textContent = isAdmin ? 'Akun admin — terverifikasi' : 'Penulis';
       document.getElementById('infoDisplayName').textContent = d.display_name || currentPenName;
       document.getElementById('infoCity').textContent = d.city || 'Nusantara';
-      const since = document.getElementById('profileSince').textContent;
-      document.getElementById('infoSince').textContent = since || '—';
+      const sinceEl = document.getElementById('stgJoined');
+      const since = sinceEl && sinceEl.textContent !== '\u2014' ? 'Sejak ' + sinceEl.textContent : '';
+      document.getElementById('infoSince').textContent = since || '\u2014';
       document.getElementById('infoCountKarya').textContent = String(parseInt(document.getElementById('profileTabTotal').textContent) || 0);
       document.getElementById('infoCountFollowers').textContent = document.getElementById('countFollowers').textContent || '0';
       document.getElementById('infoCountFollowing').textContent = document.getElementById('countFollowing').textContent || '0';
@@ -1098,6 +1216,36 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
       document.body.style.overflow = 'hidden';
     }
     function closeInfoSheet() { document.getElementById('infoSheet').style.display = 'none'; document.getElementById('infoSheetBackdrop').style.display = 'none'; document.body.style.overflow = ''; }
+
+    // ===== Panel Pengaturan (bentuk C: kotak cepat + daftar) =====
+    const STG_TITLES = { akun: 'Informasi akun', profil: 'Profil', keamanan: 'Keamanan', tampilan: 'Tampilan', foto: 'Foto & Sampul', bantuan: 'Bantuan', tentang: 'Tentang' };
+    function openSettings() {
+      const p = document.getElementById('stgPanel'), b = document.getElementById('stgBackdrop');
+      if (!p) return;
+      p.style.display = 'block'; b.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSettings() {
+      const p = document.getElementById('stgPanel'), b = document.getElementById('stgBackdrop');
+      if (!p) return;
+      p.style.display = 'none'; b.style.display = 'none';
+      const sub = document.getElementById('stgSub');
+      if (sub) sub.classList.remove('on');
+      document.body.style.overflow = '';
+    }
+    function stgOpen(sec) {
+      const sub = document.getElementById('stgSub');
+      if (!sub) return;
+      document.getElementById('stgSubTitle').textContent = STG_TITLES[sec] || '\u2014';
+      sub.querySelectorAll('.stg-sec').forEach(el => el.classList.toggle('on', el.dataset.sec === sec));
+      sub.dataset.sub = sec;
+      sub.classList.add('on');
+    }
+    function stgBack() {
+      const sub = document.getElementById('stgSub');
+      if (sub && sub.classList.contains('on')) { sub.classList.remove('on'); return; }
+      closeSettings();
+    }
     document.getElementById('followSheet')?.addEventListener('touchstart', e => { followTouchX = e.touches[0].clientX; }, { passive: true });
     document.getElementById('followSheet')?.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - followTouchX; if (Math.abs(dx) > 45) openFollowSheet(dx < 0 ? 'following' : 'followers'); });
 
@@ -1199,6 +1347,10 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
     // fungsi dipanggil onclick inline -> wajib global (module scope tak terlihat oleh atribut HTML)
     window.saveProfile = saveProfile;
     window.toggleEditModal = toggleEditModal;
+    window.openSettings = openSettings;
+    window.closeSettings = closeSettings;
+    window.stgOpen = stgOpen;
+    window.stgBack = stgBack;
     window.handleLogout = handleLogout;
     window.switchProfileTab = switchProfileTab;
     // Sunting warkah sendiri (keputusan owner 10 Nov 2026: bebas kapan saja, termasuk

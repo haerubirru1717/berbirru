@@ -81,9 +81,13 @@ app.get('/api/users/:pen_name', async (c: any) => {
 
   // Email hanya dipakai untuk cek admin — jangan pernah dikirim ke klien.
   const { email: _email, ...publik } = user;
+  // Tanggal bergabung = data pribadi: hanya dikirim ke pemilik akunnya.
+  const isSelf = Boolean(viewer && viewer.id === user.id);
+  const keluar: any = publicUser(publik);
+  if (!isSelf) delete keluar.created_at;
   return c.json({
     user: {
-      ...publicUser(publik),
+      ...keluar,
       posts_count: postsCount,
       likes_count: likesCount,
       saves_count: savesCount,
