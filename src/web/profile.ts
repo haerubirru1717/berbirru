@@ -27,7 +27,7 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
   <meta property="og:image" content="https://kitatulis.com/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700;1,6..72,500&family=Roboto+Mono:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Archivo+Black&family=DM+Sans:wght@500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700;1,6..72,500&family=Roboto+Mono:wght@600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root{--blue:${THEME.blue};--deep:${THEME.blueDeep};--ink:${THEME.ink};--paper:#FFF9E9;--white:#FFFEF8;--yellow:${THEME.accent};--coral:#FF735F;--mint:#88E6BD;--soft:#E0EEFD;--red:#EF4444;--green:#059669;--muted:${THEME.muted};--ink-soft:${THEME.inkSoft};--line-soft:${THEME.lineSoft};--line:3px solid var(--ink);--thin:2px solid var(--ink);--shadow:6px 7px 0 ${THEME.inkSoft};--small-shadow:3px 4px 0 ${THEME.inkSoft};--bg-main:var(--paper);--bg-card:#fff;--bg-blue-subtle:var(--soft);--shadow-ink:var(--ink-soft);--blue-primary:var(--blue);--blue-deep:var(--deep);--blue-light:#60A5FA;--accent-yellow:var(--yellow);--border-thick:var(--line);--border-med:3px solid var(--ink);--border-thin:var(--thin);--shadow-hard:var(--small-shadow);--shadow-hard-lg:var(--shadow);--shadow-hard-sm:2px 3px 0 ${THEME.inkSoft};--radius:0;--radius-sm:0}
@@ -374,34 +374,54 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
     .ico { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 
     .kern-profile-brand,.profile-eyebrow{display:none}
-    /* ===== Panel Pengaturan (bentuk C: kotak cepat + daftar) ===== */
-    .stg-backdrop { display:none; position:fixed; inset:0; z-index:1000; background:rgba(11,25,44,.42); }
-    .stg { display:none; position:fixed; z-index:1001; top:0; bottom:0; left:50%; transform:translateX(-50%); width:min(480px,100%); background:var(--bg-main); overflow:auto; }
-    .stg-head { position:sticky; top:0; z-index:2; display:flex; align-items:center; gap:10px; padding:14px 16px; background:var(--bg-main); border-bottom:var(--border-thick); }
-    .stg-title { font-family:'Archivo Black',sans-serif; font-size:16px; font-weight:800; }
-    .stg-x, .stg-back { width:34px; height:34px; flex:none; border:var(--border-thick); background:var(--white); box-shadow:var(--shadow-offset); font-size:16px; font-weight:800; cursor:pointer; }
-    .stg-x { margin-left:auto; }
-    .stg-acct { display:flex; align-items:center; gap:12px; padding:14px 16px; border-bottom:1px solid #E2E8F0; }
-    .stg-ava { width:46px; height:46px; flex:none; border:2px solid var(--ink); border-radius:50%; background:var(--blue); color:#FFF; display:grid; place-items:center; font:800 18px 'DM Sans',sans-serif; background-size:cover; background-position:center; }
-    .stg-acct .n { font-size:14.5px; font-weight:800; }
-    .stg-acct .h { font-size:11.5px; font-weight:700; color:var(--muted); margin-top:2px; }
-    .stg-tiles { display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:14px 16px 6px; }
-    .stg-tile { display:flex; flex-direction:column; gap:14px; text-align:left; padding:12px; cursor:pointer; border:var(--border-thick); background:var(--white); box-shadow:var(--shadow-offset); }
-    .stg-tile .l { display:block; font-size:13px; font-weight:800; }
-    .stg-tile .v { display:block; font-size:10.5px; font-weight:700; color:var(--muted); margin-top:3px; }
-    .stg-tile svg { width:17px; height:17px; stroke:currentColor; stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
-    .stg-grp { padding:16px 16px 6px; font:800 10px 'DM Sans',sans-serif; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); }
-    .stg-row { display:flex; align-items:center; gap:12px; width:100%; text-align:left; padding:13px 16px; border:0; border-top:1px solid #E2E8F0; background:transparent; font:700 13.5px 'DM Sans',sans-serif; color:var(--ink); cursor:pointer; }
-    .stg-row svg { width:17px; height:17px; flex:none; stroke:currentColor; stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
-    .stg-row .chev { margin-left:auto; color:var(--muted); font-weight:800; }
-    .stg-row.danger, .stg-row.danger svg { color:var(--accent-red); }
-    .stg-sub { display:none; position:absolute; inset:0; background:var(--bg-main); overflow:auto; }
+    /* ===== Panel Pengaturan (bentuk C) — BAHASA DESAIN BARU =====
+       Token lokal (--s-*) miliknya sendiri: panel ini contoh sistem baru —
+       tanpa warna merek, tanpa bayangan keras, hierarki lewat tipografi,
+       pemisah garis rambut. Ia TIDAK meminjam apa pun dari sistem lama. */
+    .stg-backdrop { display:none; position:fixed; inset:0; z-index:1000; background:rgba(9,9,11,.42); }
+    .stg { --s-bg:#FAFAF9; --s-ink:#0B0C0E; --s-mut:#71717A; --s-line:#E7E7E9; --s-hi:#E5484D;
+      display:none; position:fixed; z-index:1001; inset:0; width:min(430px,100%); margin:0 auto;
+      background:var(--s-bg); color:var(--s-ink); overflow:auto;
+      font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+      -webkit-font-smoothing:antialiased; }
+    .stg-head { position:sticky; top:0; z-index:3; display:flex; align-items:center; gap:10px; padding:16px 18px 14px; background:rgba(250,250,249,.94); backdrop-filter:blur(12px); border-bottom:1px solid var(--s-line); }
+    .stg-title { font-size:17px; font-weight:700; letter-spacing:-.01em; }
+    .stg-x, .stg-back { width:32px; height:32px; flex:none; display:grid; place-items:center; border:0; border-radius:50%; background:transparent; color:var(--s-mut); font:400 19px/1 inherit; cursor:pointer; }
+    .stg-x:active, .stg-back:active { background:#EFEFED; color:var(--s-ink); }
+    .stg-acct { display:flex; align-items:center; gap:13px; padding:16px 18px; border-bottom:1px solid var(--s-line); }
+    .stg-ava { width:46px; height:46px; flex:none; border:0; border-radius:50%; background:#18181B; color:#FFF; display:grid; place-items:center; font-size:17px; font-weight:600; background-size:cover; background-position:center; }
+    .stg-acct .n { font-size:15px; font-weight:600; }
+    .stg-acct .h { font-size:12.5px; color:var(--s-mut); margin-top:2px; }
+    .stg-tiles { display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:16px 18px 4px; }
+    .stg-tile { display:flex; flex-direction:column; gap:18px; text-align:left; padding:14px; cursor:pointer; border:1px solid var(--s-line); border-radius:16px; background:#FFF; }
+    .stg-tile:active { background:#F4F4F3; }
+    .stg-tile .l { display:block; font-size:13.5px; font-weight:600; letter-spacing:-.01em; }
+    .stg-tile .v { display:block; font-size:11.5px; color:var(--s-mut); margin-top:3px; }
+    .stg-tile svg { width:18px; height:18px; stroke:var(--s-ink); stroke-width:1.7; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+    .stg-grp { padding:20px 18px 6px; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--s-mut); }
+    .stg-row { display:flex; align-items:center; gap:14px; width:100%; text-align:left; padding:14px 18px; border:0; border-top:1px solid var(--s-line); background:transparent; font-family:inherit; font-size:14.5px; font-weight:500; color:var(--s-ink); cursor:pointer; }
+    .stg-row svg { width:18px; height:18px; flex:none; stroke:var(--s-ink); stroke-width:1.7; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+    .stg-row .chev { margin-left:auto; color:#C4C4C8; font-size:17px; }
+    .stg-row.danger, .stg-row.danger svg { color:var(--s-hi); }
+    .stg-sub { display:none; position:absolute; inset:0; background:var(--s-bg); overflow:auto; }
     .stg-sub.on { display:block; }
-    .stg-sec { display:none; }
+    .stg-sec { display:none; padding-bottom:24px; }
     .stg-sec.on { display:block; }
-    .stg-note { padding:12px 16px 0; font:700 11px 'DM Sans',sans-serif; color:var(--muted); }
-    .stg-flag { display:inline-block; margin-left:8px; padding:2px 7px; border:1.5px solid var(--line-soft); font:800 9.5px 'DM Sans',sans-serif; color:var(--muted); }
-    .stg-belum { margin:12px 16px; padding:14px; border:2px dashed var(--line-soft); font:700 12px 'DM Sans',sans-serif; color:var(--muted); }
+    .stg-note { padding:14px 18px 0; font-size:11.5px; color:var(--s-mut); line-height:1.55; }
+    .stg-flag { display:inline-block; margin-left:8px; padding:2px 7px; border:1px solid var(--s-line); border-radius:999px; font-size:10px; font-weight:600; color:var(--s-mut); }
+    .stg-belum { margin:14px 18px; padding:14px; border:1px dashed var(--s-line); border-radius:12px; font-size:12px; color:var(--s-mut); }
+    /* Isi sub-panel memakai bahasa baru juga — hanya di dalam .stg (sheet lama tidak tersentuh) */
+    .stg .info-head { display:flex; align-items:center; gap:13px; padding:16px 18px 8px;  box-shadow:none;}
+    .stg .info-ava { width:52px; height:52px; border:0; border-radius:50%; background:#18181B; color:#FFF; display:grid; place-items:center; font-size:19px; font-weight:600; background-size:cover; background-position:center; }
+    .stg .info-pen { font-size:15px; font-weight:600; color:var(--s-ink); }
+    .stg .info-status { font-size:12px; color:var(--s-mut); margin-top:2px; }
+    .stg .info-row { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:13px 18px; border-bottom:1px solid var(--s-line);  box-shadow:none;}
+    .stg .info-k { font-size:13px; font-weight:400; color:var(--s-mut); }
+    .stg .info-v { font-size:13.5px; font-weight:600; color:var(--s-ink); text-align:right; max-width:240px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .stg .info-stats { display:flex; gap:10px; padding:16px 18px 0; }
+    .stg .info-st { flex:1; border:1px solid var(--s-line); border-radius:14px; text-align:center; padding:12px 0; background:#FFF; box-shadow:none; }
+    .stg .info-st b { display:block; font-size:17px; font-weight:700; color:var(--s-ink); }
+    .stg .info-st span { font-size:10px; color:var(--s-mut); text-transform:uppercase; letter-spacing:.06em; }
   </style>
 </head>
 <body>

@@ -32,4 +32,13 @@ const blok = social.slice(social.indexOf("app.get('/api/users/:pen_name'"), soci
 assert.match(blok, /isSelf/, 'endpoint profil wajib menghitung isSelf');
 assert.match(blok, /delete .*created_at|created_at: undefined/, 'created_at wajib dibuang untuk pengunjung lain');
 
+// 6. Bahasa desain BARU: panel tidak boleh memakai token/font sistem lama
+const blokPanel = profile.slice(profile.indexOf('Panel Pengaturan (bentuk C) — BAHASA'), profile.indexOf('</style>'));
+for (const lama of ['border-thick', 'shadow-offset', 'Archivo Black', 'var(--ink)', 'var(--blue)', 'var(--white)']) {
+  assert.ok(!blokPanel.includes(lama), `panel tidak boleh memakai sistem lama: ${lama}`);
+}
+assert.match(blokPanel, /--s-bg:#FAFAF9/, 'panel wajib memakai token bahasa baru');
+assert.match(profile, /family=Inter/, 'font Inter wajib dimuat untuk bahasa baru');
+
+console.log('OK — panel memakai bahasa desain baru (bukan sistem lama)');
 console.log('OK — kontrak panel pengaturan (bentuk C) + tanggal bergabung privat');
