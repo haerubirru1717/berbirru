@@ -386,5 +386,5 @@ mountNotifications(app);
 
 export default {
   fetch: app.fetch,
-  // Cron per jam: expire 48 jam, auto-complete D+5, anti-resi-hantu D+1 (BinderByte).
+  // Tanpa cron: satu-satunya cron lama (sweep pesanan) milik Pasar dan sudah dicabut.
 } as any;

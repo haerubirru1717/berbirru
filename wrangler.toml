@@ -21,12 +21,11 @@ binding = "MEDIA"
 bucket_name = "berbirru-media"
 
 [vars]
-# Satu-satunya akun yang boleh membuka /owner (putus sengketa + cairkan saldo).
+# Satu-satunya akun owner (moderasi sosial).
 OWNER_EMAIL = "haeru@berbirru.com"
 APP_NAME = "KITATULIS"
 APP_DOMAIN = "kitatulis.com"
 TURNSTILE_SITE_KEY = "0x4AAAAAAFTEI0GwdODJRhtT"
-KLIKQRIS_CALLBACK_URL = "https://kitatulis.com/api/klikqris/webhook"
 
 [assets]
 directory = "./public"
