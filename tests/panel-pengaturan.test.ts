@@ -38,12 +38,16 @@ for (const lama of ['border-thick', 'shadow-offset', 'Archivo Black', 'var(--ink
   assert.ok(!blokPanel.includes(lama), `panel tidak boleh memakai sistem lama: ${lama}`);
 }
 const token = baca('src/web/design-baru.ts');
-assert.match(token, /--s-bg:\s*#FAFAF9/, 'berkas token bahasa baru wajib memuat palet');
-assert.match(token, /--s-hi:\s*#E5484D/, 'berkas token wajib memuat aksen tunggal');
+assert.match(token, /PALET = \{[\s\S]*bersih: \{[^}]*bg: '#FAFAF9'/, 'palet tampilan bersih wajib ada di berkas token');
+assert.match(token, /kertas: \{[^}]*bg: '#EFEBE3'/, 'palet krem kertas wajib ada di berkas token');
+assert.match(token, /--s-hi:   \$\{p\.hi\}/, 'aksen tunggal diambil dari palet');
 assert.match(blokPanel, /var\(--s-bg\)|var\(--s-line\)/, 'panel wajib memakai token bersama');
 assert.ok(!/--s-bg:#/.test(blokPanel), 'panel tidak boleh mendefinisikan tokennya sendiri lagi');
 assert.match(profile, /from '\.\/design-baru'/, 'profil wajib mengimpor token bersama');
-assert.match(profile, /family=Inter/, 'font Inter wajib dimuat untuk bahasa baru');
+assert.match(profile, /\$\{FONT_URL\}/, 'halaman wajib memuat fon lewat berkas token');
+assert.match(token, /FONT_URL[\s\S]*family=Inter/, 'berkas token wajib mendefinisikan fon Inter');
+assert.ok(!/Archivo|DM Sans|Newsreader|Roboto Mono/.test(blokPanel + profile.split('<style>')[1].split('</style>')[0]),
+  'fon neobrutalism tidak boleh tersisa di halaman');
 
 // 7. Jendela TIDAK layar penuh: lembar menempel bawah, tinggi mengikuti isi
 const aturanStg = blokPanel.slice(blokPanel.indexOf('.stg {'), blokPanel.indexOf('.stg-head'));

@@ -15,6 +15,7 @@ import { renderResetPage } from './web/reset';
 import { renderFeedPage } from './web/feed';
 import { renderSearchPage } from './web/search';
 import { renderProfilePage } from './web/profile';
+import { tampilanDariCookie } from './web/design-baru';
 import { renderNotificationsPage } from './web/notifications';
 import { renderChainPage } from './web/chain';
 import { applyKernTheme, wantsKern } from './web/kern-theme';
@@ -190,7 +191,7 @@ app.get('/u/:pen_name', async (c) => {
 
   const targetPenName = penNameParam.replace(/^@/, '').toLowerCase();
   const isMe = Boolean(user && user.pen_name.toLowerCase() === targetPenName);
-  return c.html(renderProfilePage(targetPenName, isMe, user, isOwner(c.env, user)));
+return c.html(renderProfilePage(targetPenName, isMe, user, isOwner(c.env, user), tampilanDariCookie(c.req.header('cookie'), c.env.KERN_THEME_PRESET)));
 });
 
 // ---- SEO & CRAWLER ENDPOINTS ----

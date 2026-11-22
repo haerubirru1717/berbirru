@@ -1,13 +1,13 @@
-import { THEME } from './theme';
 import { renderBottomNav } from './layout';
-import { TOKEN_CSS, FONT_URL } from './design-baru';
+import { FONT_URL, tokenCss, tampilanDariCookie } from './design-baru';
 import { NOTIFY_HTML } from './notify';
 
-export function renderProfilePage(penName: string, isMe = false, currentUser: any = null, isOwnerUser = false): string {
+export function renderProfilePage(penName: string, isMe = false, currentUser: any = null, isOwnerUser = false, tampilan: string = 'bersih'): string {
+  const palet = tokenCss(tampilanDariCookie(undefined, tampilan));
   const emailSafe = String(currentUser?.email || '').replace(/[<>&\"]/g, (ch: string) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '\"': '&quot;' } as any)[ch] || ch);
 
   return `<!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-bahasa="baru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,14 +18,29 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
   <meta property="og:image" content="https://kitatulis.com/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Archivo+Black&family=DM+Sans:wght@500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700;1,6..72,500&family=Roboto+Mono:wght@600;700&display=swap" rel="stylesheet">
   <link href="${FONT_URL}" rel="stylesheet">
   <style>
-    ${TOKEN_CSS}
+    ${palet}
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root{--blue:${THEME.blue};--deep:${THEME.blueDeep};--ink:${THEME.ink};--paper:#FFF9E9;--white:#FFFEF8;--yellow:${THEME.accent};--coral:#FF735F;--mint:#88E6BD;--soft:#E0EEFD;--red:#EF4444;--green:#059669;--muted:${THEME.muted};--ink-soft:${THEME.inkSoft};--line-soft:${THEME.lineSoft};--line:3px solid var(--ink);--thin:2px solid var(--ink);--shadow:6px 7px 0 ${THEME.inkSoft};--small-shadow:3px 4px 0 ${THEME.inkSoft};--bg-main:var(--paper);--bg-card:#fff;--bg-blue-subtle:var(--soft);--shadow-ink:var(--ink-soft);--blue-primary:var(--blue);--blue-deep:var(--deep);--blue-light:#60A5FA;--accent-yellow:var(--yellow);--border-thick:var(--line);--border-med:3px solid var(--ink);--border-thin:var(--thin);--shadow-hard:var(--small-shadow);--shadow-hard-lg:var(--shadow);--shadow-hard-sm:2px 3px 0 ${THEME.inkSoft};--radius:0;--radius-sm:0}
+    /* Nama-nama gaya lama tetap ada (banyak kaidah memakainya) tapi sekarang
+       MENUNJUK ke bahasa desain baru: tanpa warna merek, tanpa bayangan keras,
+       pemisah garis rambut. Satu perubahan di sini mengubah seluruh halaman. */
+    :root{
+      --ink:var(--s-ink); --ink-soft:var(--s-mut); --muted:var(--s-mut); --line-soft:var(--s-line);
+      --paper:var(--s-bg); --white:var(--s-card); --bg-main:var(--s-bg); --bg-card:var(--s-card);
+      --soft:var(--s-bg); --bg-blue-subtle:var(--s-bg);
+      --blue:var(--s-ink); --deep:var(--s-ink); --blue-primary:var(--s-ink); --blue-deep:var(--s-ink);
+      --blue-light:var(--s-mut); --shadow-ink:transparent;
+      --yellow:var(--s-hi); --accent-yellow:var(--s-hi); --red:var(--s-hi); --coral:var(--s-hi);
+      --mint:var(--s-ink); --green:var(--s-ink);
+      --line:1px solid var(--s-line); --thin:1px solid var(--s-line);
+      --border-thick:1px solid var(--s-line); --border-med:1px solid var(--s-line); --border-thin:1px solid var(--s-line);
+      --shadow:0 0 transparent; --small-shadow:0 0 transparent; --shadow-hard:0 0 transparent;
+      --shadow-hard-lg:0 0 transparent; --shadow-hard-sm:0 0 transparent;
+      --radius:14px; --radius-sm:10px;
+    }
     body {
-      font-family: 'DM Sans', -apple-system, sans-serif;
+      font-family: var(--s-font);
       background:var(--paper); color: var(--ink); min-height: 100vh;
       padding: 12px 14px 90px;
     }
@@ -62,15 +77,10 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
     .nav-menu-glass {
       width: 32px; height: 32px; background:#fff;
       border: 1.5px solid var(--ink); border-radius: 10px; display: grid; place-items: center;
-      box-shadow: 2px 2px 0 var(--shadow-ink); cursor: pointer; color: var(--ink);
+      box-shadow: 2px 2px 0 var(--shadow-ink); cursor: pointer; color: var(--s-ink);
     }
     .nav-btn-glass:active, .nav-menu-glass:active { transform: translate(1px, 1px); box-shadow: none; }
 
-    /* Settings Menu Dropdown */
-      display: none; position: absolute; top: 48px; right: 10px; width: 190px;
-      background: #FFFFFF; border: var(--border-thick); border-radius: var(--radius-sm);
-      box-shadow: var(--shadow-hard); z-index: 950; padding: 6px; flex-direction: column; gap: 2px;
-    }
       padding: 8px 10px; border-radius: 6px; font-size: 11.5px; font-weight: 800;
       color: var(--ink); display: flex; align-items: center; gap: 8px; cursor: pointer;
       text-decoration: none;
@@ -88,7 +98,7 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
       position: absolute; right: -8px; bottom: -4px; width: 28px; height: 28px;
       background: var(--accent-yellow); color: var(--ink); border: 2px solid var(--ink);
       border-radius: 50%; display: grid; place-items: center; cursor: pointer; z-index: 5;
-      box-shadow: 0 2px 0 rgba(11,25,44,0.35);
+      box-shadow: 0 2px 0 transparent;
     }
     .media-edit-badge svg { width: 14px; height: 14px; stroke: var(--ink); stroke-width: 2.4; fill: none; }
     /* ikon kamera dihapus: user langsung klik avatar/cover utk ganti gambar */
@@ -99,7 +109,7 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
     }
     .avatar-box {
       width: 72px; height: 72px; background: var(--blue-primary); color: #FFFFFF; border: var(--border-thick);
-      border-radius: 18px; display: grid; place-items: center; font-family: 'Newsreader', serif;
+      border-radius: 18px; display: grid; place-items: center; font-family: var(--s-font); font-weight: 700;
       font-size: 34px; font-weight: 700; box-shadow: var(--shadow-hard-sm); flex-shrink: 0;
       position: relative; user-select: none;
     }
@@ -122,7 +132,7 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
     }
     .pen-name-group { display: flex; flex-direction: row; flex-wrap: wrap; align-items: baseline; column-gap: 7px; row-gap: 2px; margin-bottom: 8px; }
     .pen-name {
-      font-family: 'Archivo Black', sans-serif; font-size: 21px; font-weight: 900; color: var(--ink);
+      font-family: var(--s-font); font-size: 21px; font-weight: 900; color: var(--ink);
       letter-spacing: -0.5px; line-height: 1.15;
     }
     .display-name-main {
@@ -134,7 +144,7 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
     }
     
     /* Statistik inline: icon + angka, 1 baris (Varian 2) */
-    .vis-private { display: inline-flex; align-items: center; gap: 3px; margin-top: 2px; padding: 1px 6px; border: 1.5px solid var(--line-soft); border-radius: 999px; font: 800 9px 'Roboto Mono', monospace; color: var(--muted); letter-spacing: .3px; }
+    .vis-private { display: inline-flex; align-items: center; gap: 3px; margin-top: 2px; padding: 1px 6px; border: 1.5px solid var(--line-soft); border-radius: 999px; font: 800 9px var(--s-font); color: var(--muted); letter-spacing: .3px; }
     .vis-private svg { width: 9px; height: 9px; }
     .thread-name-row { display: flex; align-items: center; gap: 3px; }
     .vcheck { width: 13px; height: 13px; flex: none; }
@@ -142,19 +152,19 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
     .admin-badge[hidden] { display: none; }
     .admin-badge svg { width: 19px; height: 19px; display: block; }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-    .stats-inline { display: flex; justify-content: center; align-items: center; gap: 26px; margin-top: 14px; padding-top: 12px; border-top: 2px solid #E2E8F0; }
+    .stats-inline { display: flex; justify-content: center; align-items: center; gap: 26px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--s-line); }
     .si { display: inline-flex; align-items: center; gap: 6px; color: var(--ink); }
     .si svg { width: 17px; height: 17px; flex: none; }
     .si b {
-      font-family: 'Archivo Black', sans-serif; font-size: 16px; font-weight: 800; line-height: 1;
+      font-family: var(--s-font); font-size: 16px; font-weight: 800; line-height: 1;
     }
     .stats-button { border: 0; background: transparent; cursor: pointer; font: inherit; padding: 0; }
     .follow-sheet-backdrop { display:none; position:fixed; inset:0; z-index:900; background:rgba(11,25,44,.42); }
-    .follow-sheet { display:none; position:fixed; z-index:901; left:50%; bottom:0; transform:translateX(-50%); width:min(480px,100%); max-height:min(620px,86vh); overflow:auto; background:#FFFFFF; border:var(--border-thick); border-bottom:0; box-shadow:0 -6px 0 var(--ink-soft); padding:16px 16px 88px; }
+    .follow-sheet { display:none; position:fixed; z-index:901; left:50%; bottom:0; transform:translateX(-50%); width:min(480px,100%); max-height:min(620px,86vh); overflow:auto; background:#FFFFFF; border:var(--border-thick); border-bottom:0; box-shadow:0 -6px 0 transparent; padding:16px 16px 88px; }
     .follow-sheet-head { display:flex; align-items:center; justify-content:space-between; padding-bottom:11px; border-bottom:2px solid #E2E8F0; }
-    .follow-sheet-title { font-family:'Newsreader',serif; font-size:24px; font-weight:700; }
+    .follow-sheet-title { font-family: var(--s-font); font-size:24px; font-weight:700; }
     .follow-sheet-hint { color:var(--muted); font-size:11px; font-weight:700; margin-top:3px; }
-    .follow-sheet-close { width:34px; height:34px; border:2px solid var(--ink); background:#FFF; box-shadow:2px 2px 0 var(--ink-soft); font-size:20px; font-weight:800; cursor:pointer; }
+    .follow-sheet-close { width:34px; height:34px; border:2px solid transparent; background:#FFF; box-shadow:2px 2px 0 transparent; font-size:20px; font-weight:800; cursor:pointer; }
     .info-head { display:flex; align-items:center; gap:13px; padding:14px 0 15px; }
     .info-ava { width:54px; height:54px; flex:none; border-radius:50%; border:2px solid var(--ink); display:grid; place-items:center; font-size:20px; font-weight:800; color:#FFF; background:#1D61E7; background-size:cover; background-position:center; }
     .info-pen { font-size:17px; font-weight:800; color:var(--ink); display:flex; align-items:center; gap:6px; }
@@ -164,21 +174,21 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
     .info-k { font-size:11px; font-weight:700; color:var(--muted); flex:none; }
     .info-v { font-size:13px; font-weight:700; color:var(--ink); text-align:right; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:230px; }
     .info-stats { display:flex; gap:8px; padding-top:12px; border-top:2px solid #E2E8F0; margin-top:4px; }
-    .info-st { flex:1; border:2px solid var(--ink); border-radius:12px; text-align:center; padding:9px 0; box-shadow:3px 3px 0 var(--ink-soft); }
+    .info-st { flex:1; border:2px solid transparent; border-radius:12px; text-align:center; padding:9px 0; box-shadow:3px 3px 0 transparent; }
     .info-st b { display:block; font-size:17px; font-weight:800; color:#1D61E7; }
     .info-st span { font-size:9px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; }
     .follow-switch { display:grid; grid-template-columns:1fr 1fr; margin:13px 0 8px; border:2px solid var(--ink); background:#FFF; }
-    .follow-switch button { border:0; padding:9px 6px; background:#FFF; color:var(--muted); font:800 11px 'DM Sans',sans-serif; cursor:pointer; }
+    .follow-switch button { border:0; padding:9px 6px; background:#FFF; color:var(--muted); font:800 11px var(--s-font); cursor:pointer; }
     .follow-switch button.active { background:var(--blue); color:#FFF; }
     .follow-list { min-height:120px; }
     .follow-row { display:flex; align-items:center; gap:10px; padding:12px 0; border-bottom:1px solid #E2E8F0; cursor:pointer; }
-    .follow-avatar { width:42px; height:42px; display:grid; place-items:center; flex:none; border:2px solid var(--ink); background:var(--blue); color:#FFF; font:22px 'Newsreader',serif; }
+    .follow-avatar { width:42px; height:42px; display:grid; place-items:center; flex:none; border:2px solid var(--ink); background:var(--blue); color:#FFF; font:700 22px var(--s-font); }
     .follow-info { flex:1; min-width:0; }
     .follow-name { display:flex; align-items:center; gap:4px; font-size:13px; font-weight:800; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .follow-verified { width:14px; height:14px; flex:none; }
     .follow-meta { color:var(--muted); font-size:10px; font-weight:700; margin-top:2px; }
-    .follow-action { border:2px solid var(--ink); background:var(--blue); color:#FFF; box-shadow:2px 2px 0 var(--ink-soft); padding:7px 10px; font-size:10px; font-weight:800; cursor:pointer; }
-    .follow-remove { background:#FFF !important; color:#B91C1C !important; border-color:#B91C1C !important; box-shadow:2px 2px 0 rgba(185,28,28,.25) !important; }
+    .follow-action { border:2px solid transparent; background:var(--blue); color:#FFF; box-shadow:2px 2px 0 transparent; padding:7px 10px; font-size:10px; font-weight:800; cursor:pointer; }
+    .follow-remove { background:#FFF !important; color:#B91C1C !important; border-color:#B91C1C !important; box-shadow:2px 2px 0 transparent !important; }
     .follow-empty, .follow-loading { padding:34px 10px; text-align:center; color:var(--muted); font-size:12px; font-weight:700; }
 
     /* Tab Underline Bersih (Hanya 1 Aktif) */
@@ -197,7 +207,7 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
       background: var(--blue-primary); border-radius: 3px 3px 0 0;
     }
     .feed-list { display: flex; flex-direction: column; gap: 16px; }
-    .profile-empty{background:#FFF;padding:24px;border:3px solid var(--ink);border-radius:16px;text-align:center;font-weight:700;box-shadow:4px 4px 0 #1E293B}
+    .profile-empty{background:#FFF;padding:24px;border:3px solid transparent;border-radius:16px;text-align:center;font-weight:700;box-shadow:4px 4px 0 #1E293B}
     /* Skeleton shimmer saat pindah tab — disamakan dengan beranda/feed */
     .skeleton-card { background: var(--bg-card); border: var(--border-med); box-shadow: var(--shadow-hard-sm);
       position: relative; margin: 0 0 14px; overflow: hidden; }
@@ -210,9 +220,9 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
     .sk-body { padding: 12px; }
     .sk-line.tall { height: 12px; width: 45%; margin-bottom: 10px; }
     .sk-line.full { width: 100%; } .sk-line.w90 { width: 90%; } .sk-line.w75 { width: 75%; }
-    .sk-footer { display: flex; justify-content: space-between; padding: 10px 12px; border-top: 2px solid #E2E8F0; }
-    .sk-pill { width: 52px; height: 8px; background: #E2E8F0; border: 0; border-radius: 0; }
-    .sk-pill.yellow { background: var(--yellow); width: 72px; }
+    .sk-footer { display: flex; justify-content: space-between; padding: 10px 12px; border-top: 1px solid var(--s-line); }
+    .sk-pill { width: 52px; height: 8px; background: var(--s-line); border: 0; border-radius: var(--s-radius-pill); }
+    .sk-pill.yellow { background: var(--s-line); width: 72px; }
     @keyframes editorial-shimmer { 0% { opacity: .45; } 50% { opacity: 1; } 100% { opacity: .45; } }
     .sk-line, .sk-avatar, .sk-pill { animation: editorial-shimmer 1.6s ease-in-out infinite; }
     .skeleton-card:nth-of-type(even) .sk-line, .skeleton-card:nth-of-type(even) .sk-avatar,
@@ -243,9 +253,9 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
     .thread-avatar-clip {
       position: absolute; left: 10px; top: -14px; width: 48px; height: 50px;
       background: var(--blue-primary); color: #FFFFFF; border: var(--border-thick);
-      border-radius: 0px; display: grid; place-items: center; font-family: 'Archivo Black', sans-serif;
+      border-radius: 0px; display: grid; place-items: center; font-family: var(--s-font);
       font-size: 23px; font-weight: 900; box-shadow: none;
-      transform: rotate(-2deg); z-index: 5;
+       z-index: 5;
     }
     .paperclip-svg {
       position: absolute; top: -10px; right: -7px; width: 18px; height: 28px;
@@ -256,12 +266,12 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
     .thread-pen-name { font-size: 13px; font-weight: 800; color: var(--ink); text-decoration: none; }
     .thread-timestamp-stack {
       display: flex; flex-direction: column; align-items: flex-end; line-height: 1.25;
-      font-family: 'Roboto Mono', monospace;
+      font-family: var(--s-font);
     }
     .time-main { font-size: 11px; font-weight: 800; color: var(--ink); }
     .date-sub { font-size: 9.5px; font-weight: 700; color: var(--muted); }
     .thread-body { padding: 14px 14px 12px; }
-    .thread-title { font-family: 'Archivo Black', sans-serif; font-size: 15px; font-weight: 800; color: var(--ink); margin-bottom: 6px; }
+    .thread-title { font-family: var(--s-font); font-size: 15px; font-weight: 800; color: var(--ink); margin-bottom: 6px; }
     .thread-text { font-size: 14px; font-weight: 400; line-height: 1.6; color: #0F172A; }
     .thread-text p { margin: 0 0 .55em; }
     .thread-text p:last-child { margin-bottom: 0; }
@@ -276,9 +286,9 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
       color: #334155;
     }
     
-    .font-serif { font-family: 'Newsreader', serif !important; }
-    .font-sans { font-family: 'DM Sans', sans-serif !important; }
-    .font-mono { font-family: 'Roboto Mono', monospace !important; }
+    .font-serif { font-family: var(--s-font) !important; }
+    .font-sans { font-family: var(--s-font) !important; }
+    .font-mono { font-family: var(--s-font) !important; }
 
     .thread-footer {
       padding: 8px 12px; background: #FFFFFF; border-top: var(--border-thin);
@@ -325,7 +335,7 @@ export function renderProfilePage(penName: string, isMe = false, currentUser: an
     }
     /* 5-TAB DOCKED BOTTOM NAVBAR — Lucide Style */
     .bottom-navbar {
-      position:fixed;bottom:0;left:0;right:0;transform:none;width:100%;max-width:none;z-index:70;background:#fff;border-top:2px solid var(--ink);padding:6px 12px calc(6px + env(safe-area-inset-bottom));box-shadow:0 -5px 0 rgba(11,25,44,.07)
+      position:fixed;bottom:0;left:0;right:0;transform:none;width:100%;max-width:none;z-index:70;background:#fff;border-top:2px solid transparent;padding:6px 12px calc(6px + env(safe-area-inset-bottom));box-shadow:0 -5px 0 transparent
     }
     .navbar-inner {
       max-width:560px;margin:auto;background:transparent;border:0;border-radius:0;box-shadow:none;display:grid;grid-template-columns:repeat(5,1fr);padding:0
@@ -345,10 +355,10 @@ gap:2px;text-decoration:none;color:#6A788D;font-size:10px;font-weight:800;cursor
       position: relative; top: -8px;
     }
     .btn-create-floating {
-width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);color:var(--ink);border:2.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink);transform:rotate(-2deg)
+width:46px;height:46px;display:grid;place-items:center;background:var(--s-ink);color:#FFF;border:0;border-radius:var(--s-radius-pill)
     }
-    .btn-create-floating svg { width: 20px; height: 20px; stroke: var(--ink); stroke-width: 2.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-    .btn-create-floating:active { transform: translate(1.5px, 1.5px); box-shadow: none; }
+    .btn-create-floating svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .btn-create-floating:active { transform: scale(.94); }
 
     .bell-wrap { position: relative; }
     .notif-dot {
@@ -369,7 +379,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
       /* Lembar menempel bawah dengan tinggi MENGIKUTI ISI (bukan layar penuh) */
       display:none; position:fixed; z-index:1001; bottom:0; left:50%; transform:translateX(-50%);
       width:min(430px,100%); max-height:88vh; overflow:auto; border-radius:20px 20px 0 0;
-      background:var(--s-bg); color:var(--s-ink); box-shadow:0 -10px 40px rgba(9,9,11,.18);
+      background:var(--s-bg); color:var(--s-ink); box-shadow:0 -10px 40px transparent;
       font-family:var(--s-font);
       -webkit-font-smoothing:antialiased; }
     .stg-head { display:flex; align-items:center; gap:10px; padding:16px 18px 14px; background:var(--s-bg); border-bottom:1px solid var(--s-line); }
@@ -511,7 +521,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
 
     <div class="crop-overlay" id="cropOverlay">
       <div class="crop-box">
-        <h3 style="font-family:'Archivo Black';font-size:14px;font-weight:800;margin-bottom:10px;" id="cropTitle">Atur Posisi Foto</h3>
+        <h3 style="font-family:var(--s-font);font-size:14px;font-weight:800;margin-bottom:10px;" id="cropTitle">Atur Posisi Foto</h3>
         <div class="crop-stage" id="cropStage">
           <img class="crop-img" id="cropImg" alt="pratinjau">
         </div>
@@ -689,15 +699,15 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
         <div class="stg-note">Keluar dari semua perangkat memutus seluruh sesi, termasuk di perangkat lain. Kamu harus masuk lagi di setiap perangkat.</div>
       </div>
       <div class="stg-sec" data-sec="tampilan">
-        <button class="stg-row" data-skin="neo" onclick="setSkin('neo')">
+        <button class="stg-row" data-skin="bersih" onclick="setSkin('bersih')">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a15 15 0 010 18M12 3a15 15 0 000 18M3 12h18"/></svg>
-          <span>Klasik &middot; Neobrutalism</span><span class="chev">&rsaquo;</span>
+          <span>Bersih</span><span class="chev">&rsaquo;</span>
         </button>
-        <button class="stg-row" data-skin="kern" onclick="setSkin('kern')">
+        <button class="stg-row" data-skin="kertas" onclick="setSkin('kertas')">
           <svg viewBox="0 0 24 24"><path d="M3 4h18v16H3zM3 9h18M9 4v5"/></svg>
-          <span>Kern &middot; Kertas Krem</span><span class="chev">&rsaquo;</span>
+          <span>Krem kertas</span><span class="chev">&rsaquo;</span>
         </button>
-        <div class="stg-note">Halaman dimuat ulang setelah gaya diganti. Bahasa desain baru (panel ini) berlaku di kedua gaya.</div>
+        <div class="stg-note">Dua tampilan ini memakai bahasa desain yang sama &mdash; hanya warnanya berbeda. Halaman dimuat ulang setelah diganti.</div>
       </div>
       <div class="stg-sec" data-sec="foto">
         <button class="stg-row" onclick="document.getElementById('avatarInput').click()">
@@ -739,9 +749,10 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
     }
     window.setSkin = setSkin;
     (function markActiveSkin() {
-      const m = /(?:^|;\\s*)bb_skin=(kern|neo)(?:;|$)/.exec(document.cookie || '');
-      const cur = m ? m[1] : 'neo';
-      const nama = { neo: 'Klasik \u00b7 Neobrutalism', kern: 'Kern \u00b7 Kertas Krem' }[cur] || 'Gaya halaman';
+      const m = /(?:^|;\\s*)bb_skin=(bersih|kertas|kern|neo)(?:;|$)/.exec(document.cookie || '');
+      const mentah = m ? m[1] : 'bersih';
+      const cur = (mentah === 'kertas' || mentah === 'kern') ? 'kertas' : 'bersih';
+      const nama = { bersih: 'Bersih', kertas: 'Krem kertas' }[cur] || 'Tampilan';
       const nilai = document.getElementById('stgSkinValue');
       if (nilai) nilai.textContent = nama;
       document.querySelectorAll('#stgPanel [data-skin]').forEach(el => {
@@ -916,7 +927,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
       const d = new Date(isoStr.endsWith('Z') ? isoStr : isoStr + 'Z');
       const datePart = d.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'Asia/Jakarta' });
       const timePart = d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Jakarta' }).replace(':', '.');
-      return '<div style="display:flex;flex-direction:column;align-items:flex-end;line-height:1.25;font-family:Roboto Mono,monospace;"><span style="font-size:11px;font-weight:800;color:var(--ink);">' + timePart + ' WIB</span><span style="font-size:9.5px;font-weight:700;color:var(--muted);">' + datePart + '</span></div>';
+      return '<div style="display:flex;flex-direction:column;align-items:flex-end;line-height:1.25;font-family:var(--s-font);"><span style="font-size:11px;font-weight:800;color:var(--ink);">' + timePart + ' WIB</span><span style="font-size:9.5px;font-weight:700;color:var(--muted);">' + datePart + '</span></div>';
     }
 
 
@@ -1139,7 +1150,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
     // 60 s (dulu 12 s): alasan sama seperti polling notifikasi.
     const PROFILE_COUNTS_POLL_MS = 60000;
     function followAvatarStyle(name, key) {
-      if (avatarUrlValid(key)) return 'background-image:url(' + avatarUrl(key) + ');background-size:cover;background-position:center;color:transparent;';
+      if (avatarUrlValid(key)) return 'background-image:url(' + avatarUrl(key) + ');background-size:cover;background-position:center;color:var(--s-ink);';
       return 'background:' + getAvatarColor(name) + ';';
     }
     function renderFollowRows(users) {
@@ -1306,7 +1317,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
         container.innerHTML = data.posts.map(p => \`
           <div class="thread-card" data-post-id="\${p.id}">
             <div class="thread-header-soft">
-              <div class="thread-avatar-clip" style="background:\${getAvatarColor(p.pen_name)};\${p.avatar_url ? \`background-image:url(\${p.avatar_url});background-size:cover;background-position:center;color:transparent;\` : ''}">
+              <div class="thread-avatar-clip" style="background:\${getAvatarColor(p.pen_name)};\${p.avatar_url ? \`background-image:url(\${p.avatar_url});background-size:cover;background-position:center;color:var(--s-ink);\` : ''}">
                 \${(p.pen_name[0] || 'D').toUpperCase()}
                 <svg class="paperclip-svg" viewBox="0 0 24 24" fill="none" stroke="var(--line-soft)" stroke-width="2.5"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
               </div>

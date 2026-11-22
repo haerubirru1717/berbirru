@@ -48,8 +48,8 @@ assert.doesNotMatch(transition, /stripTags\s*\(content\)/, 'stripTags tidak bole
 const profile = readFileSync(new URL('../src/web/profile.ts', import.meta.url), 'utf8');
   assert.match(profile, /isOwnerUser \? `[\s\S]*\/admin[\s\S]*Bilik Admin[\s\S]*Admin Sosial/,
     'baris owner di panel wajib menuju dashboard sosial');
-assert.match(profile, /renderProfilePage\(penName: string, isMe = false, currentUser: any = null, isOwnerUser = false\)/);
+assert.match(profile, /renderProfilePage\(penName: string, isMe = false, currentUser: any = null, isOwnerUser = false, tampilan: string = 'bersih'\)/);
 const indexSrc = readFileSync(new URL('../src/index.ts', import.meta.url), 'utf8');
-assert.match(indexSrc, /renderProfilePage\(targetPenName, isMe, user, isOwner\(c\.env, user\)\)/,
+assert.match(indexSrc, /renderProfilePage\(targetPenName, isMe, user, isOwner\(c\.env, user\), tampilanDariCookie\(/,
   'route profil wajib meneruskan flag owner ke renderer');
 console.log('OK — R4 admin moderation contract terkunci');

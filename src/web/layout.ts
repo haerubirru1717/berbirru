@@ -1,4 +1,3 @@
-import { THEME } from './theme';
 
 export function renderBottomNav(
   activeTab: 'feed' | 'compose' | 'notifications' | 'profile' | 'akun' | '',
@@ -32,28 +31,28 @@ export function renderBottomNav(
 
   return `
   <style>
-    .bnav-count{position:absolute;top:1px;right:13px;min-width:16px;height:16px;padding:0 4px;border-radius:9px;background:#B42318;color:#fff;font:900 9px 'DM Sans';display:grid;place-items:center;line-height:1}
+    .bnav-count{position:absolute;top:1px;right:13px;min-width:16px;height:16px;padding:0 4px;border-radius:9px;background:var(--s-hi);color:#fff;font:900 9px 'DM Sans';display:grid;place-items:center;line-height:1}
     body:has(> nav.bnav){padding-bottom:92px}
-    .bnav{position:fixed;left:0;right:0;bottom:0;z-index:75;background:#fff;border-top:2.5px solid ${THEME.ink};
-      padding:7px 10px calc(7px + env(safe-area-inset-bottom));box-shadow:0 -4px 0 rgba(11,25,44,.06)}
-    .bnav[data-mode="sosial"]{border-top-color:${THEME.ink}}
+    .bnav{position:fixed;left:0;right:0;bottom:0;z-index:75;background:#fff;border-top:2.5px solid var(--s-ink);
+      padding:7px 10px calc(7px + env(safe-area-inset-bottom));border-top:1px solid var(--s-line);background:var(--s-bg)}
+    .bnav[data-mode="sosial"]{border-top-color:var(--s-ink)}
     .bnav-in{width:100%;max-width:560px;margin:auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;gap:2px}
     .bnav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:46px;
-      text-decoration:none;color:${THEME.muted};font:800 9.5px 'DM Sans';letter-spacing:.01em;cursor:pointer;-webkit-tap-highlight-color:transparent}
+      text-decoration:none;color:var(--s-mut);font:600 9.5px var(--s-font);letter-spacing:.01em;cursor:pointer;-webkit-tap-highlight-color:transparent}
     .bnav-item svg{width:21px;height:21px;stroke:currentColor;stroke-width:2.1;fill:none;stroke-linecap:round;stroke-linejoin:round}
     .bnav-lbl{padding:1px 6px;border:1.5px solid transparent}
-    .bnav[data-mode="sosial"] .bnav-item.is-on{color:${THEME.blue}}
+    .bnav[data-mode="sosial"] .bnav-item.is-on{color:var(--s-ink)}
     .bnav-item.is-on svg{stroke-width:2.5}
-    .bnav[data-mode="sosial"] .bnav-item.is-on .bnav-lbl{background:#DBEAFE;border-color:${THEME.ink};box-shadow:1px 1px 0 ${THEME.inkSoft}}
-    .bnav-plus{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:60px;text-decoration:none;color:${THEME.ink};
-      font:900 9.5px 'DM Sans';transform:translateY(-11px)}
-    .bnav-plus .p{width:46px;height:46px;display:grid;place-items:center;background:${THEME.accent};border:2.5px solid ${THEME.ink};box-shadow:3px 3px 0 ${THEME.inkSoft}}
-    .bnav-plus[data-mode="sosial"] .p{background:#DBEAFE}
-    .bnav-plus .p svg{width:22px;height:22px;stroke:${THEME.ink};stroke-width:2.8;fill:none;stroke-linecap:round}
-    .bnav-plus:active .p{transform:translate(2px,2px);box-shadow:1px 1px 0 ${THEME.inkSoft}}
+    .bnav[data-mode="sosial"] .bnav-item.is-on .bnav-lbl{background:var(--s-card);border:1px solid var(--s-line);color:var(--s-ink);box-shadow:none}
+    .bnav-plus{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:60px;text-decoration:none;color:var(--s-ink);
+      font:700 9.5px var(--s-font);transform:translateY(-11px)}
+    .bnav-plus .p{width:46px;height:46px;display:grid;place-items:center;background:var(--s-ink);color:#FFF;border:0;border-radius:var(--s-radius-pill);box-shadow:none}
+    .bnav-plus[data-mode="sosial"] .p{background:var(--s-ink)}
+    .bnav-plus .p svg{width:22px;height:22px;stroke:currentColor;stroke-width:2.8;fill:none;stroke-linecap:round}
+    .bnav-plus:active .p{transform:translate(2px,2px);box-shadow:none}
     .bnav-ico{position:relative;display:inline-flex;line-height:0}
     .bnav-bell{position:relative;display:inline-flex}
-    .bnav-dot{position:absolute;top:-2px;right:-3px;width:8px;height:8px;border-radius:50%;background:#B42318;border:1.5px solid #fff}
+    .bnav-dot{position:absolute;top:-2px;right:-3px;width:8px;height:8px;border-radius:50%;background:var(--s-hi);border:1.5px solid #fff}
   </style>
   <nav class="bnav" data-mode="sosial">
     <div class="bnav-in">${isi}
