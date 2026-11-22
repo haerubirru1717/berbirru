@@ -39,7 +39,9 @@ assert.equal(model.attention.quarantinedPosts, 1);
 assert.equal(model.latestUsers[0].emailMasked, 'se***@example.com');
 assert(!('email' in model.latestUsers[0]), 'email mentah tidak boleh masuk view model');
 assert.equal(JSON.stringify(rows), before, 'loader tidak boleh memutasi hasil DB');
-assert.equal(issued.length, 6, 'hanya query dashboard yang terdaftar');
+assert.equal(issued.length, 8, 'hanya query dashboard yang terdaftar');
+assert.ok(issued.some((q) => /FROM account_reports/i.test(q)), 'laporan akun wajib dibaca dasbor');
+assert.equal(model.reports.total, 0, 'hitungan laporan aman saat tabel kosong');
 for (const sql of issued) {
   assert.match(sql.trim(), /^SELECT\b/i, 'dashboard hanya boleh SELECT');
   assert.doesNotMatch(sql, /SELECT\s+\*/i, 'dashboard dilarang SELECT *');

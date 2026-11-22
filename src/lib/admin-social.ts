@@ -19,6 +19,10 @@ export type AdminDashboard = {
     createdAt: string;
     postsCount: number;
   }>;
+  reports: {
+    total: number;
+    latest: Array<{ penName: string; reason: string; note: string; createdAt: string; reporter: string }>;
+  };
 };
 
 export type AdminPost = {
@@ -122,6 +126,11 @@ export async function loadAdminDashboard(db: D1Database): Promise<AdminDashboard
     (SELECT COUNT(DISTINCT f.id) FROM posts_fts f JOIN posts p ON p.id = f.id AND p.moderation_status = 'visible') AS indexed_posts,
     (SELECT COUNT(DISTINCT f.id) FROM posts_fts f LEFT JOIN posts p ON p.id = f.id WHERE p.id IS NULL OR p.moderation_status = 'quarantined') AS orphan_index_rows,
     (SELECT COUNT(id) FROM posts WHERE moderation_status = 'quarantined') AS quarantined_posts`).first();
+  const reportsTotal: any = await db.prepare(`SELECT COUNT(id) AS total FROM account_reports`).first();
+  const reportsLatest: any = await db.prepare(`SELECT r.reason, r.note, r.created_at, t.pen_name, a.pen_name AS reporter
+    FROM account_reports r JOIN users t ON t.id = r.target_user_id LEFT JOIN users a ON a.id = r.reporter_id
+    ORDER BY r.created_at DESC LIMIT 10`).all();
+
   const latest: any = await db.prepare(`SELECT u.pen_name, u.display_name, u.email, u.email_verified, u.city, u.created_at,
     (SELECT COUNT(p.id) FROM posts p WHERE p.author_id = u.id AND p.moderation_status = 'visible') AS posts_count
     FROM users u ORDER BY u.created_at DESC, u.id DESC LIMIT 50`).all();
@@ -141,6 +150,13 @@ export async function loadAdminDashboard(db: D1Database): Promise<AdminDashboard
       penName: String(u.pen_name || ''), displayName: String(u.display_name || u.pen_name || ''), emailMasked: maskEmail(String(u.email || '')),
       emailVerified: n(u.email_verified) === 1, city: String(u.city || '—'), createdAt: String(u.created_at || ''), postsCount: n(u.posts_count),
     })),
+    reports: {
+      total: n(reportsTotal?.total),
+      latest: (reportsLatest?.results || []).map((r: any) => ({
+        penName: String(r.pen_name || '—'), reason: String(r.reason || ''), note: String(r.note || ''),
+        createdAt: String(r.created_at || ''), reporter: String(r.reporter || '—'),
+      })),
+    },
   };
 }
 

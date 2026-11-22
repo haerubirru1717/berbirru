@@ -2,12 +2,13 @@
   "name": "kitatulis",
   "version": "1.0.0",
   "type": "module",
-  "description": "KITATULIS.COM — Pustaka Tulisan & Kolaborasi Kata di Edge Cloudflare",
+  "description": "KITATULIS.COM \u2014 Pustaka Tulisan & Kolaborasi Kata di Edge Cloudflare",
   "main": "src/index.ts",
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
-    "test": "for f in tests/*.test.ts; do node --experimental-strip-types \"$f\" || exit 1; done"
+    "test": "tsc --noEmit && for f in tests/*.test.ts; do node --experimental-strip-types \"$f\" || exit 1; done",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "hono": "^4.6.14",

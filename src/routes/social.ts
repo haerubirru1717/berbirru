@@ -725,4 +725,37 @@ app.post('/api/users/:pen_name/remove-follower', async (c: any) => {
     AND EXISTS (SELECT 1 FROM users au WHERE au.id = ? AND au.account_status = 'active')`).bind(user.id, follower.id, user.id).run();
   return c.json({ removed: (del.meta.changes || 0) > 0 });
 });
+// Laporan akun (tombol ... di profil orang lain). Identitas pelapor SELALU dari sesi,
+// sasaran dari pen_name di body. Satu pelapor = satu laporan per akun (ON CONFLICT update),
+// jadi tidak perlu tabel antrean terpisah maupun pembersihan berkala.
+app.post('/api/reports', async (c: any) => {
+  const user = await getAuthUser(c);
+  if (!user) return c.json({ error: 'Silakan masuk terlebih dahulu' }, 401);
+
+  if (await hitRate(c.env.DB, `lapor:${user.id}`, 10, 3600)) {
+    return c.json({ error: 'Terlalu banyak laporan. Coba lagi nanti.' }, 429);
+  }
+
+  const ALASAN = ['spam', 'harassment', 'fraud', 'other'];
+  const body = await c.req.json().catch(() => ({}));
+  const reason = String(body?.reason || '').toLowerCase();
+  if (!ALASAN.includes(reason)) return c.json({ error: 'Alasan tidak valid' }, 400);
+
+  const catatan = String(body?.note || '').trim().slice(0, 300);
+
+  const penName = String(body?.pen_name || '').replace(/^@/, '').toLowerCase();
+  if (!penName) return c.json({ error: 'Akun yang dilaporkan tidak valid' }, 400);
+  const target: any = await c.env.DB.prepare('SELECT id FROM users WHERE pen_name = ? LIMIT 1').bind(penName).first();
+  if (!target) return c.json({ error: 'Akun tidak ditemukan' }, 404);
+  if (target.id === user.id) return c.json({ error: 'Tidak bisa melaporkan diri sendiri' }, 400);
+
+  const ins = await c.env.DB.prepare(`INSERT INTO account_reports (id, reporter_id, target_user_id, reason, note)
+    SELECT ?, ?, ?, ?, ? FROM users au WHERE au.id = ? AND au.account_status = 'active'
+    ON CONFLICT (reporter_id, target_user_id) DO UPDATE SET reason = excluded.reason, note = excluded.note,
+      created_at = datetime('now'), status = 'new'`)
+    .bind(crypto.randomUUID(), user.id, target.id, reason, catatan || null, user.id).run();
+  if (!ins.meta.changes) return c.json({ error: 'Sesi tidak valid. Muat ulang halaman.' }, 401);
+
+  return c.json({ ok: true });
+});
 }

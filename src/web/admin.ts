@@ -1,4 +1,5 @@
 import { escapeHtml } from '../lib/sanitize';
+
 import type { AdminDashboard } from '../lib/admin-social';
 
 const fmt = (n: number) => new Intl.NumberFormat('id-ID').format(n);
@@ -19,6 +20,8 @@ export function renderAdminPage(d: AdminDashboard): string {
     <span class="muted">${escapeHtml(u.city)}</span><span class="muted">${fmt(u.postsCount)} karya</span><time>${escapeHtml(date(u.createdAt))}</time>
     <a href="/u/${encodeURIComponent(u.penName)}" aria-label="Lihat profil @${escapeHtml(u.penName)}">Lihat profil</a>
   </div>`).join('');
+  const LABEL_ALASAN: Record<string, string> = { spam: 'Spam', harassment: 'Pelecekan', fraud: 'Penipuan', other: 'Lainnya' };
+  const laporan = (d.reports?.latest || []).map((r) => `<div class="notice warn"><span class="n-icon">!</span><div><b>@${escapeHtml(r.penName)} &middot; ${LABEL_ALASAN[r.reason] || escapeHtml(r.reason)}</b><small>${r.note ? escapeHtml(r.note) + ' &middot; ' : ''}dilaporkan @${escapeHtml(r.reporter)} &middot; ${escapeHtml(date(r.createdAt))}</small></div><span>laporan</span></div>`).join('');
   const p1 = pct(i.likes, i.total), p2 = p1 + pct(i.bookmarks, i.total), p3 = p2 + pct(i.follows, i.total);
 
   return `<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -38,6 +41,7 @@ export function renderAdminPage(d: AdminDashboard): string {
 <div class="notice ${indexedOk?'good':'warn'}"><span class="n-icon">${indexedOk?'✓':'!'}</span><div><b>Cakupan indeks ID ${indexedOk?'lengkap':'perlu diperiksa'}</b><small>${fmt(d.attention.indexedPosts)} dari ${fmt(k.totalPosts)} ID warkah aktif ditemukan${d.attention.orphanIndexRows ? ` · ${fmt(d.attention.orphanIndexRows)} ID yatim` : ''}.</small></div><span>${pct(d.attention.indexedPosts,k.totalPosts)}%</span></div>
 <div class="notice neutral"><span class="n-icon">○</span><div><b>${fmt(d.attention.usersWithoutPosts)} akun belum menerbitkan karya</b><small>Informasi saja—bukan masalah sistem.</small></div><span>${pct(d.attention.usersWithoutPosts,k.totalUsers)}%</span></div></article>
 <article class="pulse"><div class="sect-head"><div><span class="label">PULSA 7 HARI</span><h2>Komposisi interaksi</h2></div><span class="total">${fmt(i.total)} total</span></div><div class="donut-wrap"><div class="donut" style="--p1:${p1}%;--p2:${p2}%;--p3:${p3}%"><span><b>${fmt(i.total)}</b><small>aktivitas</small></span></div><div class="legend"><p><i class="l1"></i><span>Suka</span><b>${fmt(i.likes)}</b></p><p><i class="l2"></i><span>Simpan</span><b>${fmt(i.bookmarks)}</b></p><p><i class="l3"></i><span>Ikuti</span><b>${fmt(i.follows)}</b></p><p><i class="l4"></i><span>Estafet</span><b>${fmt(i.chains)}</b></p></div></div></article></section>
+<section class="accounts"><div class="sect-head account-head"><div><span class="label">LAPORAN AKUN</span><h2>Laporan terbaru</h2><p>Dikirim pembaca dari profil akun &middot; lihat saja, belum ada tindakan otomatis</p></div><div class="meta"><span>${fmt(d.reports?.total || 0)} laporan</span></div></div>${laporan || '<div class="empty">Belum ada laporan.</div>'}</section>
 <section class="accounts"><div class="sect-head account-head"><div><span class="label">DATABASE PENGGUNA</span><h2>Akun terbaru</h2><p>Data identitas publik · email dimasking server-side</p></div><div class="meta"><span>Menampilkan ${d.latestUsers.length} dari ${fmt(k.totalUsers)}</span><button onclick="location.reload()">Muat ulang</button></div></div><div class="user-cols"><span>Akun</span><span>Status</span><span>Kota</span><span>Karya</span><span>Terdaftar</span><span></span></div>${rows || '<div class="empty">Belum ada akun.</div>'}</section></main>
 <footer class="foot">Read-only · Email dimasking server-side · Tidak ada akses SQL, edit row, atau penghapusan data</footer></body></html>`;
 }

@@ -410,6 +410,10 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
     .stg-actions { display:flex; gap:8px; padding:18px 18px 0; }
     .stg-btn { flex:1; padding:12px; border:1px solid var(--s-line); border-radius:12px; background:var(--s-card); color:var(--s-ink); font:600 14px var(--s-font); cursor:pointer; }
     .stg-btn.primary { background:var(--s-ink); border-color:var(--s-ink); color:#FFF; }
+    .stg-form select { width:100%; padding:11px 12px; border:1px solid var(--s-line); border-radius:12px; background:var(--s-card); color:var(--s-ink); font:400 14px var(--s-font); }
+    .stg-form select:focus { outline:2px solid var(--s-ink); outline-offset:-1px; }
+    .stg-form .stg-lapor-sasaran { margin:10px 0 0; font-size:13px; color:var(--s-mut); }
+    .more-btn { width:32px; height:32px; display:grid; place-items:center; flex:none; padding:0 0 10px; border:1px solid var(--s-line); border-radius:var(--s-radius-pill); background:var(--s-card); color:var(--s-ink); font:600 17px var(--s-font); line-height:1; cursor:pointer; }
     /* Isi sub-panel memakai bahasa baru juga — hanya di dalam .stg (sheet lama tidak tersentuh) */
     .stg .info-head { display:flex; align-items:center; gap:13px; padding:16px 18px 8px;  box-shadow:none;}
     .stg .info-ava { width:52px; height:52px; border:0; border-radius:50%; background:#18181B; color:#FFF; display:grid; place-items:center; font-size:19px; font-weight:600; background-size:cover; background-position:center; }
@@ -468,6 +472,9 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
             ` : ''}
           </div>
           <div class="profile-right-actions">
+            ${!isMe && currentUser ? `
+              <button class="more-btn" type="button" aria-label="Lainnya" title="Lainnya" onclick="openLapor()">&#8943;</button>
+            ` : ''}
             <div class="city-badge-top">
               <svg style="width:11px;height:11px;stroke:currentColor;stroke-width:2.5;fill:none;" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
               <span id="cityDisplay">Nusantara</span>
@@ -543,6 +550,33 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
     <div class="follow-list" id="followList"><div class="follow-loading">Pilih daftar untuk melihat akun.</div></div>
   </section>
 
+
+  ${!isMe && currentUser ? `
+  <div class="stg-backdrop" id="laporBackdrop" onclick="closeLapor()"></div>
+  <section class="stg" id="laporPanel" role="dialog" aria-modal="true" aria-label="Laporkan akun">
+    <div class="stg-head">
+      <button class="stg-back" type="button" aria-label="Tutup" onclick="closeLapor()">&lsaquo;</button>
+      <div class="stg-title">Laporkan akun</div>
+    </div>
+    <div class="stg-form">
+      <p class="stg-lapor-sasaran">Kamu melaporkan @${penName}.</p>
+      <label>Alasan</label>
+      <select id="laporAlasan">
+        <option value="spam">Spam atau promosi berulang</option>
+        <option value="harassment">Pelecehan atau ujaran kebencian</option>
+        <option value="fraud">Penipuan</option>
+        <option value="other">Lainnya</option>
+      </select>
+      <label>Catatan <em>(opsional)</em></label>
+      <textarea id="laporCatatan" maxlength="300" placeholder="Ceritakan singkat apa yang terjadi"></textarea>
+    </div>
+    <div class="stg-actions">
+      <button class="stg-btn" onclick="closeLapor()">Batal</button>
+      <button class="stg-btn primary" onclick="kirimLaporan()">Kirim laporan</button>
+    </div>
+    <div class="stg-note">Satu akun hanya bisa kamu laporkan sekali; kiriman berikutnya memperbarui laporan sebelumnya. Laporan ditinjau pemilik.</div>
+  </section>
+  ` : ''}
 
   <!-- 5-TAB DOCKED BOTTOM NAVBAR -->
   ${isMe ? `
@@ -681,11 +715,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
           <svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V5a1 1 0 011-1h11"/></svg>
           <span>Salin tautan profil</span><span class="chev">&rsaquo;</span>
         </button>
-        <button class="stg-row" onclick="bbToast('Laporan diterima untuk ditinjau.', 'success');">
-          <svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg>
-          <span>Laporkan akun</span><span class="chev">&rsaquo;</span>
-        </button>
-        <div class="stg-note">Laporkan akun dicatat untuk ditinjau pemilik.</div>
+        <div class="stg-note">Melaporkan akun dilakukan dari profil akun yang bersangkutan (tombol &#8943; di kanan atas).</div>
       </div>
       <div class="stg-sec" data-sec="tentang">
         <div class="info-row"><span class="info-k">Produk</span><span class="info-v">KitaTulis</span></div>
@@ -745,6 +775,34 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
         bbToast('Gagal keluar dari semua perangkat. Coba lagi.', 'error');
       }
     }
+    function openLapor() {
+      const p = document.getElementById('laporPanel'), b = document.getElementById('laporBackdrop');
+      if (!p) return;
+      p.style.display = 'block'; b.style.display = 'block'; document.body.style.overflow = 'hidden';
+    }
+    function closeLapor() {
+      const p = document.getElementById('laporPanel'), b = document.getElementById('laporBackdrop');
+      if (!p) return;
+      p.style.display = 'none'; b.style.display = 'none'; document.body.style.overflow = '';
+    }
+    async function kirimLaporan() {
+      const alasan = document.getElementById('laporAlasan').value;
+      const catatan = document.getElementById('laporCatatan').value.trim();
+      try {
+        const res = await fetch('/api/reports', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pen_name: currentPenName, reason: alasan, note: catatan })
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.error || 'gagal');
+        closeLapor();
+        bbToast('Laporan tercatat. Terima kasih.', 'success');
+        document.getElementById('laporCatatan').value = '';
+      } catch (e) {
+        bbToast('Gagal mengirim laporan. Coba lagi.', 'error');
+      }
+    }
+    window.openLapor = openLapor; window.closeLapor = closeLapor; window.kirimLaporan = kirimLaporan;
     window.bukaUbahSandi = bukaUbahSandi;
     window.logoutAllDevices = logoutAllDevices;
 
@@ -1215,7 +1273,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
       if (sub && sub.classList.contains('on')) { sub.classList.remove('on'); document.getElementById('stgPanel').classList.remove('sub-open'); return; }
       closeSettings();
     }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeFollowSheet(); stgBack(); } });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeFollowSheet(); closeLapor(); stgBack(); } });
 
     async function loadProfilePosts(tab = 'original') {
       const container = document.getElementById('profileFeed');
