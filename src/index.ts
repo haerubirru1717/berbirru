@@ -28,7 +28,6 @@ import { renderNotaPengiriman, renderNotaPembelian } from './web/nota';
 import { renderVerifikasiPage } from './web/verifikasi';
 import { renderPasarSaya } from './web/pasarSaya';
 import { renderTokoPublikPage } from './web/tokoPublik';
-import { renderPasarTutupPage } from './web/pasarTutup';
 import { renderOwnerPage } from './web/owner';
 import { renderAkunAdminPage } from './web/akunAdmin';
 import { renderBuktiPencairan } from './web/pencairan';
@@ -45,11 +44,9 @@ import { VENDOR_SWEETALERT2_JS, VENDOR_SWEETALERT2_CSS } from './vendor';
 import { Env } from './env';
 import { sha256hex, hitRate, hardenPost, publicPost, visibilityClause, getAuthUser, PUBLIC_POST_COLUMNS } from './lib/shared';
 import { mountNotifications } from './routes/notifications';
-import { mountKurir } from './routes/kurir';
 import { mountMedia } from './routes/media';
-import { mountOwner, sweepOrders } from './routes/owner';
+import { sweepOrders } from './routes/owner';
 import { mountSocial } from './routes/social';
-import { mountPasar } from './routes/pasar';
 import { mountAuth } from './routes/auth';
 import { mountAdmin } from './routes/admin';
 import { notifyOrder, logOrderEvent, sellerBalance, ORDER_EXPIRE_MIN, AUTO_COMPLETE_DAYS, KURIR_MAP } from './lib/pasar-core';
@@ -74,19 +71,6 @@ app.onError((err, c) => {
 const ALLOWED_ORIGINS = ['https://kitatulis.com', 'https://www.kitatulis.com'];
 app.use('*', cors({
   origin: (origin: string) => (ALLOWED_ORIGINS.includes(origin) ? origin : null),
-  credentials: true,
-}));
-
-// Pasar Buku ditutup sementara (Strix run-1..4 + pemolesan alur) — satu titik gate.
-// Buka kembali: hapus/kosongkan var PASAR_TUTUP di [vars] wrangler (prod & uji) → deploy.
-// Owner tetap bisa inspeksi. Cron sweep & webhook QRIS tidak lewat gate ini (tetap hidup).
-app.on(['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], ['/pasar', '/pasar/*', '/api/pasar/*'], async (c, next) => {
-  if (c.env.PASAR_TUTUP !== '1') return next();
-  const user = await getAuthUser(c);
-  if (user && isOwner(c.env, user)) return next();
-  if (c.req.path.startsWith('/api/pasar')) return c.json({ ok: false }, 404);
-  return c.html(renderPasarTutupPage(user), 200, { 'Cache-Control': 'no-store' });
-});
 
 // Proteksi CSRF server-side (temuan vuln-0009). Catatan: `csrf()` bawaan Hono HANYA
 // memeriksa content-type form (x-www-form-urlencoded|multipart|text/plain), sehingga
@@ -320,7 +304,6 @@ mountAdmin(app);
 
 // ---- NOTIFIKASI (SSR) ----
 
-mountPasar(app);
 
 app.get('/setelah-masuk', async (c) => {
   const me = await getAuthUser(c);
@@ -392,8 +375,6 @@ app.get('/chain/:id', async (c) => {
   return c.html(renderChainPage({ user, root: safeRoot, rootAuthor, rootAvatarUrl: safeRoot.avatar_url, orphans, children: daftar.slice(1) }));
 });
 
-mountKurir(app);
-mountOwner(app);
 mountNotifications(app);
 
 

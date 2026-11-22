@@ -558,7 +558,6 @@ ${WARKAH_CARD_CSS}
       <div class="fcol">
         <p class="t">Jelajah</p>
         <a href="#estafet">Estafet kota</a>
-        <a href="/pasar">Pasar buku</a>
       </div>
       <div class="fcol">
         <p class="t">Bantuan</p>
