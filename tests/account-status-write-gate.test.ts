@@ -9,8 +9,6 @@ const read = (p: string) => readFileSync(new URL(p, import.meta.url), 'utf8');
 const auth = read('../src/routes/auth.ts');
 const social = read('../src/routes/social.ts');
 const media = read('../src/routes/media.ts');
-const pasar = read('../src/routes/pasar.ts');
-const owner = read('../src/routes/owner.ts');
 
 // === auth.ts — sisa write user-driven (login/verify/reset/mint sudah T2/T3) ===
 assert.match(auth, /UPDATE users SET pen_name = \?, city = \? WHERE id = \? AND account_status = 'active'/,
@@ -84,42 +82,7 @@ assert.match(media, /UPDATE users SET \$\{spec\.col\} = \? WHERE id = \? AND acc
 assert.match(media, /MEDIA\.delete\(key\)/, 'upload gagal wajib best-effort hapus key baru (anti-orphan)');
 assert.match(media, /if \(!up\.meta\.changes\)/, 'media handler wajib gagal-tertutup saat guard menolak');
 
-// === pasar.ts — hakim-hakim user-driven (count threshold + bentuk kunci) ===
-assert.equal((pasar.match(/account_status = 'active'/g) || []).length >= 24, true,
-  'pasar wajib guard active di tiap hakim user-driven (>=24)');
-assert.match(pasar, /INSERT INTO orders \(id, listing_id, buyer_id, seller_id, price, shipping, status, kesepakatan,[\s\S]{0,400}SELECT[\s\S]{0,700}account_status = 'active'/,
-  'create order langsung wajib hakim INSERT...SELECT active');
-assert.match(pasar, /INSERT INTO listings /, 'marker existence');
-assert.match(pasar, /UPDATE users SET seller_status='pending'[\s\S]{0,240}account_status = 'active'/,
-  'seller apply wajib active');
-assert.match(pasar, /INSERT INTO withdrawals[\s\S]{0,400}account_status = 'active'/,
-  'withdrawal hakim wajib INSERT...SELECT active');
-assert.match(pasar, /UPDATE orders SET status = 'handed'[\s\S]{0,300}account_status = 'active'/,
-  'handover hakim wajib active');
-assert.match(pasar, /UPDATE orders SET status = 'completed'[\s\S]{0,300}account_status = 'active'/,
-  'receive hakim wajib active');
-assert.match(pasar, /UPDATE orders SET status = 'disputed'[\s\S]{0,300}account_status = 'active'/,
-  'dispute hakim wajib active');
-assert.match(pasar, /UPDATE orders SET resi_verified = 1[\s\S]{0,300}account_status = 'active'/,
-  'track hakim wajib active');
-assert.doesNotMatch(pasar, /UPDATE orders SET status = 'paid'[\s\S]{0,400}account_status/,
-  'webhook pembayaran (system) TIDAK diguard user-active');
-assert.doesNotMatch(pasar, /UPDATE orders SET status = 'expired'[\s\S]{0,400}account_status/,
-  'cron expiry (system) TIDAK diguard user-active');
-
-// === owner.ts — owner mutations juga active (defense-in-depth; owner tak tersuspend by design) ===
-assert.equal((owner.match(/account_status = 'active'/g) || []).length >= 6, true,
-  'owner hakim (resolve/review/settle/reconcile) wajib active (>=6)');
-assert.match(owner, /UPDATE users SET seller_status=\?[\s\S]{0,300}account_status = 'active'/,
-  'seller review users-update wajib active');
-
 // === Rilis B: R2 upload bound (plan §91) ===
-assert.equal((pasar.match(/putFoto\(\s*c: any,\s*keyName: \(ext: string\) => string,\s*uploaderId: string\s*\)/g) || []).length, 1,
-  'putFoto wajib terima uploaderId utk cek active kedua');
-assert.equal((pasar.match(/SELECT 1 AS ok FROM users WHERE id = \? AND account_status = 'active'/g) || []).length, 3,
-  'putFoto + upload-delete + evidence fallback wajib cek active KEDUA (Rilis B W3+W4)');
-assert.equal((pasar.match(/await putFoto\(c, \(ext\) =>[\s\S]{0,140}?, me\.id\)/g) || []).length, 3,
-  'tiga caller putFoto wajib lolos identitas utk cek kedua');
 assert.match(media, /SELECT 1 AS ok FROM users WHERE id = \? AND account_status = 'active'/,
   'media put wajib cek active kedua sebelum put');
 assert.match(media, /orphan key setelah guard tolak/, 'cleanup gagal wajib tercatat server-side');
@@ -129,7 +92,5 @@ assert.equal((auth.match(/INSERT INTO sessions \(id, user_id, token(_hash)?, exp
   'verify-otp mint + tiket reset + issueOtp/issueResetOtp/issueOtpFlow wajib INSERT...SELECT active (T3 + W2)');
 assert.doesNotMatch(auth, /flow && flowRes\.meta\.changes !== 1/,
   'flow-delete bukan invariant (W1: 0 sah, row bisa dimakan send-otp konkuren)');
-assert.match(pasar, /evidence: orphan key setelah guard tolak/, 'W3: evidence cleanup wajib log orphan');
-assert.match(pasar, /seller-docs: orphan key setelah guard tolak/, 'W3: seller-docs cleanup wajib log orphan');
 
 console.log('OK — Task 4+Rilis B: predicate active pada seluruh hakim user-driven; R2 bound; W1-W4 closed; system paths bebas');

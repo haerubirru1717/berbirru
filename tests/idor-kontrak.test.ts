@@ -7,7 +7,7 @@ import { readFileSync } from 'node:fs';
 
 // admin/owner dikecualikan dari cek generik: rutenya satu-baris mendelegasi ke helper,
 // gerbangnya ada DI HELPER (diperiksa terpisah di bawah).
-const BERKAS = ['auth', 'media', 'notifications', 'pasar', 'social', 'kurir'];
+const BERKAS = ['auth', 'media', 'notifications', 'social'];
 const guard = /author_id\s*[=!]==?|\.user_id\b|user_id\s*=|seller_id|buyer_id|isOwner|OWNER_EMAIL|getAuthUser/;
 const routePola = /app\.(post|put|delete|patch)\(\s*'([^']*:([a-zA-Z_]+)[^']*)'/g;
 
@@ -37,10 +37,5 @@ for (const nama of new Set(dipanggil)) {
 }
 assert.ok((admin.match(/!isOwner\(c\.env, me\)/g) || []).length >= 4, 'gerbang isOwner muncul di tiap helper admin');
 assert.ok(!/app\.(post|put|delete|patch)\(\s*'\/api\/(admin|owner)\//.test(readFileSync(new URL('../src/routes/social.ts', import.meta.url), 'utf8')), 'route sosial tak boleh menyentuh namespace admin/owner');
-
-// Bukti pendukung: pencarian alamat & pesanan mengikat pemilik di SQL (pola yang dijaga)
-const pasar = readFileSync(new URL('../src/routes/pasar.ts', import.meta.url), 'utf8');
-assert.match(pasar, /FROM addresses WHERE id = \? AND user_id = \?/, 'alamat: baca milik sendiri mengikat user_id');
-assert.match(pasar, /seller_id !== me\.id/, 'listing: tolak bila bukan penjualnya');
 
 console.log(`OK — kontrak IDOR: ${diperiksa} route ber-id diperiksa, gerbang admin utuh, pengikatan pemilik terjaga`);

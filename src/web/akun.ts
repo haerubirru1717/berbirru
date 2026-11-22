@@ -1,6 +1,6 @@
 import { THEME } from './theme';
 import { escapeHtml } from '../lib/sanitize';
-import { PASAR_BASE_CSS } from './pasar';
+import { AKUN_BASE_CSS } from './style-akun';
 import { renderBottomNav } from './layout';
 
 const rupiah = (n: number) => 'Rp' + Number(n || 0).toLocaleString('id-ID');
@@ -47,7 +47,7 @@ export function renderAkunPage(user: any, refunds: any[] = [], owner = false): s
 <title>Akun | KITATULIS</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.ico">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700&display=swap" rel="stylesheet">
-${PASAR_BASE_CSS}
+${AKUN_BASE_CSS}
 <style>
     :root{--muted:${THEME.muted};--ink-soft:${THEME.inkSoft};--line-soft:${THEME.lineSoft};}${CSS}</style></head>
 <body>

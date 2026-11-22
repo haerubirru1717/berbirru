@@ -12,32 +12,15 @@ import { renderLandingPage } from './web/landing';
 
 import { renderLoginPage } from './web/login';
 import { renderResetPage } from './web/reset';
-import { cekResi, validasiFormatResi, ambilWilayah, cekTarifOngkir, KURIR_DIDUKUNG, KURIR_LABEL } from './kurir';
-import { validStock } from './lib/pasar-inventory';
 import { renderFeedPage } from './web/feed';
 import { renderSearchPage } from './web/search';
 import { renderProfilePage } from './web/profile';
 import { renderNotificationsPage } from './web/notifications';
 import { renderChainPage } from './web/chain';
 import { renderAkunPage } from './web/akun';
-import { renderAlamatListPage, renderAlamatFormPage } from './web/alamat';
-import { renderPasarPage, renderJualPage, renderEditListingPage, renderListingDetail } from './web/pasar';
-import { renderCheckoutPage } from './web/checkout';
-import { renderOrderPage } from './web/order';
-import { renderNotaPengiriman, renderNotaPembelian } from './web/nota';
-import { renderVerifikasiPage } from './web/verifikasi';
-import { renderPasarSaya } from './web/pasarSaya';
-import { renderTokoPublikPage } from './web/tokoPublik';
-import { renderOwnerPage } from './web/owner';
-import { renderAkunAdminPage } from './web/akunAdmin';
-import { renderBuktiPencairan } from './web/pencairan';
 import { applyKernTheme, wantsKern } from './web/kern-theme';
 import { INTERACTION_CSS } from './web/interaction';
 import { bolehLihatPesanan, bolehUnggahBukti, jenisDokumen, kunciBukti, kunciDokumen, MAKS_BUKTI_PER_PIHAK } from './lib/berkas';
-import { createQrisTransaction, getQrisStatus, verifyWebhook, KlikQrisEnv } from './klikqris';
-import { providerAmountMatches, settlementAmounts, PASAR_FEE, WITHDRAW_MIN, withdrawFee, withdrawTotal, kodePencairan } from './lib/pasar-settlement';
-import { validasiPenerima, normalisasiHp } from './lib/alamat';
-import { slugToko, slugUnik } from './lib/toko';
 import { sendOtpEmail, sendPasswordChangedEmail } from './mail';
 import { OG_IMAGE_BASE64 } from './assets';
 import { VENDOR_SWEETALERT2_JS, VENDOR_SWEETALERT2_CSS } from './vendor';
@@ -45,11 +28,9 @@ import { Env } from './env';
 import { sha256hex, hitRate, hardenPost, publicPost, visibilityClause, getAuthUser, PUBLIC_POST_COLUMNS } from './lib/shared';
 import { mountNotifications } from './routes/notifications';
 import { mountMedia } from './routes/media';
-import { sweepOrders } from './routes/owner';
 import { mountSocial } from './routes/social';
 import { mountAuth } from './routes/auth';
 import { mountAdmin } from './routes/admin';
-import { notifyOrder, logOrderEvent, sellerBalance, ORDER_EXPIRE_MIN, AUTO_COMPLETE_DAYS, KURIR_MAP } from './lib/pasar-core';
 import { isOwner as isOwnerU } from './lib/shared';
 const isOwner = isOwnerU;
 
@@ -397,7 +378,4 @@ mountNotifications(app);
 export default {
   fetch: app.fetch,
   // Cron per jam: expire 48 jam, auto-complete D+5, anti-resi-hantu D+1 (BinderByte).
-  async scheduled(_event: any, env: any, ctx: any) {
-    ctx.waitUntil(sweepOrders(env.DB, env).then((s: string) => console.log('[cron] sweepOrders', s)));
-  },
 } as any;
