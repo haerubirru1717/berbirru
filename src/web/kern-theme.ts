@@ -17,7 +17,7 @@ body .bnav-plus .p{background:var(--kern-accent)!important;color:var(--kern-ink)
 body .bnav-plus .p svg{stroke:var(--kern-ink)!important}
 body :is(.badge,.count-badge,.notif-dot){border-color:var(--kern-accent)!important}
 /* Existing marketplace and account components inherit the same editorial skin. */
-body :is(.book-card,.sell-card,.detail-card,.buy-row,.rekber-note,.empty-state,.admstrip,.lap,.card,.panel,.form-card,.order-card,.listing-card){background:var(--kern-card)!important;border:1px solid var(--kern-ink)!important;color:var(--kern-ink)!important}
+body :is(.empty-state,.admstrip,.lap,.card,.panel,.form-card){background:var(--kern-card)!important;border:1px solid var(--kern-ink)!important;color:var(--kern-ink)!important}
 body :is(.card-img,.card-img-empty){background:#E6E1D5!important;border-bottom:1px solid var(--kern-ink)!important}
 body :is(.card-price,.nav-item.active,.nav-item.is-on,.price,.price-value){color:var(--kern-ink)!important}
 body :is(.cond-badge,.btn-yellow,.chip.on){background:var(--kern-ink)!important;color:var(--kern-paper)!important;border:1px solid var(--kern-ink)!important}
@@ -27,7 +27,7 @@ body .bnav{border-top:1px solid var(--kern-ink)!important}
 body .bnav .bnav-item.is-on,body .bnav .bnav-item.is-on svg{color:var(--kern-ink)!important;stroke:var(--kern-ink)!important}
 body .bnav .bnav-item.is-on .bnav-lbl{background:transparent!important;color:var(--kern-ink)!important;border-color:transparent!important;box-shadow:none!important}
 body :is(.btn-primary,.pf-go,.btn-buy){background:var(--kern-ink)!important;color:var(--kern-paper)!important;border-color:var(--kern-ink)!important}
-body :is(.brand-badge,.pasar-top,.market-header){box-shadow:none!important}
+body :is(.brand-badge){box-shadow:none!important}
 body .brand-badge{background:transparent!important;border:0!important;border-radius:0!important;transform:none!important;padding:0!important;color:var(--kern-ink)!important}
 body .brand-badge h1{font:700 23px 'Newsreader',Georgia,serif!important;letter-spacing:-.01em;color:var(--kern-ink)!important}
 body .brand-badge svg{display:none!important}

@@ -20,7 +20,7 @@ assert.doesNotMatch(index, /SELECT\s+p\.\*/i, 'SSR chain dilarang SELECT p.*');
 assert.doesNotMatch(notifications, /SELECT\s+n\.\*/i, 'notifikasi dilarang SELECT n.*');
 for (const field of ['n.id AS id', 'n.user_id AS user_id', 'n.actor_id AS actor_id', 'n.type AS type',
   "CASE WHEN p.moderation_status = 'visible' THEN n.post_id ELSE NULL END AS post_id",
-  'n.order_id AS order_id', 'n.is_read AS is_read', 'n.created_at AS created_at']) {
+  'n.is_read AS is_read', 'n.created_at AS created_at']) {
   assert(notifications.includes(field), `projection notifikasi kehilangan ${field}`);
 }
 assert.doesNotMatch(shared.PUBLIC_POST_COLUMNS, /moderation_status|moderation_reason|moderated_at|moderated_by|moderation_action_id/,

@@ -27,8 +27,6 @@ APP_NAME = "KITATULIS"
 APP_DOMAIN = "kitatulis.com"
 TURNSTILE_SITE_KEY = "0x4AAAAAAFTEI0GwdODJRhtT"
 KLIKQRIS_CALLBACK_URL = "https://kitatulis.com/api/klikqris/webhook"
-# Strix run-4 followup: Pasar Buku ditutup sementara ("1" = gate aktif). Buka: hapus baris ini → deploy.
-PASAR_TUTUP = "1"
 
 [assets]
 directory = "./public"

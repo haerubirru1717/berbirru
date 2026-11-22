@@ -6,22 +6,18 @@ app.get('/api/notifications', async (c: any) => {
   const user = await getAuthUser(c);
   if (!user) return c.json({ error: 'Unauthorized' }, 401);
 
-  // Dua kotak: 'sosial' (like/chain/save/follow) vs 'pasar' (order_*).
-  const scope = c.req.query('scope') === 'pasar' ? 'pasar' : 'sosial';
-  const cond = scope === 'pasar' ? "n.type LIKE 'order_%'" : "(n.type IS NULL OR n.type NOT LIKE 'order_%')";
+  // Hanya notifikasi sosial (like/chain/save/follow). Kotak 'pasar' dicabut bersama fiturnya.
+  const cond = "(n.type IS NULL OR n.type NOT LIKE 'order_%')";
   const { results } = await c.env.DB.prepare(`
     SELECT n.id AS id, n.user_id AS user_id, n.actor_id AS actor_id, n.type AS type,
            CASE WHEN p.moderation_status = 'visible' THEN n.post_id ELSE NULL END AS post_id,
-           n.order_id AS order_id, n.is_read AS is_read, n.created_at AS created_at,
+           n.is_read AS is_read, n.created_at AS created_at,
            u.pen_name as actor_pen_name, u.avatar_key as actor_avatar_key,
            CASE WHEN p.moderation_status = 'visible' THEN p.title ELSE NULL END AS post_title,
-           CASE WHEN p.moderation_status = 'visible' THEN p.content ELSE NULL END AS post_content,
-           l.title as order_title
+           CASE WHEN p.moderation_status = 'visible' THEN p.content ELSE NULL END AS post_content
     FROM notifications n
     JOIN users u ON n.actor_id = u.id
     LEFT JOIN posts p ON n.post_id = p.id
-    LEFT JOIN orders o ON o.id = n.order_id
-    LEFT JOIN listings l ON l.id = o.listing_id
     WHERE n.user_id = ? AND ${cond}
     ORDER BY n.created_at DESC
     LIMIT 50
@@ -45,8 +41,7 @@ app.get('/api/notifications/unread-count', async (c: any) => {
   const user = await getAuthUser(c);
   if (!user) return c.json({ count: 0 });
 
-  const scope = c.req.query('scope') === 'pasar' ? 'pasar' : 'sosial';
-  const cond = scope === 'pasar' ? "AND type LIKE 'order_%'" : "AND (type IS NULL OR type NOT LIKE 'order_%')";
+  const cond = "AND (type IS NULL OR type NOT LIKE 'order_%')";
   const row = await c.env.DB.prepare(
     `SELECT count(*) as count FROM notifications WHERE user_id = ? AND is_read = 0 ${cond}`
   ).bind(user.id).first();
@@ -60,8 +55,7 @@ app.post('/api/notifications/read-all', async (c: any) => {
   // kuota tulis harian (100.000 baris) yang dibutuhkan SEMUA pengguna.
   if (await hitRate(c.env.DB, `notif-read:${user.id}`, 60, 60)) return c.json({ error: 'Terlalu banyak permintaan. Tunggu sebentar.' }, 429);
 
-  const scope = c.req.query('scope') === 'pasar' ? 'pasar' : 'sosial';
-  const cond = scope === 'pasar' ? "AND type LIKE 'order_%'" : "AND (type IS NULL OR type NOT LIKE 'order_%')";
+  const cond = "AND (type IS NULL OR type NOT LIKE 'order_%')";
   await c.env.DB.prepare(`UPDATE notifications SET is_read = 1 WHERE user_id = ? ${cond}
     AND EXISTS (SELECT 1 FROM users WHERE id = ? AND account_status = 'active')`).bind(user.id, user.id).run();
   return c.json({ ok: true });

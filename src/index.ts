@@ -151,6 +151,15 @@ app.get('/lupa-sandi', async (c) => {
   return c.html(renderResetPage(c.env.TURNSTILE_SITE_KEY || ''));
 });
 
+// Halaman akun: pengaturan profil, tampilan, dan keamanan.
+// (Rute ini dulu menempel di modul Pasar saat Pasar masih menyatu; dipulihkan di sini
+//  tanpa bagian Pasar-nya.)
+app.get('/akun', async (c) => {
+  const user = await getAuthUser(c);
+  if (!user) return c.redirect('/login');
+  return c.html(renderAkunPage(user, isOwner(c.env, user)));
+});
+
 app.get('/feed', async (c) => {
   const user = await getAuthUser(c);
   return c.html(renderFeedPage(user));

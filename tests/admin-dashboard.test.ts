@@ -84,6 +84,5 @@ assert(index.includes('mountAdmin(app)'), 'route admin wajib dipasang');
 assert(index.includes("c.req.path.startsWith('/admin')"), 'visual /admin tidak boleh ditimpa skin sosial');
 const akun = readFileSync(new URL('../src/web/akun.ts', import.meta.url), 'utf8');
 assert(akun.includes("baris('/admin'"), 'akun owner wajib punya tautan dashboard sosial');
-assert(akun.includes("baris('/owner'"), 'tautan Rekber tetap terpisah');
 
 console.log('OK — dashboard sosial admin read-only, owner-gated, dan data-minimal');

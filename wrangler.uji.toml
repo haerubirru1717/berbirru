@@ -22,8 +22,6 @@ APP_NAME = "KITATULIS"
 APP_DOMAIN = "berbirru-uji.haerubirru17.workers.dev"
 KERN_THEME_PRESET = "kern"
 # Mode scan Strix R6 (±): gate sandbox DIBUKA sementara utk pentest. Kembalikan ke "1" segera
-# setelah scan selesai. Prod (wrangler.toml) tetap PASAR_TUTUP="1".
-PASAR_TUTUP = "0"
 # KLIKQRIS_MOCK: "1" = QRIS palsu otomatis (buat scanner tanpa klik manual).
 # "0" = jalur provider sandbox KlikQRIS asli — order menunggu approve manual owner
 #       di dashboard KlikQRIS, baru status jadi PAID. Default sandbox: 0 (jalur asli).

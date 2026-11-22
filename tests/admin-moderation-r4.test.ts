@@ -21,7 +21,7 @@ assert.match(issued[0], /WHERE p\.moderation_status = \?/);
 assert.match(issued[0], /ORDER BY p\.created_at DESC, p\.id DESC\s+LIMIT 50/);
 assert.equal(rows.length, 1);
 const html = adminWeb.renderAdminPostsPage(rows, 'quarantined');
-assert.match(html, /Dashboard/); assert.match(html, /Warkah/); assert.match(html, /Buka Rekber/);
+assert.match(html, /Dashboard/); assert.match(html, /Warkah/); 
 assert.match(html, /Karantina|Pulihkan/); assert.match(html, /alasan/i);
 assert.doesNotMatch(html, /<x>/); assert.doesNotMatch(html, /pena@example\.invalid/);
 
@@ -46,8 +46,8 @@ assert.match(transition, /INSERT INTO social_admin_actions/);
 assert.doesNotMatch(transition, /stripTags\s*\(content\)/, 'stripTags tidak boleh dipanggil dari SQL');
 
 const profile = readFileSync(new URL('../src/web/profile.ts', import.meta.url), 'utf8');
-assert.match(profile, /isOwnerUser \? `[\s\S]*Bilik Admin[\s\S]*id="bilikSub"[\s\S]*href="\/admin"[\s\S]*Admin Sosial[\s\S]*href="\/owner"[\s\S]*Admin Rekber/,
-  'Bilik Admin wajib punya dropdown Admin Sosial + Admin Rekber');
+  assert.match(profile, /isOwnerUser \? `[\s\S]*Bilik Admin[\s\S]*id="bilikSub"[\s\S]*href="\/admin"[\s\S]*Admin Sosial/,
+    'Bilik Admin wajib punya dropdown Admin Sosial');
 assert.match(profile, /renderProfilePage\(penName: string, isMe = false, currentUser: any = null, isOwnerUser = false\)/);
 const indexSrc = readFileSync(new URL('../src/index.ts', import.meta.url), 'utf8');
 assert.match(indexSrc, /renderProfilePage\(targetPenName, isMe, user, isOwner\(c\.env, user\)\)/,

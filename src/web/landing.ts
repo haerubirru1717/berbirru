@@ -153,7 +153,7 @@ ${WARKAH_CARD_CSS}
   .screen img{width:100%;height:auto;display:block}
   .appbar{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;height:34px;padding:0 14px;background:#FAF7F2;font:700 12px var(--body);color:#111;z-index:4}
   .appbar svg{width:38px;height:10px;display:block}
-  .appnav{position:sticky;bottom:0;display:grid;grid-template-columns:repeat(5,1fr);background:#fff;border-top:2px solid var(--ink);padding:6px 4px 8px;z-index:3}
+  .appnav{position:sticky;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-top:2px solid var(--ink);padding:6px 4px 8px;z-index:3}
   .appnav span{display:flex;flex-direction:column;align-items:center;gap:2px;font:800 8px var(--mono);color:#6A788D;line-height:1}
   .appnav svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .appnav .on{color:var(--blue)}
@@ -341,7 +341,6 @@ ${WARKAH_CARD_CSS}
                 <img src="/app-preview.png" alt="Linimasa warkah di aplikasi Kitatulis" width="390" height="844" loading="lazy">
                 <div class="appnav" aria-hidden="true">
                 <span class="on"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Beranda</span>
-                <span><svg viewBox="0 0 24 24"><path d="M6 7h12l1 13H5L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>Pasar</span>
                 <span class="fab"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke-width:2.4"><path d="M12 5v14M5 12h14"/></svg></span>
                 <span><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>Notifikasi</span>
                 <span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 21a7 7 0 0 1 14 0"/></svg>Profil</span>
@@ -468,12 +467,11 @@ ${WARKAH_CARD_CSS}
       <div class="wrap">
         <p class="tag">Gratis untuk mulai. Tidak ada paywall bacaan.</p>
         <h2 class="display">Yang lain, kalau kamu butuh</h2>
-        <p class="lead">Estafet, pasar buku, arsip pribadi. Semua ada di menu, tidak perlu dipelajari dulu.</p>
+        <p class="lead">Estafet dan arsip pribadi. Semua ada di menu, tidak perlu dipelajari dulu.</p>
         <div class="more">
           <div class="mcard lift"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg><div><h3>Estafet lintas kota</h3><p>Lanjutkan bait dari penulis di kota lain, satu klik.</p></div></div>
           <div class="mcard lift"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg><div><h3>Riwayat tanpa batas</h3><p>Semua warkahmu tersimpan, bisa ditelusuri kapan saja.</p></div></div>
           <div class="mcard lift"><svg viewBox="0 0 24 24"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg><div><h3>Privat atau publik</h3><p>Sakelar visibilitas per warkah, bukan setelan global.</p></div></div>
-          <div class="mcard lift"><svg viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg><div><h3>Pasar buku</h3><p>Jual dan beli buku bekas dengan rekber, ongkir live.</p></div></div>
           <div class="mcard lift"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg><div><h3>Paspor antologi</h3><p>Rekap karya, suka, dan simpanan jadi satu halaman.</p></div></div>
           <div class="mcard lift"><svg viewBox="0 0 24 24"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg><div><h3>Tanpa iklan</h3><p>Tidak ada pelacak pihak ketiga, tidak ada sponsori.</p></div></div>
           <div class="mcard lift"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.8 2.8 8.1 7 10 4.2-1.9 7-5.2 7-10V6l-7-3Z"/><path d="m8.8 12.3 2 2.1 4.6-5.1"/></svg><div><h3>Ruang aman</h3><p>Kurasi AI dan manusia menahan ujaran kebencian.</p></div></div>
@@ -490,7 +488,7 @@ ${WARKAH_CARD_CSS}
         <div class="faq">
           <h2 class="display center" style="margin-bottom:16px">Pertanyaan yang sering masuk</h2>
           <p class="center" style="max-width:42rem;margin:0 auto 32px;font-size:18px;line-height:1.6;color:rgba(17,17,17,.8)">Ini yang paling sering ditanyakan ke admin@kitatulis.com. Kalau belum terjawab, kirim email.</p>
-          <details open><summary><h3>Apakah Kitatulis gratis?</h3><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Ya. Membaca, menulis, menyimpan, dan menyambung estafet gratis. Tidak ada paywall bacaan dan tidak ada iklan. Biaya hanya muncul di Pasar Buku sebagai biaya layanan rekber saat kamu berjualan.</p></details>
+          <details open><summary><h3>Apakah Kitatulis gratis?</h3><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Ya. Membaca, menulis, menyimpan, dan menyambung estafet gratis. Tidak ada paywall bacaan dan tidak ada iklan. </p></details>
           <details><summary><h3>Apakah tulisan saya bisa dilihat semua orang?</h3><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Kamu yang menentukan per warkah. Sakelar privat membuat warkah hanya terlihat olehmu — termasuk dari tautan langsung, pencarian, dan halaman profil.</p></details>
           <details><summary><h3>Apa itu estafet kota?</h3><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Warkah bisa dilanjutkan penulis lain sebagai bait berikutnya. Rantainya tampil terbuka, jadi pembaca bisa melihat siapa menulis bagian mana dan dari kota mana.</p></details>
           <details><summary><h3>Apakah saya harus jadi penulis hebat?</h3><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Tidak. Kitatulis dibuat untuk orang yang baru mulai. Tidak ada skor, tidak ada peringkat, dan tidak ada tombol tidak-suka untuk menjatuhkan tulisan orang.</p></details>

@@ -407,7 +407,7 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
                 <span>Informasi Akun</span>
               </div>
               ${isOwnerUser ? `
-              <div class="settings-item" onclick="event.stopPropagation(); var s=document.getElementById('bilikSub'); s.style.display=s.style.display==='flex'?'none':'flex';" title="Bilik admin: sosial dan rekber">
+              <div class="settings-item" onclick="event.stopPropagation(); var s=document.getElementById('bilikSub'); s.style.display=s.style.display==='flex'?'none':'flex';" title="Bilik admin: dashboard sosial">
                 <svg style="width:14px;height:14px;stroke:currentColor;stroke-width:2.2;fill:none;" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 <span>Bilik Admin</span>
                 <svg style="width:10px;height:10px;margin-left:6px;stroke:currentColor;stroke-width:2.5;fill:none;" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
@@ -416,10 +416,6 @@ width:46px;height:46px;display:grid;place-items:center;background:var(--yellow);
                 <a class="settings-item" style="padding-left:24px;" href="/admin" onclick="toggleSettingsMenu(false)">
                   <svg style="width:14px;height:14px;stroke:currentColor;stroke-width:2.2;fill:none;" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                   <span>Admin Sosial</span>
-                </a>
-                <a class="settings-item" style="padding-left:24px;" href="/owner" onclick="toggleSettingsMenu(false)">
-                  <svg style="width:14px;height:14px;stroke:currentColor;stroke-width:2.2;fill:none;" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-                  <span>Admin Rekber</span>
                 </a>
               </div>` : ''}
               <div class="settings-divider"></div>

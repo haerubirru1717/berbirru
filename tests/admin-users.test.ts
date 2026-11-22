@@ -74,6 +74,5 @@ for (const [name, src] of [['webAdmin', webAdmin], ['webPosts', webPosts], ['web
   assert.ok(src.includes('href="/admin/posts"'), `${name}: link Warkah`);
   assert.ok(src.includes('href="/admin/users"'), `${name}: link Akun`);
   assert.ok(src.includes('href="/admin/audit"'), `${name}: link Jejak`);
-  assert.ok(src.includes('href="/owner"'), `${name}: link Rekber tetap ada`);
 }
 console.log('OK — Task 6: route+UI /admin/users (empat POST admin, loader minim, nav ko-eksisten)');

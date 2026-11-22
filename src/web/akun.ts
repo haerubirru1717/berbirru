@@ -3,7 +3,6 @@ import { escapeHtml } from '../lib/sanitize';
 import { AKUN_BASE_CSS } from './style-akun';
 import { renderBottomNav } from './layout';
 
-const rupiah = (n: number) => 'Rp' + Number(n || 0).toLocaleString('id-ID');
 
 const CSS = `
   .ak-card{background:#fff;border:3px solid var(--ink);box-shadow:5px 6px 0 var(--ink-soft);border-radius:12px;overflow:hidden;margin-bottom:16px}
@@ -31,9 +30,7 @@ function baris(href: string, ikon: string, judul: string, sub: string, danger = 
     </a>`;
 }
 
-export function renderAkunPage(user: any, refunds: any[] = [], owner = false): string {
-  const penjual = user.seller_status === 'approved';
-  const menunggu = user.seller_status === 'pending';
+export function renderAkunPage(user: any, owner = false): string {
   const icoTas = '<path d="M9 11h6M9 15h4"/><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/>';
   const icoToko = '<path d="M3 9h18M3 9l1.5-4.5h15L21 9M4 9v11h16V9M9 20v-6h6v6"/>';
   const icoDuit = '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/>';
@@ -52,16 +49,15 @@ ${AKUN_BASE_CSS}
     :root{--muted:${THEME.muted};--ink-soft:${THEME.inkSoft};--line-soft:${THEME.lineSoft};}${CSS}</style></head>
 <body>
 <div class="wrap">
-  ${KEPALA('Akun', penjual ? 'Kelola pesanan, toko, dan saldo.' : 'Pesanan, alamat, dan pengaturan akun.')}
+  ${KEPALA('Akun', 'Pengaturan akun dan tampilan halaman.')}
 
   <div class="ak-card">
     <div class="ak-row" style="cursor:default;">
       <span class="ak-ic"><svg viewBox="0 0 24 24">${icoOrang}</svg></span>
-      <span class="ak-t"><b>@${escapeHtml(user.pen_name)}</b><span>${escapeHtml(user.email || '')} · ${penjual ? 'Penjual terverifikasi' : menunggu ? 'Pengajuan toko diproses' : 'Pembeli'}</span></span>
+      <span class="ak-t"><b>@${escapeHtml(user.pen_name)}</b><span>${escapeHtml(user.email || '')}</span></span>
     </div>
     ${baris('/u/' + encodeURIComponent(user.pen_name), icoLuaran, 'Profil Publik', 'Warkah, pengikut, dan bio')}
     ${owner ? baris('/admin', icoOrang, 'Dashboard Sosial', 'Pengguna, warkah, dan kesehatan komunitas') : ''}
-    ${owner ? baris('/owner', icoKeluar, 'Dashboard Rekber', 'Sengketa, pencairan, verifikasi penjual') : ''}
   </div>
 
   <div class="ak-card">
@@ -75,21 +71,6 @@ ${AKUN_BASE_CSS}
     </div>
   </div>
 
-  ${refunds.length ? `
-  <div class="ak-card">
-    <div class="ak-row" style="cursor:default;">
-      <span class="ak-ic"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><polyline points="3 4 3 10 9 10"/></svg></span>
-      <span class="ak-t"><b>Refund saya</b><span>Uang yang sudah dikembalikan ke kamu</span></span>
-    </div>
-    ${refunds.map((r: any) => `
-      <a class="ak-row" href="/pasar/order/${escapeHtml(r.id)}">
-        <span class="ak-t" style="padding-left:46px;">
-          <b>${rupiah(Number(r.refund_amount || Number(r.qris_final_amount) || Number(r.price) + Number(r.shipping || 0)))}</b>
-          <span>${escapeHtml(String(r.refunded_at || '').slice(0, 16))} · ref ${escapeHtml(r.refund_ref || '—')}</span>
-        </span>
-        <span class="ak-arw">›</span>
-      </a>`).join('')}
-  </div>` : ''}
 
   <button class="ak-btn" id="klr" style="color:#B42318;" onclick="keluar()">Keluar akun</button>
 </div>
@@ -117,7 +98,7 @@ async function keluar(){
   });
 })();
 </script>
-${renderBottomNav('akun' as any, user, false, { mode: 'pasar', marketTab: 'akun' as any })}
+${renderBottomNav('akun' as any, user, false)}
 </body></html>`;
 }
 

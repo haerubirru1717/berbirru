@@ -32,7 +32,7 @@ const html = page.renderAdminAuditPage(model);
 assert.match(html, /Jejak Tindakan/);
 assert.match(html, /tidak bisa dihapus/i);
 assert.match(html, /Belum ada tindakan/);
-assert.match(html, /Dashboard/); assert.match(html, /Warkah/); assert.match(html, /Buka Rekber/);
+assert.match(html, /Dashboard/); assert.match(html, /Warkah/); 
 assert.doesNotMatch(html, /<button[^>]*(hapus|delete)|onclick=.*(delete|DROP)/i, 'tidak boleh ada aksi hapus');
 
 const route = readFileSync(new URL('../src/routes/admin.ts', import.meta.url), 'utf8');
