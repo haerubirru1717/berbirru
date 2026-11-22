@@ -52,6 +52,8 @@ app.onError((err, c) => {
 const ALLOWED_ORIGINS = ['https://kitatulis.com', 'https://www.kitatulis.com'];
 app.use('*', cors({
   origin: (origin: string) => (ALLOWED_ORIGINS.includes(origin) ? origin : null),
+  credentials: true,
+}));
 
 // Proteksi CSRF server-side (temuan vuln-0009). Catatan: `csrf()` bawaan Hono HANYA
 // memeriksa content-type form (x-www-form-urlencoded|multipart|text/plain), sehingga
